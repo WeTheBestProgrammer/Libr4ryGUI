@@ -36,8 +36,6 @@ public class AdminGUI extends javax.swing.JFrame {
 
         jLabel1.setText("Nama Pegawai");
 
-        jLabel2.setText("jLabel2");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
