@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 public class LoginGUI extends javax.swing.JFrame {
     private String username;
     private String password;
+    private String email;
 
     /**
      * Creates new form LoginGUI
