@@ -190,7 +190,7 @@ public class LoginGUI extends javax.swing.JFrame {
     private boolean validate_login(String Username, String Password) throws SQLException, ClassNotFoundException {
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/perpustakaan? + user=root&password=");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:8080/perpustakaan? + user=root&password=");
             PreparedStatement pst = conn.prepareStatement("Select * from login where username=? and password");
             pst.setString(1, username);
             pst.setString(2, password);
