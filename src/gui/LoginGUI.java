@@ -5,11 +5,22 @@
  */
 package gui;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Angga Maulana A
  */
 public class LoginGUI extends javax.swing.JFrame {
+    private String username;
+    private String password;
 
     /**
      * Creates new form LoginGUI
@@ -29,10 +40,10 @@ public class LoginGUI extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        usrName = new javax.swing.JTextField();
+        usrPass = new javax.swing.JPasswordField();
         mskLogin = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        mskAdmin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Form");
@@ -41,9 +52,9 @@ public class LoginGUI extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        usrName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                usrNameActionPerformed(evt);
             }
         });
 
@@ -54,10 +65,10 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Login as Administrator");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        mskAdmin.setText("Admin");
+        mskAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                mskAdminActionPerformed(evt);
             }
         });
 
@@ -73,12 +84,12 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(mskLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(mskLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2))
-                    .addComponent(jPasswordField1)
-                    .addComponent(jTextField1))
-                .addContainerGap(56, Short.MAX_VALUE))
+                        .addComponent(mskAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(usrPass)
+                    .addComponent(usrName))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,34 +97,51 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(usrName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(usrPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mskLogin)
-                    .addComponent(jButton2))
+                    .addComponent(mskAdmin))
                 .addGap(22, 22, 22))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void usrNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usrNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_usrNameActionPerformed
 
     private void mskLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mskLoginActionPerformed
         // TODO add your handling code here:
-        String user = mskLogin.getText();
-        
+        if (usrName.getText().length()==0)
+            JOptionPane.showMessageDialog(null, "usrName");
+        else if(usrPass.getPassword().length==0)
+            JOptionPane.showMessageDialog(null, "usrPass");
+        else{
+            String User = usrName.getText();
+            char[] username = usrPass.getPassword();
+            String Login = String.copyValueOf(username);
+            try {
+                if (validate_login(User, Login))
+                    JOptionPane.showMessageDialog(null, "");
+                else
+                    JOptionPane.showMessageDialog(null, "");
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_mskLoginActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void mskAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mskAdminActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_mskAdminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,11 +179,30 @@ public class LoginGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton mskAdmin;
     private javax.swing.JButton mskLogin;
+    private javax.swing.JTextField usrName;
+    private javax.swing.JPasswordField usrPass;
     // End of variables declaration//GEN-END:variables
+
+    private boolean validate_login(String Username, String Password) throws SQLException, ClassNotFoundException {
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/perpustakaan? + user=root&password=");
+            PreparedStatement pst = conn.prepareStatement("Select * from login where username=? and password");
+            pst.setString(1, username);
+            pst.setString(2, password);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next())
+                return true;
+            else
+                return false;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
