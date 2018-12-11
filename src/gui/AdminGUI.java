@@ -61,6 +61,11 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabelJenisBuku.setText("Jenis Buku");
 
         jComboBoxJenisBuku.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxJenisBuku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxJenisBukuActionPerformed(evt);
+            }
+        });
 
         jLabelJudulBuku.setText("Judul Buku");
 
@@ -147,6 +152,10 @@ public class AdminGUI extends javax.swing.JFrame {
     private void jTextFieldJumlahBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldJumlahBukuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldJumlahBukuActionPerformed
+
+    private void jComboBoxJenisBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxJenisBukuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxJenisBukuActionPerformed
 
     /**
      * @param args the command line arguments
