@@ -128,6 +128,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void mskLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mskLoginActionPerformed
         // TODO add your handling code here:
+        buka_koneksi();
         if (usrName.getText().length()==0)
             JOptionPane.showMessageDialog(null, "usrName");
         else if(usrPass.getPassword().length==0)
