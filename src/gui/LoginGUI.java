@@ -5,20 +5,17 @@
  */
 package gui;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
  * @author Angga Maulana A
  */
 public class LoginGUI extends javax.swing.JFrame {
+    private static Connection koneksi;
     private String username;
     private String password;
 
@@ -29,6 +26,19 @@ public class LoginGUI extends javax.swing.JFrame {
         initComponents();
     }
 
+    private static void buka_koneksi(){
+        if (koneksi == null) {
+            try {
+                String url = "jdbc:mysql://localhost/perpustakaan";
+                String user = "root";
+                String password = "";
+                DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+                koneksi = DriverManager.getConnection(url, user, password);
+            } catch (SQLException t) {
+                System.out.println("Error membuat koneksi");
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
