@@ -5,16 +5,11 @@
  */
 package gui;
 
-import java.sql.DriverManager;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Angga Maulana A
  */
 public class LoginGUI extends javax.swing.JFrame {
-    private String Username;
-    private String Password;
 
     /**
      * Creates new form LoginGUI
@@ -34,10 +29,10 @@ public class LoginGUI extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        usrName = new javax.swing.JTextField();
-        usrPass = new javax.swing.JPasswordField();
+        jTextField1 = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
         mskLogin = new javax.swing.JButton();
-        logAdmin = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Form");
@@ -46,9 +41,9 @@ public class LoginGUI extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
-        usrName.addActionListener(new java.awt.event.ActionListener() {
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usrNameActionPerformed(evt);
+                jTextField1ActionPerformed(evt);
             }
         });
 
@@ -59,12 +54,7 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
 
-        logAdmin.setText("Admin");
-        logAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logAdminActionPerformed(evt);
-            }
-        });
+        jButton2.setText("As Admin");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,14 +66,15 @@ public class LoginGUI extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(mskLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(logAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(usrName)
-                    .addComponent(usrPass))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextField1)
+                        .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(mskLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,49 +82,30 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(usrName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(usrPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mskLogin)
-                    .addComponent(logAdmin))
+                    .addComponent(jButton2))
                 .addGap(22, 22, 22))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void usrNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usrNameActionPerformed
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-        if (usrName.getText().length()==0)
-            JOptionPane.showMessageDialog(null, "usrName");
-        else if (usrPass.getPassword().length==0)
-            JOptionPane.showMessageDialog(null, "usrPass");
-        else{
-            String user = usrName.getText();
-            char [] pass = usrPass.getPassword();
-            String pwd = String.copyValueOf(pass);
-            if (validate_login(user,pwd))
-                JOptionPane.showMessageDialog(null, "pass");
-            else
-                JOptionPane.showMessageDialog(null, pass);
-        }
-            
-    }//GEN-LAST:event_usrNameActionPerformed
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void mskLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mskLoginActionPerformed
         // TODO add your handling code here:
         String user = mskLogin.getText();
         
     }//GEN-LAST:event_mskLoginActionPerformed
-
-    private void logAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logAdminActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_logAdminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,18 +143,11 @@ public class LoginGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JButton logAdmin;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton mskLogin;
-    private javax.swing.JTextField usrName;
-    private javax.swing.JPasswordField usrPass;
     // End of variables declaration//GEN-END:variables
-
-    private boolean validate_login(String user, String pwd) {
-//        try{
-//            Class.forName("Username");
-//            Connection con = DriverManager.getConnection(pwd)
-//        }
-//    }
-//}
+}
