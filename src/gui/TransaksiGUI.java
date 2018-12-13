@@ -17,7 +17,10 @@ public class TransaksiGUI extends javax.swing.JFrame {
      */
     public TransaksiGUI() {
         initComponents();
-        j
+        nomorPeminjamanPeminjaman.setEnabled(false);
+        nomorPeminjamanPengembalian.setEnabled(false);
+        namaMahasiswaTextField.setEnabled(false);
+        t
         jButtonCancel.setEnabled(false);
     }
 
@@ -47,12 +50,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
         nomorPeminjamanPengembalian = new javax.swing.JTextField();
         jLabelNomorPeminjaman2 = new javax.swing.JLabel();
         jLabelTanggalPeminjaman = new javax.swing.JLabel();
-        textTglPnjm = new javax.swing.JTextField();
+        tanggalPeminjamanTextField = new javax.swing.JTextField();
         jLabelTanggalPengembalian = new javax.swing.JLabel();
-        textTglKmbli = new javax.swing.JTextField();
-        textKeterlambatan = new javax.swing.JTextField();
+        tanggalKembaliTextField = new javax.swing.JTextField();
+        keterlambatanTextField = new javax.swing.JTextField();
         jLabelKeterlambatan = new javax.swing.JLabel();
-        textDenda = new javax.swing.JTextField();
+        dendaTextField = new javax.swing.JTextField();
         jLabelDenda = new javax.swing.JLabel();
         buttonProses = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -202,10 +205,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(buttonProses)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(textTglKmbli, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(textTglPnjm, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(textKeterlambatan, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(textDenda, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                .addComponent(tanggalKembaliTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(keterlambatanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(dendaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(53, 53, 53)
+                                        .addComponent(tanggalPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelNomorPeminjaman2)
                                 .addGap(69, 69, 69)
@@ -237,18 +242,18 @@ public class TransaksiGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelTanggalPeminjaman)
-                            .addComponent(textTglPnjm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tanggalPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelTanggalPengembalian)
-                            .addComponent(textTglKmbli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tanggalKembaliTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textKeterlambatan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(keterlambatanTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelKeterlambatan))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textDenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dendaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelDenda))
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -337,6 +342,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private javax.swing.JTextField biayaTextField;
     private javax.swing.JButton buttonPinjam;
     private javax.swing.JButton buttonProses;
+    private javax.swing.JTextField dendaTextField;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JLabel jLabelBiaya;
@@ -357,13 +363,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JComboBox<String> judulBukuComboBox;
     private javax.swing.JComboBox<String> kategoriBukuComboBox;
+    private javax.swing.JTextField keterlambatanTextField;
     private javax.swing.JTextField namaMahasiswaTextField;
     private javax.swing.JTextField nomorPeminjamanPeminjaman;
     private javax.swing.JTextField nomorPeminjamanPengembalian;
     private javax.swing.JTable tabelTransaksi;
-    private javax.swing.JTextField textDenda;
-    private javax.swing.JTextField textKeterlambatan;
-    private javax.swing.JTextField textTglKmbli;
-    private javax.swing.JTextField textTglPnjm;
+    private javax.swing.JTextField tanggalKembaliTextField;
+    private javax.swing.JTextField tanggalPeminjamanTextField;
     // End of variables declaration//GEN-END:variables
 }

@@ -115,12 +115,15 @@
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="buttonProses" min="-2" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="textTglKmbli" min="-2" pref="317" max="-2" attributes="0"/>
-                                              <Component id="textTglPnjm" min="-2" pref="317" max="-2" attributes="0"/>
-                                              <Component id="textKeterlambatan" alignment="0" min="-2" pref="317" max="-2" attributes="0"/>
-                                              <Component id="textDenda" min="-2" pref="317" max="-2" attributes="0"/>
+                                              <Component id="tanggalKembaliTextField" min="-2" pref="317" max="-2" attributes="0"/>
+                                              <Component id="keterlambatanTextField" alignment="0" min="-2" pref="317" max="-2" attributes="0"/>
+                                              <Component id="dendaTextField" min="-2" pref="317" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                      <Component id="tanggalPeminjamanTextField" min="-2" pref="317" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -165,21 +168,21 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelTanggalPeminjaman" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="textTglPnjm" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tanggalPeminjamanTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelTanggalPengembalian" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="textTglKmbli" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tanggalKembaliTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="textKeterlambatan" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="keterlambatanTextField" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelKeterlambatan" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="textDenda" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="dendaTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelDenda" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
@@ -277,23 +280,23 @@
         <Property name="text" type="java.lang.String" value="Tanggal Peminjaman"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="textTglPnjm">
+    <Component class="javax.swing.JTextField" name="tanggalPeminjamanTextField">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelTanggalPengembalian">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tanggal Pengembalian"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="textTglKmbli">
+    <Component class="javax.swing.JTextField" name="tanggalKembaliTextField">
     </Component>
-    <Component class="javax.swing.JTextField" name="textKeterlambatan">
+    <Component class="javax.swing.JTextField" name="keterlambatanTextField">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelKeterlambatan">
       <Properties>
         <Property name="text" type="java.lang.String" value="Keterlambatan"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="textDenda">
+    <Component class="javax.swing.JTextField" name="dendaTextField">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelDenda">
       <Properties>
