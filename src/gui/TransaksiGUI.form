@@ -59,17 +59,17 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelNamaMahasiswa" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelJenisBuku" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelJudulBuku" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelBiaya" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="textBiaya" min="-2" pref="367" max="-2" attributes="0"/>
                                           <Component id="buttonPinjam" min="-2" max="-2" attributes="0"/>
-                                          <Component id="textBiaya" alignment="0" min="-2" pref="367" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -86,34 +86,46 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
+                              <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace pref="65" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelTanggalPeminjaman" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelTanggalPengembalian" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelKeterlambatan" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelDenda" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="textTglKmbli" min="-2" pref="317" max="-2" attributes="0"/>
-                                  <Component id="textTglPnjm" min="-2" pref="317" max="-2" attributes="0"/>
-                                  <Component id="textKeterlambatan" alignment="0" min="-2" pref="317" max="-2" attributes="0"/>
-                                  <Component id="textDenda" min="-2" pref="317" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonPengembalian" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="buttonProses" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="textTglKmbli" min="-2" pref="317" max="-2" attributes="0"/>
+                                              <Component id="textTglPnjm" min="-2" pref="317" max="-2" attributes="0"/>
+                                              <Component id="textKeterlambatan" alignment="0" min="-2" pref="317" max="-2" attributes="0"/>
+                                              <Component id="textDenda" min="-2" pref="317" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelNomorPeminjaman" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                               <Component id="textNomorPinjm" min="-2" pref="317" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="buttonProses" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
@@ -123,71 +135,62 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonPengembalian" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelNamaMahasiswa" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelNomorPeminjaman" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="textNomorPinjm" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="buttonProses" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="textNamaMhs" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelJenisBuku" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelTanggalPeminjaman" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textTglPnjm" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="comboJenis" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelJudulBuku" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelTanggalPengembalian" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textTglKmbli" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="textKeterlambatan" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textBiaya" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="textDenda" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="buttonPinjam" min="-2" max="-2" attributes="0"/>
+                  <Component id="textKeterlambatan" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelBiaya" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelKeterlambatan" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="textBiaya" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="11" max="32767" attributes="0"/>
-              <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="textDenda" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelDenda" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="buttonPinjam" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonProses" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="194" max="-2" attributes="0"/>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Proses Peminjaman"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="jLabelNamaMahasiswa">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nama Mahasiswa"/>
       </Properties>
@@ -204,19 +207,19 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="jLabelJenisBuku">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Jenis Buku"/>
+        <Property name="text" type="java.lang.String" value="Kategori Buku"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="jLabelJudulBuku">
       <Properties>
         <Property name="text" type="java.lang.String" value="Judul Buku"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textBiaya">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="jLabelBiaya">
       <Properties>
         <Property name="text" type="java.lang.String" value="Biaya Peminjaman"/>
       </Properties>
@@ -229,26 +232,21 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPinjamActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Proses Pengembalian"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="textNomorPinjm">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
+    <Component class="javax.swing.JLabel" name="jLabelNomorPeminjaman">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nomor Peminjaman"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel8">
+    <Component class="javax.swing.JLabel" name="jLabelTanggalPeminjaman">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tanggal Peminjaman"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textTglPnjm">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel9">
+    <Component class="javax.swing.JLabel" name="jLabelTanggalPengembalian">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tanggal Pengembalian"/>
       </Properties>
@@ -257,14 +255,14 @@
     </Component>
     <Component class="javax.swing.JTextField" name="textKeterlambatan">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel10">
+    <Component class="javax.swing.JLabel" name="jLabelKeterlambatan">
       <Properties>
         <Property name="text" type="java.lang.String" value="Keterlambatan"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textDenda">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel11">
+    <Component class="javax.swing.JLabel" name="jLabelDenda">
       <Properties>
         <Property name="text" type="java.lang.String" value="Denda"/>
       </Properties>
@@ -281,7 +279,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tabelBuku">
+        <Component class="javax.swing.JTable" name="tabelTransaksi">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
@@ -304,6 +302,19 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Peminjaman"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonPengembalian">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pengembalian"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonPengembalianActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
