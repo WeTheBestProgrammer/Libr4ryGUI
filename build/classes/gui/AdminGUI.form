@@ -62,11 +62,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jButtonLogout" min="-2" max="-2" attributes="0"/>
+                              <Component id="logoutButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jButtonSave" min="-2" max="-2" attributes="0"/>
+                              <Component id="saveButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
+                              <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -76,15 +76,15 @@
                               </Group>
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jComboBoxJenisBuku" max="32767" attributes="0"/>
-                                  <Component id="jComboBoxJudulBuku" max="32767" attributes="0"/>
-                                  <Component id="jTextFieldJumlahBuku" min="-2" pref="261" max="-2" attributes="0"/>
+                                  <Component id="jenisBukuComboBox" max="32767" attributes="0"/>
+                                  <Component id="judulBukuComboBox" max="32767" attributes="0"/>
+                                  <Component id="jumlahBukuTextField" min="-2" pref="261" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabelBiayaPeminjaman" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextFieldBiayaPeminjaman" min="-2" pref="262" max="-2" attributes="0"/>
+                              <Component id="biayaPeminjamanTextField" min="-2" pref="262" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -107,25 +107,25 @@
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jTextField2" max="32767" attributes="0"/>
-                                  <Component id="jTextField1" max="32767" attributes="0"/>
-                                  <Component id="jComboBox2" pref="218" max="32767" attributes="0"/>
-                                  <Component id="jComboBox1" max="32767" attributes="0"/>
+                                  <Component id="biayaPeminjamanTambahTextField" max="32767" attributes="0"/>
+                                  <Component id="jumlahBukuTambahTextField" max="32767" attributes="0"/>
+                                  <Component id="judulBukuTambahComboBox" pref="218" max="32767" attributes="0"/>
+                                  <Component id="jenisBukuTambahComboBox" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="saveTambahButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="cancelTambahButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="ubahDataBukuRadioButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="322" max="-2" attributes="0"/>
-                      <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="tambahDataBukuRadioButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -137,16 +137,16 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ubahDataBukuRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tambahDataBukuRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabelJenisBuku" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jComboBoxJenisBuku" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jenisBukuComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jenisBukuTambahComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -154,45 +154,45 @@
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelJudulBuku" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBoxJudulBuku" min="-2" max="-2" attributes="0"/>
+                          <Component id="judulBukuComboBox" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelJumlahBuku" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldJumlahBuku" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jumlahBukuTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelBiayaPeminjaman" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldBiayaPeminjaman" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="biayaPeminjamanTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButtonSave" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonLogout" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="logoutButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="judulBukuTambahComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jumlahBukuTambahTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="biayaPeminjamanTambahTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cancelTambahButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="saveTambahButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -214,14 +214,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBoxJenisBuku">
+    <Component class="javax.swing.JComboBox" name="jenisBukuComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxJenisBukuActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jenisBukuComboBoxActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -232,7 +232,7 @@
         <Property name="text" type="java.lang.String" value="Judul Buku"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBoxJudulBuku">
+    <Component class="javax.swing.JComboBox" name="judulBukuComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
@@ -247,9 +247,9 @@
         <Property name="text" type="java.lang.String" value="Jumlah Buku"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldJumlahBuku">
+    <Component class="javax.swing.JTextField" name="jumlahBukuTextField">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldJumlahBukuActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jumlahBukuTextFieldActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelBiayaPeminjaman">
@@ -257,29 +257,29 @@
         <Property name="text" type="java.lang.String" value="Biaya Peminjaman"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldBiayaPeminjaman">
+    <Component class="javax.swing.JTextField" name="biayaPeminjamanTextField">
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonSave">
+    <Component class="javax.swing.JButton" name="saveButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonCancel">
+    <Component class="javax.swing.JButton" name="cancelButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonLogout">
+    <Component class="javax.swing.JButton" name="logoutButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Logout"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+    <Component class="javax.swing.JRadioButton" name="ubahDataBukuRadioButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ubah Data Buku"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+    <Component class="javax.swing.JRadioButton" name="tambahDataBukuRadioButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tambah Data Buku"/>
       </Properties>
@@ -289,7 +289,7 @@
         <Property name="text" type="java.lang.String" value="Jenis Buku"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="jenisBukuTambahComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
@@ -299,7 +299,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox2">
+    <Component class="javax.swing.JComboBox" name="judulBukuTambahComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
@@ -314,26 +314,26 @@
         <Property name="text" type="java.lang.String" value="Judul Buku"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="jumlahBukuTambahTextField">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="text" type="java.lang.String" value="Jumlah Buku"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="biayaPeminjamanTambahTextField">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="text" type="java.lang.String" value="Biaya Peminjaman"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="cancelTambahButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="saveTambahButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
