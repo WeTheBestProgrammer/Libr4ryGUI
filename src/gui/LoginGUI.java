@@ -5,19 +5,30 @@
  */
 package gui;
 
-import java.sql.*;
-import java.util.*;
-import javax.swing.*;
-
+import com.sun.istack.internal.logging.Logger;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import javax.swing.JFrame;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Angga Maulana A
  */
+
+import sun.util.logging.PlatformLogger;
+
 public class LoginGUI extends javax.swing.JFrame {
-    private static Connection koneksi;
-    private String username;
-    private String password;
-    private String email;
+    java.sql.Connection conn = null;
+    ResultSet rs = null;
+    Statement st;
+    
+    private JFrame frame;
 
     /**
      * Creates new form LoginGUI
@@ -26,19 +37,6 @@ public class LoginGUI extends javax.swing.JFrame {
         initComponents();
     }
     
-    private static void buka_koneksi(){
-        if (koneksi == null) {
-            try {
-                String url = "jdbc:mysql://localhost/perpustakaan";
-                String user = "root";
-                String password = "";
-                DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-                koneksi = DriverManager.getConnection(url, user, password);
-            } catch (SQLException t) {
-                System.out.println("Error membuat koneksi");
-            }
-        }
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,10 +48,11 @@ public class LoginGUI extends javax.swing.JFrame {
 
         jLabelUsername = new javax.swing.JLabel();
         jLabelPassword = new javax.swing.JLabel();
-        usernameTextBox = new javax.swing.JTextField();
-        passwordTextBox = new javax.swing.JPasswordField();
+        User = new javax.swing.JTextField();
+        Pass = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JButton();
         adminButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Form");
@@ -62,9 +61,9 @@ public class LoginGUI extends javax.swing.JFrame {
 
         jLabelPassword.setText("Password");
 
-        usernameTextBox.addActionListener(new java.awt.event.ActionListener() {
+        User.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameTextBoxActionPerformed(evt);
+                UserActionPerformed(evt);
             }
         });
 
@@ -82,111 +81,98 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Login Perpustakaan");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelPassword)
                     .addComponent(jLabelUsername))
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(adminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(passwordTextBox)
-                    .addComponent(usernameTextBox))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(Pass)
+                    .addComponent(User, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelUsername)
-                    .addComponent(usernameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(User, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPassword)
-                    .addComponent(passwordTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                    .addComponent(Pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginButton)
                     .addComponent(adminButton))
-                .addGap(22, 22, 22))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void usernameTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextBoxActionPerformed
+    private void UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usernameTextBoxActionPerformed
+    }//GEN-LAST:event_UserActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        buka_koneksi();
-        if (usernameTextBox.getText().length()==0)
-            JOptionPane.showMessageDialog(null, "usrName");
-        else if(passwordTextBox.getPassword().length==0)
-            JOptionPane.showMessageDialog(null, "usrPass");
-        else{
-            String User = usernameTextBox.getText();
-            char[] username = passwordTextBox.getPassword();
-            String Login = String.copyValueOf(username);
-            try {
-                if (validate_login(User, Login))
-                    JOptionPane.showMessageDialog(null, "");
-                else
-                    JOptionPane.showMessageDialog(null, "");
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        String username = User.getText();
+        String password = Pass.getText();
         
-        buka_koneksi();
-        String sqlKode = "INSERT INTO anggota(nama, alamat, telp)" ;
         try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sqlKode);
-            mStatement.executeUpdate();
-            mStatement.close();
-            JOptionPane.showMessageDialog(this, "Data berhasil ditambah");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Terjadi Kesalah" + ex.getMessage());
+            int log = 1;
+            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/perpustakaandatabase", "perpustakaan", "LoginGui");
+            st = (Statement) conn.createStatement();
+            rs =  st.executeQuery("select * from perpustkaan");
+        
+            while (rs.next()){
+                if (rs.getString(1).equals(username) && rs.getString(2).equals(password)))
+                {
+                    log = 0;
+                    break;
+                }
+            }
+            if(log == 0){
+                
+                CloseMe();
+                TransaksiGUI perpustakaan = new TransaksiGUI();
+                perpustakaan.setVisible(true);
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Gagal Masuk", "Username & Password Salah", JOptionPane.ERROR_MESSAGE);
+            User.setText("");
+            Pass.setText("");
+            User.grabFocus();  
         }
+        catch (SQLException ex){
+            Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE,null,ex);
+        } 
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
-        // TODO add your handling code here:
-        buka_koneksi();
-        String pass = passwordTextBox.getText();
-        try {
-            String sqlKode = "SELECT username, password where username = '" + usernameTextBox.getText() +
-                    "'";
-            PreparedStatement mStatement = koneksi.prepareStatement(sqlKode);
-            mStatement.executeQuery();
-            if (pass.equals(ABORT)) {
-                
-            }
-        } catch (Exception e) {
-        }
-        
-        
-        try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sqlKode);
-            mStatement.executeUpdate();
-            mStatement.close();
-            JOptionPane.showMessageDialog(this, "Data berhasil ditambah");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Terjadi Kesalah" + ex.getMessage());
-        }
+
     }//GEN-LAST:event_adminButtonActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
@@ -223,30 +209,16 @@ public class LoginGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField Pass;
+    private javax.swing.JTextField User;
     private javax.swing.JButton adminButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelUsername;
     private javax.swing.JButton loginButton;
-    private javax.swing.JPasswordField passwordTextBox;
-    private javax.swing.JTextField usernameTextBox;
     // End of variables declaration//GEN-END:variables
-
-    private boolean validate_login(String Username, String Password) throws SQLException, ClassNotFoundException {
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/perpustakaan? + user=root&password=");
-            PreparedStatement pst = conn.prepareStatement("Select * from login where username=? and password");
-            pst.setString(1, username);
-            pst.setString(2, password);
-            ResultSet rs = pst.executeQuery();
-            if(rs.next())
-                return true;
-            else
-                return false;
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            return false;
-        }
+private void CloseMe(){
+            WindowEvent meClose = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+            Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(meClose);
     }
 }
