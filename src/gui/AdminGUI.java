@@ -5,6 +5,8 @@
  */
 package gui;
 
+import javax.swing.*;
+
 /**
  *
  * @author KINTUL
@@ -16,6 +18,25 @@ public class AdminGUI extends javax.swing.JFrame {
      */
     public AdminGUI() {
         initComponents();
+        ButtonGroup group = new ButtonGroup();
+        group.add(ubahDataBukuRadioButton);
+        group.add(tambahDataBukuRadioButton);
+        jenisBukuComboBox.setEnabled(false);
+        jenisBukuTambahComboBox.setEnabled(false);
+        judulBukuComboBox.setEnabled(false);
+        judulBukuTambahComboBox.setEnabled(false);
+        jumlahBukuTextField.setEnabled(false);
+        jumlahBukuTambahTextField.setEnabled(false);
+        biayaPeminjamanTextField.setEnabled(false);
+        biayaPeminjamanTambahTextField.setEnabled(false);
+        logoutButton.setEnabled(false);
+        saveButton.setEnabled(false);
+        cancelButton.setEnabled(false);
+        jenisBukuComboBox.setEnabled(false);
+        saveTambahButton.setEnabled(false);
+        cancelTambahButton.setEnabled(false);
+        
+        
     }
 
     /**
@@ -32,6 +53,7 @@ public class AdminGUI extends javax.swing.JFrame {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        buttonGroup = new javax.swing.ButtonGroup();
         jLabelJenisBuku = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jenisBukuComboBox = new javax.swing.JComboBox<>();
@@ -279,6 +301,7 @@ public class AdminGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField biayaPeminjamanTambahTextField;
     private javax.swing.JTextField biayaPeminjamanTextField;
+    private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton cancelTambahButton;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
