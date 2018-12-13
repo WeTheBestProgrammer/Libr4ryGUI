@@ -5,7 +5,7 @@
  */
 package gui;
 
-import com.sun.istack.internal.logging.Logger;
+//import com.sun.istack.internal.logging.Logger;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import javax.swing.JFrame;
@@ -13,8 +13,7 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 import javax.swing.JOptionPane;
 /**
  *
@@ -145,7 +144,7 @@ public class LoginGUI extends javax.swing.JFrame {
             rs =  st.executeQuery("select * from perpustkaan");
         
             while (rs.next()){
-                if (rs.getString(1).equals(username) && rs.getString(2).equals(password)))
+                if (rs.getString(1).equals(username) && rs.getString(2).equals(password))
                 {
                     log = 0;
                     break;
