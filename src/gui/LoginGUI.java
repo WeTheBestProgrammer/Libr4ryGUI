@@ -29,7 +29,7 @@ public class LoginGUI extends javax.swing.JFrame {
     private static void buka_koneksi(){
         if (koneksi == null) {
             try {
-                String url = "jdbc:mysql://localhost/biodata";
+                String url = "jdbc:mysql://localhost/perpustakaan";
                 String user = "root";
                 String password = "";
                 DriverManager.registerDriver(new com.mysql.jdbc.Driver());
@@ -150,11 +150,7 @@ public class LoginGUI extends javax.swing.JFrame {
         }
         
         buka_koneksi();
-        String sqlKode = "INSERT INTO anggota(nama, alamat, telp)" 
-                + "values ('" + this.jTextFieldNama.getText() + "',"
-                + "'" + this.jTextFieldAlamat.getText() + "',"
-                + "'" + this.jTextFieldTelepon.getText() + "')";
-        
+        String sqlKode = "INSERT INTO anggota(nama, alamat, telp)" ;
         try {
             PreparedStatement mStatement = koneksi.prepareStatement(sqlKode);
             mStatement.executeUpdate();
@@ -167,6 +163,28 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
         // TODO add your handling code here:
+        buka_koneksi();
+        String pass = passwordTextBox.getText();
+        try {
+            String sqlKode = "SELECT username, password where username = '" + usernameTextBox.getText() +
+                    "'";
+            PreparedStatement mStatement = koneksi.prepareStatement(sqlKode);
+            mStatement.executeQuery();
+            if (pass.equals(ABORT)) {
+                
+            }
+        } catch (Exception e) {
+        }
+        
+        
+        try {
+            PreparedStatement mStatement = koneksi.prepareStatement(sqlKode);
+            mStatement.executeUpdate();
+            mStatement.close();
+            JOptionPane.showMessageDialog(this, "Data berhasil ditambah");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Terjadi Kesalah" + ex.getMessage());
+        }
     }//GEN-LAST:event_adminButtonActionPerformed
 
     /**
