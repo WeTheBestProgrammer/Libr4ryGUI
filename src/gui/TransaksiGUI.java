@@ -318,8 +318,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
         tanggalPeminjamanTextField.setEnabled(true);
         tanggalKembaliTextField.setEnabled(true);
         kategoriBukuComboBox.setEnabled(false);
-        judulBukuComboBox.setEnabled(true);
-        biayaTextField.setEnabled(true);
+        judulBukuComboBox.setEnabled(false);
+        biayaTextField.setEnabled(false);
         dendaTextField.setEnabled(false);
         prosesButton.setEnabled(false);
         pinjamButton.setEnabled(false);
@@ -337,14 +337,15 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void jRadioButtonPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPeminjamanActionPerformed
         nomorPeminjamanPeminjaman.setEnabled(true);
-        nomorPeminjamanPengembalian.setEnabled(false);
-        namaMahasiswaTextField.setEnabled(true);
-        tanggalPeminjamanTextField.setEnabled(false);
-        tanggalKembaliTextField.setEnabled(false);
         kategoriBukuComboBox.setEnabled(true);
         judulBukuComboBox.setEnabled(true);
+        dendaTextField.setEnabled(true);
+        namaMahasiswaTextField.setEnabled(true);
         biayaTextField.setEnabled(true);
-        dendaTextField.setEnabled(false);
+        tanggalKembaliTextField.setEnabled(false);
+        
+        tanggalPeminjamanTextField.setEnabled(false);
+        nomorPeminjamanPengembalian.setEnabled(false);
         prosesButton.setEnabled(false);
         pinjamButton.setEnabled(false);
         jButtonSave.setEnabled(false);
