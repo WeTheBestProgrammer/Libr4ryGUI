@@ -34,28 +34,28 @@ public class AdminGUI extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jLabelJenisBuku = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBoxJenisBuku = new javax.swing.JComboBox<>();
+        jenisBukuComboBox = new javax.swing.JComboBox<>();
         jLabelJudulBuku = new javax.swing.JLabel();
-        jComboBoxJudulBuku = new javax.swing.JComboBox<>();
+        judulBukuComboBox = new javax.swing.JComboBox<>();
         jLabelJumlahBuku = new javax.swing.JLabel();
-        jTextFieldJumlahBuku = new javax.swing.JTextField();
+        jumlahBukuTextField = new javax.swing.JTextField();
         jLabelBiayaPeminjaman = new javax.swing.JLabel();
-        jTextFieldBiayaPeminjaman = new javax.swing.JTextField();
-        jButtonSave = new javax.swing.JButton();
-        jButtonCancel = new javax.swing.JButton();
-        jButtonLogout = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        biayaPeminjamanTextField = new javax.swing.JTextField();
+        saveButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
+        ubahDataBukuRadioButton = new javax.swing.JRadioButton();
+        tambahDataBukuRadioButton = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jenisBukuTambahComboBox = new javax.swing.JComboBox<>();
+        judulBukuTambahComboBox = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jumlahBukuTambahTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        biayaPeminjamanTambahTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        cancelTambahButton = new javax.swing.JButton();
+        saveTambahButton = new javax.swing.JButton();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -72,9 +72,9 @@ public class AdminGUI extends javax.swing.JFrame {
 
         jLabelJenisBuku.setText("Jenis Buku");
 
-        jComboBoxJenisBuku.addActionListener(new java.awt.event.ActionListener() {
+        jenisBukuComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxJenisBukuActionPerformed(evt);
+                jenisBukuComboBoxActionPerformed(evt);
             }
         });
 
@@ -82,23 +82,23 @@ public class AdminGUI extends javax.swing.JFrame {
 
         jLabelJumlahBuku.setText("Jumlah Buku");
 
-        jTextFieldJumlahBuku.addActionListener(new java.awt.event.ActionListener() {
+        jumlahBukuTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldJumlahBukuActionPerformed(evt);
+                jumlahBukuTextFieldActionPerformed(evt);
             }
         });
 
         jLabelBiayaPeminjaman.setText("Biaya Peminjaman");
 
-        jButtonSave.setText("Save");
+        saveButton.setText("Save");
 
-        jButtonCancel.setText("Cancel");
+        cancelButton.setText("Cancel");
 
-        jButtonLogout.setText("Logout");
+        logoutButton.setText("Logout");
 
-        jRadioButton1.setText("Ubah Data Buku");
+        ubahDataBukuRadioButton.setText("Ubah Data Buku");
 
-        jRadioButton2.setText("Tambah Data Buku");
+        tambahDataBukuRadioButton.setText("Tambah Data Buku");
 
         jLabel1.setText("Jenis Buku");
 
@@ -108,9 +108,9 @@ public class AdminGUI extends javax.swing.JFrame {
 
         jLabel5.setText("Biaya Peminjaman");
 
-        jButton1.setText("Cancel");
+        cancelTambahButton.setText("Cancel");
 
-        jButton2.setText("Save");
+        saveTambahButton.setText("Save");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,11 +122,11 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonLogout)
+                                .addComponent(logoutButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonSave)
+                                .addComponent(saveButton)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonCancel))
+                                .addComponent(cancelButton))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelJenisBuku)
@@ -134,13 +134,13 @@ public class AdminGUI extends javax.swing.JFrame {
                                     .addComponent(jLabelJumlahBuku))
                                 .addGap(32, 32, 32)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBoxJenisBuku, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBoxJudulBuku, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldJumlahBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jenisBukuComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(judulBukuComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jumlahBukuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabelBiayaPeminjaman)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldBiayaPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(biayaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,20 +157,20 @@ public class AdminGUI extends javax.swing.JFrame {
                                         .addComponent(jLabel2)
                                         .addGap(164, 164, 164)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jComboBox2, 0, 218, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(biayaPeminjamanTambahTextField)
+                                    .addComponent(jumlahBukuTambahTextField)
+                                    .addComponent(judulBukuTambahComboBox, 0, 218, Short.MAX_VALUE)
+                                    .addComponent(jenisBukuTambahComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)
+                                .addComponent(saveTambahButton)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)))
+                                .addComponent(cancelTambahButton)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
+                        .addComponent(ubahDataBukuRadioButton)
                         .addGap(322, 322, 322)
-                        .addComponent(jRadioButton2)
+                        .addComponent(tambahDataBukuRadioButton)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -178,51 +178,51 @@ public class AdminGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 8, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(ubahDataBukuRadioButton)
+                    .addComponent(tambahDataBukuRadioButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelJenisBuku)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBoxJenisBuku, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jenisBukuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jenisBukuTambahComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelJudulBuku)
-                            .addComponent(jComboBoxJudulBuku, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(judulBukuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelJumlahBuku)
-                            .addComponent(jTextFieldJumlahBuku, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jumlahBukuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelBiayaPeminjaman)
-                            .addComponent(jTextFieldBiayaPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(biayaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonSave)
-                            .addComponent(jButtonCancel)
-                            .addComponent(jButtonLogout)))
+                            .addComponent(saveButton)
+                            .addComponent(cancelButton)
+                            .addComponent(logoutButton)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(judulBukuTambahComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jumlahBukuTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(biayaPeminjamanTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))))
+                            .addComponent(cancelTambahButton)
+                            .addComponent(saveTambahButton))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(75, 75, 75)
@@ -233,13 +233,13 @@ public class AdminGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldJumlahBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldJumlahBukuActionPerformed
+    private void jumlahBukuTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumlahBukuTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldJumlahBukuActionPerformed
+    }//GEN-LAST:event_jumlahBukuTextFieldActionPerformed
 
-    private void jComboBoxJenisBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxJenisBukuActionPerformed
+    private void jenisBukuComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisBukuComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxJenisBukuActionPerformed
+    }//GEN-LAST:event_jenisBukuComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,17 +277,12 @@ public class AdminGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonLogout;
-    private javax.swing.JButton jButtonSave;
+    private javax.swing.JTextField biayaPeminjamanTambahTextField;
+    private javax.swing.JTextField biayaPeminjamanTextField;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton cancelTambahButton;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBoxJenisBuku;
-    private javax.swing.JComboBox<String> jComboBoxJudulBuku;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -298,13 +293,18 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelJudulBuku;
     private javax.swing.JLabel jLabelJumlahBuku;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextFieldBiayaPeminjaman;
-    private javax.swing.JTextField jTextFieldJumlahBuku;
+    private javax.swing.JComboBox<String> jenisBukuComboBox;
+    private javax.swing.JComboBox<String> jenisBukuTambahComboBox;
+    private javax.swing.JComboBox<String> judulBukuComboBox;
+    private javax.swing.JComboBox<String> judulBukuTambahComboBox;
+    private javax.swing.JTextField jumlahBukuTambahTextField;
+    private javax.swing.JTextField jumlahBukuTextField;
+    private javax.swing.JButton logoutButton;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JButton saveTambahButton;
+    private javax.swing.JRadioButton tambahDataBukuRadioButton;
+    private javax.swing.JRadioButton ubahDataBukuRadioButton;
     // End of variables declaration//GEN-END:variables
 }
