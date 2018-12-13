@@ -59,7 +59,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="408" max="-2" attributes="0"/>
-                              <Component id="buttonPinjam" min="-2" max="-2" attributes="0"/>
+                              <Component id="pinjamButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
@@ -113,7 +113,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="buttonProses" min="-2" max="-2" attributes="0"/>
+                                          <Component id="prosesButton" min="-2" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="tanggalKembaliTextField" min="-2" pref="317" max="-2" attributes="0"/>
                                               <Component id="keterlambatanTextField" alignment="0" min="-2" pref="317" max="-2" attributes="0"/>
@@ -187,8 +187,8 @@
                       </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="buttonPinjam" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="buttonProses" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="pinjamButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="prosesButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="194" max="-2" attributes="0"/>
@@ -260,12 +260,12 @@
         <Property name="text" type="java.lang.String" value="Biaya Peminjaman"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonPinjam">
+    <Component class="javax.swing.JButton" name="pinjamButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pinjam"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPinjamActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pinjamButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="nomorPeminjamanPengembalian">
@@ -303,7 +303,7 @@
         <Property name="text" type="java.lang.String" value="Denda"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonProses">
+    <Component class="javax.swing.JButton" name="prosesButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Proses"/>
       </Properties>

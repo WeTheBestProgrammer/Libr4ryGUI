@@ -20,7 +20,16 @@ public class TransaksiGUI extends javax.swing.JFrame {
         nomorPeminjamanPeminjaman.setEnabled(false);
         nomorPeminjamanPengembalian.setEnabled(false);
         namaMahasiswaTextField.setEnabled(false);
-        t
+        tanggalPeminjamanTextField.setEnabled(false);
+        tanggalKembaliTextField.setEnabled(false);
+        kategoriBukuComboBox.setEnabled(false);
+        judulBukuComboBox.setEnabled(false);
+        keterlambatanTextField.setEnabled(false);
+        biayaTextField.setEnabled(false);
+        dendaTextField.setEnabled(false);
+        prosesButton.setEnabled(false);
+        pinjamButton.setEnabled(false);
+        jButtonSave.setEnabled(false);
         jButtonCancel.setEnabled(false);
     }
 
@@ -46,7 +55,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         jLabelJudulBuku = new javax.swing.JLabel();
         biayaTextField = new javax.swing.JTextField();
         jLabelBiaya = new javax.swing.JLabel();
-        buttonPinjam = new javax.swing.JButton();
+        pinjamButton = new javax.swing.JButton();
         nomorPeminjamanPengembalian = new javax.swing.JTextField();
         jLabelNomorPeminjaman2 = new javax.swing.JLabel();
         jLabelTanggalPeminjaman = new javax.swing.JLabel();
@@ -57,7 +66,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         jLabelKeterlambatan = new javax.swing.JLabel();
         dendaTextField = new javax.swing.JTextField();
         jLabelDenda = new javax.swing.JLabel();
-        buttonProses = new javax.swing.JButton();
+        prosesButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelTransaksi = new javax.swing.JTable();
         judulBukuComboBox = new javax.swing.JComboBox<>();
@@ -93,10 +102,10 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
         jLabelBiaya.setText("Biaya Peminjaman");
 
-        buttonPinjam.setText("Pinjam");
-        buttonPinjam.addActionListener(new java.awt.event.ActionListener() {
+        pinjamButton.setText("Pinjam");
+        pinjamButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonPinjamActionPerformed(evt);
+                pinjamButtonActionPerformed(evt);
             }
         });
 
@@ -110,7 +119,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
         jLabelDenda.setText("Denda");
 
-        buttonProses.setText("Proses");
+        prosesButton.setText("Proses");
 
         tabelTransaksi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -162,7 +171,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(408, 408, 408)
-                                .addComponent(buttonPinjam))
+                                .addComponent(pinjamButton))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(213, 213, 213)
                                 .addComponent(jRadioButton1))
@@ -203,7 +212,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(53, 53, 53)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(buttonProses)
+                                            .addComponent(prosesButton)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(tanggalKembaliTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(keterlambatanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,8 +266,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
                             .addComponent(jLabelDenda))
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonPinjam)
-                            .addComponent(buttonProses))
+                            .addComponent(pinjamButton)
+                            .addComponent(prosesButton))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -287,9 +296,9 @@ public class TransaksiGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPinjamActionPerformed
+    private void pinjamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinjamButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttonPinjamActionPerformed
+    }//GEN-LAST:event_pinjamButtonActionPerformed
 
     private void jRadioButtonPengembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPengembalianActionPerformed
         // TODO add your handling code here:
@@ -340,8 +349,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField biayaTextField;
-    private javax.swing.JButton buttonPinjam;
-    private javax.swing.JButton buttonProses;
     private javax.swing.JTextField dendaTextField;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonSave;
@@ -367,6 +374,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private javax.swing.JTextField namaMahasiswaTextField;
     private javax.swing.JTextField nomorPeminjamanPeminjaman;
     private javax.swing.JTextField nomorPeminjamanPengembalian;
+    private javax.swing.JButton pinjamButton;
+    private javax.swing.JButton prosesButton;
     private javax.swing.JTable tabelTransaksi;
     private javax.swing.JTextField tanggalKembaliTextField;
     private javax.swing.JTextField tanggalPeminjamanTextField;
