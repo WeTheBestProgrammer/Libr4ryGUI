@@ -6,8 +6,7 @@
 package gui;
 
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.*;
 import javax.swing.*;
 
 /**
@@ -26,11 +25,11 @@ public class LoginGUI extends javax.swing.JFrame {
     public LoginGUI() {
         initComponents();
     }
-
+    
     private static void buka_koneksi(){
         if (koneksi == null) {
             try {
-                String url = "jdbc:mysql://localhost/perpustakaan";
+                String url = "jdbc:mysql://localhost/biodata";
                 String user = "root";
                 String password = "";
                 DriverManager.registerDriver(new com.mysql.jdbc.Driver());
@@ -148,6 +147,21 @@ public class LoginGUI extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        
+        buka_koneksi();
+        String sqlKode = "INSERT INTO anggota(nama, alamat, telp)" 
+                + "values ('" + this.jTextFieldNama.getText() + "',"
+                + "'" + this.jTextFieldAlamat.getText() + "',"
+                + "'" + this.jTextFieldTelepon.getText() + "')";
+        
+        try {
+            PreparedStatement mStatement = koneksi.prepareStatement(sqlKode);
+            mStatement.executeUpdate();
+            mStatement.close();
+            JOptionPane.showMessageDialog(this, "Data berhasil ditambah");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Terjadi Kesalah" + ex.getMessage());
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
