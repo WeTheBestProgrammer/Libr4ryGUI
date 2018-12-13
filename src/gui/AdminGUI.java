@@ -119,8 +119,18 @@ public class AdminGUI extends javax.swing.JFrame {
         logoutButton.setText("Logout");
 
         ubahDataBukuRadioButton.setText("Ubah Data Buku");
+        ubahDataBukuRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ubahDataBukuRadioButtonActionPerformed(evt);
+            }
+        });
 
         tambahDataBukuRadioButton.setText("Tambah Data Buku");
+        tambahDataBukuRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahDataBukuRadioButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Jenis Buku");
 
@@ -262,6 +272,42 @@ public class AdminGUI extends javax.swing.JFrame {
     private void jenisBukuComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisBukuComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jenisBukuComboBoxActionPerformed
+
+    private void tambahDataBukuRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahDataBukuRadioButtonActionPerformed
+        // TODO add your handling code here:
+        jenisBukuTambahComboBox.setEnabled(true);
+        judulBukuTambahComboBox.setEnabled(true);
+        jumlahBukuTambahTextField.setEnabled(true);
+        biayaPeminjamanTambahTextField.setEnabled(true);
+        saveTambahButton.setEnabled(true);
+        cancelTambahButton.setEnabled(true);
+        logoutButton.setEnabled(true);
+        jenisBukuComboBox.setEnabled(false);
+        judulBukuComboBox.setEnabled(false);
+        jumlahBukuTextField.setEnabled(false);
+        biayaPeminjamanTextField.setEnabled(false);
+        saveButton.setEnabled(false);
+        cancelButton.setEnabled(false);
+        
+    }//GEN-LAST:event_tambahDataBukuRadioButtonActionPerformed
+
+    private void ubahDataBukuRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahDataBukuRadioButtonActionPerformed
+        // TODO add your handling code here:
+        jenisBukuComboBox.setEnabled(true);
+        judulBukuComboBox.setEnabled(true);
+        jumlahBukuTextField.setEnabled(true);
+        biayaPeminjamanTextField.setEnabled(true);
+        saveButton.setEnabled(true);
+        cancelButton.setEnabled(true);
+        logoutButton.setEnabled(true);
+        jenisBukuTambahComboBox.setEnabled(false);
+        judulBukuTambahComboBox.setEnabled(false);
+        jumlahBukuTambahTextField.setEnabled(false);
+        biayaPeminjamanTambahTextField.setEnabled(false);
+        saveTambahButton.setEnabled(false);
+        cancelTambahButton.setEnabled(false);
+        
+    }//GEN-LAST:event_ubahDataBukuRadioButtonActionPerformed
 
     /**
      * @param args the command line arguments
