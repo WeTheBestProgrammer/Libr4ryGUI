@@ -5,13 +5,17 @@ package gui;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.text.*;
+import java.util.Date;
 import javax.swing.*;
 /**
  *
  * @author KINTUL
  */
 public class TransaksiGUI extends javax.swing.JFrame {
-
+    int code;
+    DateFormat dateFormat;
+    Date date;
     /**
      * Creates new form TransaksiGUI
      */
@@ -34,6 +38,10 @@ public class TransaksiGUI extends javax.swing.JFrame {
         pinjamButton.setEnabled(false);
         jButtonSave.setEnabled(false);
         jButtonCancel.setEnabled(false);
+        
+        code = 0; //untuk code transaksi digit terakhir
+        dateFormat = new SimpleDateFormat("yyMMdd"); //format tanggal untuk code transaksi
+	date = new Date();
     }
 
     private void isiComboJenis(){
@@ -312,15 +320,17 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void jRadioButtonPengembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPengembalianActionPerformed
         // TODO add your handling code here:
-        nomorPeminjamanPeminjaman.setEnabled(false);
-        nomorPeminjamanPengembalian.setEnabled(true);
-        namaMahasiswaTextField.setEnabled(false);
-        tanggalPeminjamanTextField.setEnabled(true);
         tanggalKembaliTextField.setEnabled(true);
+        tanggalPeminjamanTextField.setEnabled(true);
+        nomorPeminjamanPengembalian.setEnabled(true);
+        keterlambatanTextField.setEnabled(true);
+        dendaTextField.setEnabled(true);
+        nomorPeminjamanPeminjaman.setEnabled(false);
         kategoriBukuComboBox.setEnabled(false);
         judulBukuComboBox.setEnabled(false);
+        namaMahasiswaTextField.setEnabled(false);
         biayaTextField.setEnabled(false);
-        dendaTextField.setEnabled(false);
+        
         prosesButton.setEnabled(false);
         pinjamButton.setEnabled(false);
         jButtonSave.setEnabled(false);
@@ -339,28 +349,19 @@ public class TransaksiGUI extends javax.swing.JFrame {
         nomorPeminjamanPeminjaman.setEnabled(true);
         kategoriBukuComboBox.setEnabled(true);
         judulBukuComboBox.setEnabled(true);
-        dendaTextField.setEnabled(true);
         namaMahasiswaTextField.setEnabled(true);
         biayaTextField.setEnabled(true);
         tanggalKembaliTextField.setEnabled(false);
-        
         tanggalPeminjamanTextField.setEnabled(false);
         nomorPeminjamanPengembalian.setEnabled(false);
-        prosesButton.setEnabled(false);
-        pinjamButton.setEnabled(false);
-        jButtonSave.setEnabled(false);
-        jButtonCancel.setEnabled(false);
-        
-        
-        
-        
         keterlambatanTextField.setEnabled(false);
-        biayaTextField.setEnabled(false);
         dendaTextField.setEnabled(false);
         prosesButton.setEnabled(false);
         pinjamButton.setEnabled(false);
         jButtonSave.setEnabled(false);
         jButtonCancel.setEnabled(false);
+        
+        nomorPeminjamanPeminjaman.setText(dateFormat.format(date)+String.format("%02d", code));
     }//GEN-LAST:event_jRadioButtonPeminjamanActionPerformed
 
     /**
