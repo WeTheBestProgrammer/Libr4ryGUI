@@ -17,6 +17,9 @@ public class TransaksiGUI extends javax.swing.JFrame {
      */
     public TransaksiGUI() {
         initComponents();
+        ButtonGroup group = new ButtonGroup();
+        group.add(jRadioButtonPeminjaman);
+        group.add(jRadioButtonPengembalian);
         nomorPeminjamanPeminjaman.setEnabled(false);
         nomorPeminjamanPengembalian.setEnabled(false);
         namaMahasiswaTextField.setEnabled(false);
@@ -48,6 +51,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        buttonGroup = new javax.swing.ButtonGroup();
         jLabelNamaMahasiswa = new javax.swing.JLabel();
         namaMahasiswaTextField = new javax.swing.JTextField();
         kategoriBukuComboBox = new javax.swing.JComboBox<>();
@@ -70,7 +74,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelTransaksi = new javax.swing.JTable();
         judulBukuComboBox = new javax.swing.JComboBox<>();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButtonPeminjaman = new javax.swing.JRadioButton();
         jRadioButtonPengembalian = new javax.swing.JRadioButton();
         jButtonSave = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
@@ -134,7 +138,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabelTransaksi);
 
-        jRadioButton1.setText("Peminjaman");
+        jRadioButtonPeminjaman.setText("Peminjaman");
+        jRadioButtonPeminjaman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonPeminjamanActionPerformed(evt);
+            }
+        });
 
         jRadioButtonPengembalian.setText("Pengembalian");
         jRadioButtonPengembalian.addActionListener(new java.awt.event.ActionListener() {
@@ -174,7 +183,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                                 .addComponent(pinjamButton))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(213, 213, 213)
-                                .addComponent(jRadioButton1))
+                                .addComponent(jRadioButtonPeminjaman))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelNamaMahasiswa)
@@ -237,15 +246,16 @@ public class TransaksiGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButtonPeminjaman)
                     .addComponent(jRadioButtonPengembalian))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNomorPeminjaman2)
-                    .addComponent(nomorPeminjamanPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabelNomorPeminjaman)
-                        .addComponent(nomorPeminjamanPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(nomorPeminjamanPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelNomorPeminjaman2)
+                        .addComponent(nomorPeminjamanPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -302,6 +312,19 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void jRadioButtonPengembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPengembalianActionPerformed
         // TODO add your handling code here:
+        nomorPeminjamanPeminjaman.setEnabled(false);
+        nomorPeminjamanPengembalian.setEnabled(true);
+        namaMahasiswaTextField.setEnabled(false);
+        tanggalPeminjamanTextField.setEnabled(true);
+        tanggalKembaliTextField.setEnabled(true);
+        kategoriBukuComboBox.setEnabled(false);
+        judulBukuComboBox.setEnabled(true);
+        biayaTextField.setEnabled(true);
+        dendaTextField.setEnabled(false);
+        prosesButton.setEnabled(false);
+        pinjamButton.setEnabled(false);
+        jButtonSave.setEnabled(false);
+        jButtonCancel.setEnabled(false);
     }//GEN-LAST:event_jRadioButtonPengembalianActionPerformed
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
@@ -311,6 +334,33 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jRadioButtonPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPeminjamanActionPerformed
+        nomorPeminjamanPeminjaman.setEnabled(true);
+        nomorPeminjamanPengembalian.setEnabled(false);
+        namaMahasiswaTextField.setEnabled(true);
+        tanggalPeminjamanTextField.setEnabled(false);
+        tanggalKembaliTextField.setEnabled(false);
+        kategoriBukuComboBox.setEnabled(true);
+        judulBukuComboBox.setEnabled(true);
+        biayaTextField.setEnabled(true);
+        dendaTextField.setEnabled(false);
+        prosesButton.setEnabled(false);
+        pinjamButton.setEnabled(false);
+        jButtonSave.setEnabled(false);
+        jButtonCancel.setEnabled(false);
+        
+        
+        
+        
+        keterlambatanTextField.setEnabled(false);
+        biayaTextField.setEnabled(false);
+        dendaTextField.setEnabled(false);
+        prosesButton.setEnabled(false);
+        pinjamButton.setEnabled(false);
+        jButtonSave.setEnabled(false);
+        jButtonCancel.setEnabled(false);
+    }//GEN-LAST:event_jRadioButtonPeminjamanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,6 +399,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField biayaTextField;
+    private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JTextField dendaTextField;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonSave;
@@ -362,7 +413,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNomorPeminjaman2;
     private javax.swing.JLabel jLabelTanggalPeminjaman;
     private javax.swing.JLabel jLabelTanggalPengembalian;
-    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButtonPeminjaman;
     private javax.swing.JRadioButton jRadioButtonPengembalian;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
