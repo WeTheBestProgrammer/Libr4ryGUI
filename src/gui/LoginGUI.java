@@ -49,37 +49,37 @@ public class LoginGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        usrName = new javax.swing.JTextField();
-        usrPass = new javax.swing.JPasswordField();
-        mskLogin = new javax.swing.JButton();
-        mskAdmin = new javax.swing.JButton();
+        jLabelUsername = new javax.swing.JLabel();
+        jLabelPassword = new javax.swing.JLabel();
+        usernameTextBox = new javax.swing.JTextField();
+        passwordTextBox = new javax.swing.JPasswordField();
+        loginButton = new javax.swing.JButton();
+        adminButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Form");
 
-        jLabel1.setText("Username");
+        jLabelUsername.setText("Username");
 
-        jLabel2.setText("Password");
+        jLabelPassword.setText("Password");
 
-        usrName.addActionListener(new java.awt.event.ActionListener() {
+        usernameTextBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usrNameActionPerformed(evt);
+                usernameTextBoxActionPerformed(evt);
             }
         });
 
-        mskLogin.setText("Login");
-        mskLogin.addActionListener(new java.awt.event.ActionListener() {
+        loginButton.setText("Login");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mskLoginActionPerformed(evt);
+                loginButtonActionPerformed(evt);
             }
         });
 
-        mskAdmin.setText("Admin");
-        mskAdmin.addActionListener(new java.awt.event.ActionListener() {
+        adminButton.setText("Admin");
+        adminButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mskAdminActionPerformed(evt);
+                adminButtonActionPerformed(evt);
             }
         });
 
@@ -90,16 +90,16 @@ public class LoginGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabelPassword)
+                    .addComponent(jLabelUsername))
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(mskLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(mskAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(usrPass)
-                    .addComponent(usrName))
+                        .addComponent(adminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordTextBox)
+                    .addComponent(usernameTextBox))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -107,36 +107,36 @@ public class LoginGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(usrName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelUsername)
+                    .addComponent(usernameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(usrPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelPassword)
+                    .addComponent(passwordTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mskLogin)
-                    .addComponent(mskAdmin))
+                    .addComponent(loginButton)
+                    .addComponent(adminButton))
                 .addGap(22, 22, 22))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void usrNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usrNameActionPerformed
+    private void usernameTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usrNameActionPerformed
+    }//GEN-LAST:event_usernameTextBoxActionPerformed
 
-    private void mskLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mskLoginActionPerformed
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
         buka_koneksi();
-        if (usrName.getText().length()==0)
+        if (usernameTextBox.getText().length()==0)
             JOptionPane.showMessageDialog(null, "usrName");
-        else if(usrPass.getPassword().length==0)
+        else if(passwordTextBox.getPassword().length==0)
             JOptionPane.showMessageDialog(null, "usrPass");
         else{
-            String User = usrName.getText();
-            char[] username = usrPass.getPassword();
+            String User = usernameTextBox.getText();
+            char[] username = passwordTextBox.getPassword();
             String Login = String.copyValueOf(username);
             try {
                 if (validate_login(User, Login))
@@ -149,11 +149,11 @@ public class LoginGUI extends javax.swing.JFrame {
                 Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_mskLoginActionPerformed
+    }//GEN-LAST:event_loginButtonActionPerformed
 
-    private void mskAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mskAdminActionPerformed
+    private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_mskAdminActionPerformed
+    }//GEN-LAST:event_adminButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,12 +191,12 @@ public class LoginGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JButton mskAdmin;
-    private javax.swing.JButton mskLogin;
-    private javax.swing.JTextField usrName;
-    private javax.swing.JPasswordField usrPass;
+    private javax.swing.JButton adminButton;
+    private javax.swing.JLabel jLabelPassword;
+    private javax.swing.JLabel jLabelUsername;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JPasswordField passwordTextBox;
+    private javax.swing.JTextField usernameTextBox;
     // End of variables declaration//GEN-END:variables
 
     private boolean validate_login(String Username, String Password) throws SQLException, ClassNotFoundException {
