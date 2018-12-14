@@ -5,6 +5,8 @@ package gui;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import buku.Item;
+import java.sql.*;
 import java.text.*;
 import java.util.Date;
 import javax.swing.*;
@@ -13,9 +15,11 @@ import javax.swing.*;
  * @author KINTUL
  */
 public class TransaksiGUI extends javax.swing.JFrame {
+    private static Connection koneksi;
     int code;
     DateFormat dateFormat;
     Date date;
+    ResultSet rs = null;
     /**
      * Creates new form TransaksiGUI
      */
@@ -45,8 +49,35 @@ public class TransaksiGUI extends javax.swing.JFrame {
 	date = new Date();
     }
 
-    private void isiComboJenis(){
+    private static void buka_koneksi(){
+        if (koneksi == null) {
+            try {
+                String url = "jdbc:mysql://localhost/perpustakaan";
+                String user = "root";
+                String password = "";
+                DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+                koneksi = DriverManager.getConnection(url, user, password);
+            } catch (SQLException t) {
+                System.out.println("Error membuat koneksi");
+            }
+        }
+    }
+    
+    private void IsiComboBox(){
+        buka_koneksi();
+        String sql = "SELECT kategori from buku";
+        try {
+            PreparedStatement mStatement = koneksi.prepareStatement(sql);
+            mStatement.setString(1, kategoriBukuComboBox);
+            
+            mStatement.close();
+            JOptionPane.showMessageDialog(this, "Data berhasil ditambah");
+        } catch (Exception e) {
+        }
         
+        jComboBoxItems.addItem(barang1);
+        jComboBoxItems.addItem(barang2);
+        jComboBoxItems.addItem(barang3);
     }
     /**
      * This method is called from within the constructor to initialize the form.
