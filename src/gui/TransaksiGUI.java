@@ -19,13 +19,13 @@ public class TransaksiGUI extends javax.swing.JFrame {
     int code;
     DateFormat dateFormat;
     Date date;
-    ResultSet rs = null;
+    
     /**
      * Creates new form TransaksiGUI
      */
     public TransaksiGUI() {
         initComponents();
-        IsiComboBox();
+        
         ButtonGroup group = new ButtonGroup();
         group.add(jRadioButtonPeminjaman);
         group.add(jRadioButtonPengembalian);
@@ -64,8 +64,9 @@ public class TransaksiGUI extends javax.swing.JFrame {
         }
     }
     
-    private void IsiComboBox(){
+    private void isiComboBoxKategori(){
         buka_koneksi();
+        ResultSet rs = null;
         String sql = "SELECT kategori from buku";
         try {
             PreparedStatement mStatement = koneksi.prepareStatement(sql);
@@ -142,6 +143,17 @@ public class TransaksiGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabelNamaMahasiswa.setText("Nama Mahasiswa");
+
+        kategoriBukuComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                kategoriBukuComboBoxItemStateChanged(evt);
+            }
+        });
+        kategoriBukuComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kategoriBukuComboBoxActionPerformed(evt);
+            }
+        });
 
         jLabelJenisBuku.setText("Kategori Buku");
 
@@ -287,15 +299,16 @@ public class TransaksiGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(408, 408, 408)
-                                .addComponent(pinjamButton)
-                                .addGap(536, 536, 536))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54)
-                                .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(pinjamButton)
+                                        .addGap(536, 536, 536))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(54, 54, 54)
+                                        .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(52, 52, 52)))))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -417,7 +430,33 @@ public class TransaksiGUI extends javax.swing.JFrame {
         jButtonCancel.setEnabled(false);
         
         nomorPeminjamanPeminjaman.setText(dateFormat.format(date)+String.format("%02d", code));
+        isiComboBoxKategori();
     }//GEN-LAST:event_jRadioButtonPeminjamanActionPerformed
+
+    private void kategoriBukuComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategoriBukuComboBoxActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_kategoriBukuComboBoxActionPerformed
+
+    private void kategoriBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_kategoriBukuComboBoxItemStateChanged
+        // TODO add your handling code here:
+        judulBukuComboBox.removeAllItems();
+        buka_koneksi();
+        ResultSet rs = null;
+        String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
+        String sql = "SELECT judul from buku";
+        try {
+            PreparedStatement mStatement = koneksi.prepareStatement(sql);
+            Statement state = koneksi.createStatement();
+            rs =  state.executeQuery("select judul from buku where kategori = '" +ktgr+ "'");
+            while (rs.next()) {                
+                judulBukuComboBox.addItem(rs.getString("judul"));
+            }
+            mStatement.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+        }
+    }//GEN-LAST:event_kategoriBukuComboBoxItemStateChanged
 
     /**
      * @param args the command line arguments
