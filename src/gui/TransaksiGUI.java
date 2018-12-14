@@ -25,6 +25,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
      */
     public TransaksiGUI() {
         initComponents();
+        IsiComboBox();
         ButtonGroup group = new ButtonGroup();
         group.add(jRadioButtonPeminjaman);
         group.add(jRadioButtonPengembalian);
@@ -68,16 +69,15 @@ public class TransaksiGUI extends javax.swing.JFrame {
         String sql = "SELECT kategori from buku";
         try {
             PreparedStatement mStatement = koneksi.prepareStatement(sql);
-            mStatement.setString(1, kategoriBukuComboBox);
-            
+            Statement state = koneksi.createStatement();
+            rs =  state.executeQuery("select distinct kategori from buku");
+            while (rs.next()) {                
+                kategoriBukuComboBox.addItem(rs.getString("kategori"));
+            }
             mStatement.close();
-            JOptionPane.showMessageDialog(this, "Data berhasil ditambah");
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
         }
-        
-        jComboBoxItems.addItem(barang1);
-        jComboBoxItems.addItem(barang2);
-        jComboBoxItems.addItem(barang3);
     }
     /**
      * This method is called from within the constructor to initialize the form.
