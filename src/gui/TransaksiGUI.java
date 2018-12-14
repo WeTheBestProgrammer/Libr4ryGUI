@@ -10,6 +10,7 @@ import java.sql.*;
 import java.text.*;
 import java.util.Date;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author KINTUL
@@ -79,6 +80,20 @@ public class TransaksiGUI extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
         }
+    }
+    
+    public final void LihatDataMahasiswa(){
+        String[] NamaKolom = {"NIM", "Nama Mahasiswa", "Alamat"};
+        Object[][] objekMahasiswa = new Object [DataMahasiswa.getData().size()][3];
+        int i = 0;
+        for (Mahasiswa mhs: DataMahasiswa.getData()) {
+            String arrayMahasiswa[] = {mhs.getNim(), mhs.getNama(), mhs.getAlamat()};
+            objekMahasiswa[i] = arrayMahasiswa;
+            i++;
+        }
+        TabMahasiswa = new DefaultTableModel(objekMahasiswa, NamaKolom);
+        jTableMhs.setModel(TabMahasiswa);
+        //LihatDataMahasiswa();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -260,12 +275,14 @@ public class TransaksiGUI extends javax.swing.JFrame {
                                             .addComponent(nomorPeminjamanPeminjaman)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jTextFieldLamaPeminjaman)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabelHari))
-                                            .addComponent(biayaTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(pinjamButton)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jTextFieldLamaPeminjaman)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jLabelHari))
+                                                .addComponent(biayaTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                             .addComponent(jLabelNomorPeminjaman))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,16 +316,11 @@ public class TransaksiGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(pinjamButton)
-                                        .addGap(536, 536, 536))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(54, 54, 54)
-                                        .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(52, 52, 52)))))
+                                .addGap(249, 249, 249)
+                                .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(54, 54, 54)
+                                .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -413,7 +425,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jRadioButtonPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPeminjamanActionPerformed
-        nomorPeminjamanPeminjaman.setEnabled(true);
+        nomorPeminjamanPeminjaman.setEnabled(false);
         kategoriBukuComboBox.setEnabled(true);
         judulBukuComboBox.setEnabled(true);
         namaMahasiswaTextField.setEnabled(true);
