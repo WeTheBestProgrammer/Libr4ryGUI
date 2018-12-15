@@ -147,6 +147,11 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabelBiayaPeminjaman.setText("Biaya Peminjaman");
 
         saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText("Cancel");
 
@@ -396,6 +401,21 @@ public class AdminGUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, e);
             }   
     }//GEN-LAST:event_saveTambahButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+        buka_koneksi();
+            try {
+                String sql = "update buku SET kategori='"+jenisBukuComboBox.getSelectedItem()+"',judul='"+judulBukuComboBox.getSelectedItem()+"',harga_sat='"+biayaPeminjamanTextField.getText()+"'";
+    //            java.sql.Connection conn = (java.sql.Connection)gui.koneksi.koneksiDB();
+                PreparedStatement pst = koneksi.prepareStatement(sql);
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "berhasil disimpan");
+                pst.close();
+            } catch (SQLException | HeadlessException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
      * @param args the command line arguments
