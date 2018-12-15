@@ -512,7 +512,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
         c.setTime(date);
-        c.add(Calendar.DATE, 1);  // number of days to add
+        c.add(Calendar.DATE, Integer.parseInt(jTextFieldLamaPeminjaman.getText()));  // number of days to add
         String dt = sdf.format(c.getTime());  // dt is now the new date
         
         input.isiData(Integer.parseInt(nomorPeminjamanPeminjaman.getText()),
@@ -520,8 +520,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
                       String.valueOf(kategoriBukuComboBox.getSelectedItem()),
                       String.valueOf(judulBukuComboBox.getSelectedItem()),
                       Integer.parseInt(jTextFieldLamaPeminjaman.getText()),
-                      dateFormat.format(date),
-                      dateFormat.format(date),
+                      sdf.format(date),
+                      dt,
                       harga,
                       total
                       );
