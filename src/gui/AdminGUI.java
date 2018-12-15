@@ -385,18 +385,16 @@ public class AdminGUI extends javax.swing.JFrame {
     private void saveTambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTambahButtonActionPerformed
         // TODO add your handling code here:
         buka_koneksi();
-        ResultSet rs = null;
-        String sql = "INSERT INTO buku";
-        try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sql);
-            Statement state = koneksi.createStatement();
-            rs =  state.executeQuery("select distinct kategori from buku");
-            while (rs.next()) {                
-                jenisBukuTambahComboBox.addItem(rs.getString("kategori"));
-            }
-            mStatement.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+        if (databaru == true) { // prosess simpan atau edit
+            try {
+                String sql = "insert into buku values('"+jenisBukuTambahComboBox.getSelectedItem()+"','"+judulTambahTextField.getText()+"','"+biayaPeminjamanTambahTextField.getText()+"')";
+    //            java.sql.Connection conn = (java.sql.Connection)gui.koneksi.koneksiDB();
+                java.sql.PreparedStatement pst = koneksi.prepareStatement(sql);
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "berhasil disimpan");
+            } catch (SQLException | HeadlessException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }   
         }
     }//GEN-LAST:event_saveTambahButtonActionPerformed
 
@@ -434,6 +432,7 @@ public class AdminGUI extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField biayaPeminjamanTambahTextField;
