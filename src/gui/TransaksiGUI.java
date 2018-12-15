@@ -25,11 +25,13 @@ import javax.swing.table.DefaultTableModel;
 public class TransaksiGUI extends javax.swing.JFrame {
     private static Connection koneksi;
     int code;
+    int harga = 0;
     DateFormat dateFormat;
     SimpleDateFormat simpleDateFormat;
     Date date;
     InputData input;
     DefaultTableModel tabel;
+    Item item;
     
     /**
      * Creates new form TransaksiGUI
@@ -64,12 +66,36 @@ public class TransaksiGUI extends javax.swing.JFrame {
 	date = new Date();
         input = new InputData();
         
+        
+        
         jTextFieldLamaPeminjaman.addKeyListener(new KeyAdapter() {     
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+                if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE) || (c < 0))) {
                     e.consume();
+                } else {
+                    Conector.buka_koneksi();
+        
+                    ResultSet rs = null;
+        
+                    String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
+                    String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
+                    String sql = "SELECT harga_sat from buku";
+                    try {
+                        PreparedStatement mStatement = koneksi.prepareStatement(sql);
+                        Statement state = koneksi.createStatement();
+                        rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
+                        while (rs.next()) {                
+                            harga = rs.getInt("harga_sat");
+                        }
+                        mStatement.close();
+                    } catch (Exception l) {
+                        JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+                    }
+                    
                 }
+                biayaTextField.setText(harga + " X " + c + " = " +
+                            (harga * Character.getNumericValue(c)));
             }
         });
     }
@@ -464,7 +490,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private void pinjamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinjamButtonActionPerformed
         // TODO add your handling code here:
         Conector.buka_koneksi();
-        int harga = 0;
+        
         ResultSet rs = null;
         
         String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
@@ -601,6 +627,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void jTextFieldLamaPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLamaPeminjamanActionPerformed
         // TODO add your handling code here:
+        
         
     }//GEN-LAST:event_jTextFieldLamaPeminjamanActionPerformed
 
