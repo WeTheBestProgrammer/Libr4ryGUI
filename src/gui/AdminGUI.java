@@ -428,7 +428,10 @@ public class AdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         buka_koneksi();
             try {
-                String sql = "update buku SET kategori='"+jenisBukuComboBox.getSelectedItem()+"',judul='"+judulBukuComboBox.getSelectedItem()+"',harga_sat='"+biayaPeminjamanTextField.getText()+"'";
+                String sql = "update buku SET kategori='"+jenisBukuComboBox.getSelectedItem()+
+                        "',judul='"+judulBukuComboBox.getSelectedItem()+"',jml_buku='"+jumlahBukuTextField.getText()+
+                        "',harga_sat='"+biayaPeminjamanTextField.getText()+
+                        "' where judul = '" + judulBukuComboBox.getSelectedItem() + "'";
     //            java.sql.Connection conn = (java.sql.Connection)gui.koneksi.koneksiDB();
                 PreparedStatement pst = koneksi.prepareStatement(sql);
                 pst.execute();
