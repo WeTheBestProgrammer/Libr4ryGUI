@@ -1,6 +1,5 @@
 package gui;
 
-//import com.sun.istack.internal.logging.Logger;
 import database.Conector;
 import java.awt.Dimension;
 import java.sql.*;
@@ -131,34 +130,6 @@ public class LoginGUI extends javax.swing.JFrame {
         String username = User.getText();
         String password = Pass.getText();
         
-//        try {
-//            int log = 1;
-//            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/perpustakaandatabase", "perpustakaan", "LoginGui");
-//            st = (Statement) conn.createStatement();
-//            rs =  st.executeQuery("select * from perpustkaan");
-//        
-//            while (rs.next()){
-//                if (rs.getString(1).equals(username) && rs.getString(2).equals(password))
-//                {
-//                    log = 0;
-//                    break;
-//                }
-//            }
-//            if(log == 0){
-//                
-//                CloseMe();
-//                TransaksiGUI perpustakaan = new TransaksiGUI();
-//                perpustakaan.setVisible(true);
-//            }
-//            else
-//                JOptionPane.showMessageDialog(null, "Gagal Masuk", "Username & Password Salah", JOptionPane.ERROR_MESSAGE);
-//            User.setText("");
-//            Pass.setText("");
-//            User.grabFocus();  
-//        }
-//        catch (SQLException ex){
-//            Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE,null,ex);
-//        } 
         Conector.buka_koneksi();
         try {
         String queryString = "SELECT username, password from umum where username ='" + username + "'";
@@ -176,7 +147,6 @@ public class LoginGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
-
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
     }//GEN-LAST:event_adminButtonActionPerformed
 
