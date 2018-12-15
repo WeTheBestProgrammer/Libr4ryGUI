@@ -366,21 +366,19 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void jenisBukuTambahComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jenisBukuTambahComboBoxItemStateChanged
         // TODO add your handling code here:
-        judulBukuTambahComboBox.removeAllItems();
+//        judulBukuTambahComboBox.removeAllItems();
         buka_koneksi();
         ResultSet rs = null;
-        String ktgr = String.valueOf(jenisBukuTambahComboBox.getSelectedItem());
+//        String ktgr = String.valueOf(jenisBukuTambahComboBox.getSelectedItem());
         String sql = "SELECT kategori from buku";
         try {
             PreparedStatement mStatement = koneksi.prepareStatement(sql);
             Statement state = koneksi.createStatement();
             rs =  state.executeQuery("select distinct kategori from buku");
-            while (rs.next()) {                
                 jenisBukuTambahComboBox.addItem(rs.getString("kategori"));
-            }
             mStatement.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+//            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
         }
     }//GEN-LAST:event_jenisBukuTambahComboBoxItemStateChanged
 
