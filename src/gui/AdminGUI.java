@@ -70,7 +70,24 @@ public class AdminGUI extends javax.swing.JFrame {
             mStatement.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
-        }
+        }    
+    }
+    
+    private void isiComboBoxUbah(){
+       buka_koneksi();
+        ResultSet rs = null;
+        String sql = "SELECT kategori from buku";
+        try {
+            PreparedStatement mStatement = koneksi.prepareStatement(sql);
+            Statement state = koneksi.createStatement();
+            rs =  state.executeQuery("select distinct kategori from buku");
+            while (rs.next()) {                
+                jenisBukuComboBox.addItem(rs.getString("kategori"));
+            }
+            mStatement.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+        }    
     }
 
     /**
@@ -362,7 +379,7 @@ public class AdminGUI extends javax.swing.JFrame {
         biayaPeminjamanTambahTextField.setEnabled(false);
         saveTambahButton.setEnabled(false);
         cancelTambahButton.setEnabled(false);
-        
+        isiComboBoxUbah();
     }//GEN-LAST:event_ubahDataBukuRadioButtonActionPerformed
 
     private void jenisBukuTambahComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisBukuTambahComboBoxActionPerformed
