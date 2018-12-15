@@ -279,9 +279,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="biayaTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="biayaTextFieldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelBiaya">
       <Properties>
@@ -400,9 +397,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="nomorPeminjamanPeminjaman">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomorPeminjamanPeminjamanActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelNomorPeminjaman">
       <Properties>
