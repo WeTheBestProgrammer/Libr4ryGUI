@@ -7,6 +7,7 @@ package gui;
  */
 import buku.InputData;
 import buku.Item;
+import database.Conector;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.*;
@@ -426,7 +427,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void pinjamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinjamButtonActionPerformed
         // TODO add your handling code here:
-        buka_koneksi();
+        Conector.buka_koneksi();
         int harga = 0;
         ResultSet rs = null;
         

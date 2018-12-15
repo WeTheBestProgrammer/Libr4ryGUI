@@ -5,7 +5,7 @@
  */
 package gui;
 
-import static database.Conector.buka_koneksi;
+import database.Conector;
 import java.sql.*;
 import javax.swing.*;
 
@@ -40,20 +40,34 @@ public class AdminGUI extends javax.swing.JFrame {
         
     }
     
-    private void isiComboBoxJenis(){
-        buka_koneksi();
+    private static void buka_koneksi(){
+        if (koneksi == null) {
+            try {
+                String url = "jdbc:mysql://localhost/perpustakaan";
+                String user = "root";
+                String password = "";
+                DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+                koneksi = DriverManager.getConnection(url, user, password);
+            } catch (SQLException t) {
+                System.out.println("Error membuat koneksi");
+            }
+        }
+    }
+    
+    private void isiComboBoxKategori(){
+       buka_koneksi();
         ResultSet rs = null;
         String sql = "SELECT kategori from buku";
         try {
             PreparedStatement mStatement = koneksi.prepareStatement(sql);
             Statement state = koneksi.createStatement();
             rs =  state.executeQuery("select distinct kategori from buku");
-            while (rs.next()) {
-                jenisBukuTambahComboBox.addItem(rs.getString("kategori"));                
+            while (rs.next()) {                
+                jenisBukuTambahComboBox.addItem(rs.getString("kategori"));
             }
             mStatement.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
         }
     }
 
@@ -293,6 +307,7 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void tambahDataBukuRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahDataBukuRadioButtonActionPerformed
         // TODO add your handling code here:
+        
         jenisBukuTambahComboBox.setEnabled(true);
         judulBukuTambahComboBox.setEnabled(true);
         jumlahBukuTambahTextField.setEnabled(true);
@@ -306,7 +321,7 @@ public class AdminGUI extends javax.swing.JFrame {
         biayaPeminjamanTextField.setEnabled(false);
         saveButton.setEnabled(false);
         cancelButton.setEnabled(false);
-        
+        isiComboBoxKategori();
     }//GEN-LAST:event_tambahDataBukuRadioButtonActionPerformed
 
     private void ubahDataBukuRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahDataBukuRadioButtonActionPerformed
