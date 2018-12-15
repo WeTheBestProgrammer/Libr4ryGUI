@@ -1,51 +1,45 @@
 package gui;
 
+//import com.sun.istack.internal.logging.Logger;
+import java.awt.Dimension;
 import java.sql.*;
-import javax.swing.JOptionPane;
-import login.koneksi1;
+import java.awt.Toolkit;
+import javax.swing.*;
 /**
  *
  * @author Angga Maulana A
  */
 
 public class LoginGUI extends javax.swing.JFrame {
-    koneksi1 login;
+    private static Connection koneksi;
+    java.sql.Connection conn = null;
+    Statement st;
+    
+    private JFrame frame;
 
     /**
      * Creates new form LoginGUI
      */
     public LoginGUI() {
         initComponents();
-        login = new koneksi1();
-        login.Class();
-        this.setLocationRelativeTo(null);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
     
-    private void masuk(){
-        try {
-            String nama = User.getText();
-            String pass = new String(Pass.getPassword());
-            login.ss = login.cc.createStatement();
-            String sql = "Select * From Tlogin Where username  = '"+nama+"' And password ='"+pass+"'";
-            login.rr = login.ss.executeQuery(sql);
-            if(login.rr.next()){
-                if (Pass.getText().equals(login.rr.getString("password"))){
-                    new AdminGUI().show();
-                    new TransaksiGUI().show();
-                    this.dispose();
-                }
-                else {
-                    JOptionPane.showMessageDialog(rootPane, "Password Salah, Silahkan Coba Lagi !!");
-                    Pass.setText("");
-                    Pass.requestFocus();
-                }
-            }else{
-                JOptionPane.showMessageDialog(null, "Login Gagal !!");
+    private static void buka_koneksi(){
+        if (koneksi == null) {
+            try {
+                String url = "jdbc:mysql://localhost/perpustakaan";
+                String user = "root";
+                String password = "";
+                DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+                koneksi = DriverManager.getConnection(url, user, password);
+            } catch (SQLException t) {
+                System.out.println("Error membuat koneksi");
             }
-        }catch (SQLException e){
-            JOptionPane.showMessageDialog(null, e);
         }
-    }   
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -145,11 +139,57 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        masuk();
+        String username = User.getText();
+        String password = Pass.getText();
+        
+//        try {
+//            int log = 1;
+//            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/perpustakaandatabase", "perpustakaan", "LoginGui");
+//            st = (Statement) conn.createStatement();
+//            rs =  st.executeQuery("select * from perpustkaan");
+//        
+//            while (rs.next()){
+//                if (rs.getString(1).equals(username) && rs.getString(2).equals(password))
+//                {
+//                    log = 0;
+//                    break;
+//                }
+//            }
+//            if(log == 0){
+//                
+//                CloseMe();
+//                TransaksiGUI perpustakaan = new TransaksiGUI();
+//                perpustakaan.setVisible(true);
+//            }
+//            else
+//                JOptionPane.showMessageDialog(null, "Gagal Masuk", "Username & Password Salah", JOptionPane.ERROR_MESSAGE);
+//            User.setText("");
+//            Pass.setText("");
+//            User.grabFocus();  
+//        }
+//        catch (SQLException ex){
+//            Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE,null,ex);
+//        } 
+        
+        buka_koneksi();
+        try {
+        String queryString = "SELECT username, password from umum where username ='" + username + "'";
+            PreparedStatement pst = koneksi.prepareStatement(queryString);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {                
+                if (password.equals(rs.getString("password"))) {
+                    this.setVisible(false);
+                    new TransaksiGUI().setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Username / password salah!");
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
-        masuk();
     }//GEN-LAST:event_adminButtonActionPerformed
 
     
