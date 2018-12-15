@@ -234,6 +234,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabelTransaksi);
 
+        judulBukuComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                judulBukuComboBoxActionPerformed(evt);
+            }
+        });
+
         jRadioButtonPeminjaman.setText("Peminjaman");
         jRadioButtonPeminjaman.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -539,6 +545,10 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private void nomorPeminjamanPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomorPeminjamanPeminjamanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomorPeminjamanPeminjamanActionPerformed
+
+    private void judulBukuComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_judulBukuComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_judulBukuComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
