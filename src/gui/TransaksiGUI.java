@@ -5,13 +5,9 @@ package gui;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import buku.InputData;
 import buku.Item;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.sql.*;
 import java.text.*;
-import java.util.Calendar;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -23,18 +19,13 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private static Connection koneksi;
     int code;
     DateFormat dateFormat;
-    SimpleDateFormat simpleDateFormat;
     Date date;
-    InputData input;
-    DefaultTableModel tabel;
     
     /**
      * Creates new form TransaksiGUI
      */
     public TransaksiGUI() {
         initComponents();
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         
         ButtonGroup group = new ButtonGroup();
         group.add(jRadioButtonPeminjaman);
@@ -57,9 +48,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         
         code = 0; //untuk code transaksi digit terakhir
         dateFormat = new SimpleDateFormat("yyMMdd"); //format tanggal untuk code transaksi
-        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	date = new Date();
-        input = new InputData();
     }
 
     private static void buka_koneksi(){
@@ -94,24 +83,16 @@ public class TransaksiGUI extends javax.swing.JFrame {
     }
     
     public final void LihatDataMahasiswa(){
-        String[] namaKolom = {"Nomor Peminjaman", "Nama Mahasiswa", "Kategori Buku", "Judul Buku", "Lama Peminjaman",
-            "Tanggal Penyewaan", "Tanggal Pengembalian", "Harga per hari", "Biaya Peminjaman"};
-        Object[][] objekMahasiswa = new Object [input.getData().size()][namaKolom.length];
+        String[] NamaKolom = {"NIM", "Nama Mahasiswa", "Alamat"};
+        Object[][] objekMahasiswa = new Object [DataMahasiswa.getData().size()][3];
         int i = 0;
-        for (Item item: input.getData()) {
-            String arrayTransaksi[] = {String.valueOf(item.getCodePinjam()),
-                                        item.getNamaMahasiswa(), item.getKategoriBuku(), item.getJudulBuku(),
-                                        String.valueOf(item.getLamaPinjam()),
-                                        String.valueOf(item.getTanggalPinjam()),
-                                        String.valueOf(item.getTanggalKembali()),
-                                        String.valueOf(item.getHarga()),
-                                        String.valueOf(item.getBiaya())
-                                        };
-            objekMahasiswa[i] = arrayTransaksi;
+        for (Mahasiswa mhs: DataMahasiswa.getData()) {
+            String arrayMahasiswa[] = {mhs.getNim(), mhs.getNama(), mhs.getAlamat()};
+            objekMahasiswa[i] = arrayMahasiswa;
             i++;
         }
-        tabel = new DefaultTableModel(objekMahasiswa, namaKolom);
-        tabelTransaksi.setModel(tabel);
+        TabMahasiswa = new DefaultTableModel(objekMahasiswa, NamaKolom);
+        jTableMhs.setModel(TabMahasiswa);
         //LihatDataMahasiswa();
     }
     /**
@@ -193,12 +174,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
         jLabelJudulBuku.setText("Judul Buku");
 
-        biayaTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                biayaTextFieldActionPerformed(evt);
-            }
-        });
-
         jLabelBiaya.setText("Biaya Peminjaman");
 
         pinjamButton.setText("Pinjam");
@@ -258,12 +233,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelActionPerformed(evt);
-            }
-        });
-
-        nomorPeminjamanPeminjaman.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomorPeminjamanPeminjamanActionPerformed(evt);
             }
         });
 
@@ -426,36 +395,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void pinjamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinjamButtonActionPerformed
         // TODO add your handling code here:
-        buka_koneksi();
-        int harga = 0;
-        ResultSet rs = null;
-        
-        String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
-        String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
-        String sql = "SELECT harga_sat from buku";
-        try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sql);
-            Statement state = koneksi.createStatement();
-            rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
-            while (rs.next()) {                
-                harga = rs.getInt("harga_sat");
-            }
-            mStatement.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
-        }
-        
-        input.isiData(Integer.parseInt(nomorPeminjamanPeminjaman.getText()),
-                      namaMahasiswaTextField.getText(),
-                      String.valueOf(kategoriBukuComboBox.getSelectedItem()),
-                      String.valueOf(judulBukuComboBox.getSelectedItem()),
-                      Integer.parseInt(jTextFieldLamaPeminjaman.getText()),
-                      dateFormat.format(date),
-                      dateFormat.format(date),
-                      harga,
-                      Integer.parseInt( biayaTextField.getText())
-                      );
-        LihatDataMahasiswa();
     }//GEN-LAST:event_pinjamButtonActionPerformed
 
     private void jRadioButtonPengembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPengembalianActionPerformed
@@ -498,7 +437,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         keterlambatanTextField.setEnabled(false);
         dendaTextField.setEnabled(false);
         prosesButton.setEnabled(false);
-        pinjamButton.setEnabled(true);
+        pinjamButton.setEnabled(false);
         jButtonSave.setEnabled(false);
         jButtonCancel.setEnabled(false);
         
@@ -530,14 +469,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
         }
     }//GEN-LAST:event_kategoriBukuComboBoxItemStateChanged
-
-    private void biayaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_biayaTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_biayaTextFieldActionPerformed
-
-    private void nomorPeminjamanPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomorPeminjamanPeminjamanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomorPeminjamanPeminjamanActionPerformed
 
     /**
      * @param args the command line arguments

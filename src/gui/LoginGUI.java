@@ -1,14 +1,22 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package gui;
 
 //import com.sun.istack.internal.logging.Logger;
-import java.awt.Dimension;
 import java.sql.*;
 import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+import java.util.logging.*;
 import javax.swing.*;
 /**
  *
  * @author Angga Maulana A
  */
+
+import sun.util.logging.PlatformLogger;
 
 public class LoginGUI extends javax.swing.JFrame {
     private static Connection koneksi;
@@ -22,8 +30,6 @@ public class LoginGUI extends javax.swing.JFrame {
      */
     public LoginGUI() {
         initComponents();
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
     
     private static void buka_koneksi(){
@@ -39,7 +45,7 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,7 +65,6 @@ public class LoginGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Form");
-        setLocationByPlatform(true);
 
         jLabelUsername.setText("Username");
 
@@ -127,7 +132,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginButton)
                     .addComponent(adminButton))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -190,6 +195,7 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
+
     }//GEN-LAST:event_adminButtonActionPerformed
 
     
@@ -237,4 +243,8 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelUsername;
     private javax.swing.JButton loginButton;
     // End of variables declaration//GEN-END:variables
+private void CloseMe(){
+            WindowEvent meClose = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+            Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(meClose);
+    }
 }
