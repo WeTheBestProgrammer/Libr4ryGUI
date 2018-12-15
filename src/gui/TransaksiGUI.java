@@ -10,6 +10,8 @@ import buku.Item;
 import database.Conector;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.text.*;
 import java.util.Calendar;
@@ -61,6 +63,15 @@ public class TransaksiGUI extends javax.swing.JFrame {
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	date = new Date();
         input = new InputData();
+        
+        jTextFieldLamaPeminjaman.addKeyListener(new KeyAdapter() {     
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+                    e.consume();
+                }
+            }
+        });
     }
 
     private static void buka_koneksi(){
@@ -115,6 +126,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
         tabelTransaksi.setModel(tabel);
         //LihatDataMahasiswa();
     }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -209,6 +222,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
             }
         });
 
+        nomorPeminjamanPengembalian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomorPeminjamanPengembalianActionPerformed(evt);
+            }
+        });
+
         jLabelNomorPeminjaman2.setText("Nomor Peminjaman");
 
         jLabelTanggalPeminjaman.setText("Tanggal Peminjaman");
@@ -277,6 +296,17 @@ public class TransaksiGUI extends javax.swing.JFrame {
         jLabelNomorPeminjaman.setText("Nomor Peminjaman");
 
         jLabel1.setText("Lama Peminjaman");
+
+        jTextFieldLamaPeminjaman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldLamaPeminjamanActionPerformed(evt);
+            }
+        });
+        jTextFieldLamaPeminjaman.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldLamaPeminjamanKeyTyped(evt);
+            }
+        });
 
         jLabelHari.setText("Hari");
 
@@ -467,11 +497,11 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void jRadioButtonPengembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPengembalianActionPerformed
         // TODO add your handling code here:
-        tanggalKembaliTextField.setEnabled(true);
-        tanggalPeminjamanTextField.setEnabled(true);
+        tanggalKembaliTextField.setEnabled(false);
+        tanggalPeminjamanTextField.setEnabled(false);
         nomorPeminjamanPengembalian.setEnabled(true);
-        keterlambatanTextField.setEnabled(true);
-        dendaTextField.setEnabled(true);
+        keterlambatanTextField.setEnabled(false);
+        dendaTextField.setEnabled(false);
         nomorPeminjamanPeminjaman.setEnabled(false);
         kategoriBukuComboBox.setEnabled(false);
         judulBukuComboBox.setEnabled(false);
@@ -549,6 +579,35 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private void judulBukuComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_judulBukuComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_judulBukuComboBoxActionPerformed
+
+    private void nomorPeminjamanPengembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomorPeminjamanPengembalianActionPerformed
+        // TODO add your handling code here:
+        tanggalKembaliTextField.setEnabled(true);
+        tanggalPeminjamanTextField.setEnabled(true);
+        nomorPeminjamanPengembalian.setEnabled(true);
+        keterlambatanTextField.setEnabled(true);
+        dendaTextField.setEnabled(true);
+        nomorPeminjamanPeminjaman.setEnabled(false);
+        kategoriBukuComboBox.setEnabled(false);
+        judulBukuComboBox.setEnabled(false);
+        namaMahasiswaTextField.setEnabled(false);
+        biayaTextField.setEnabled(false);
+        jTextFieldLamaPeminjaman.setEnabled(false);
+        prosesButton.setEnabled(false);
+        pinjamButton.setEnabled(false);
+        jButtonSave.setEnabled(false);
+        jButtonCancel.setEnabled(false);
+    }//GEN-LAST:event_nomorPeminjamanPengembalianActionPerformed
+
+    private void jTextFieldLamaPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLamaPeminjamanActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTextFieldLamaPeminjamanActionPerformed
+
+    private void jTextFieldLamaPeminjamanKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLamaPeminjamanKeyTyped
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTextFieldLamaPeminjamanKeyTyped
 
     /**
      * @param args the command line arguments

@@ -297,6 +297,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="nomorPeminjamanPengembalian">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomorPeminjamanPengembalianActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelNomorPeminjaman2">
       <Properties>
@@ -418,6 +421,10 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldLamaPeminjaman">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldLamaPeminjamanActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldLamaPeminjamanKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelHari">
       <Properties>
