@@ -5,6 +5,8 @@
  */
 package gui;
 
+import static database.Conector.buka_koneksi;
+import java.sql.*;
 import javax.swing.*;
 
 /**
@@ -12,7 +14,7 @@ import javax.swing.*;
  * @author KINTUL
  */
 public class AdminGUI extends javax.swing.JFrame {
-
+    private static Connection koneksi;
     /**
      * Creates new form AdminGUI
      */
@@ -36,7 +38,23 @@ public class AdminGUI extends javax.swing.JFrame {
         saveTambahButton.setEnabled(false);
         cancelTambahButton.setEnabled(false);
         
-        
+    }
+    
+    private void isiComboBoxJenis(){
+        buka_koneksi();
+        ResultSet rs = null;
+        String sql = "SELECT kategori from buku";
+        try {
+            PreparedStatement mStatement = koneksi.prepareStatement(sql);
+            Statement state = koneksi.createStatement();
+            rs =  state.executeQuery("select distinct kategori from buku");
+            while (rs.next()) {
+                jenisBukuTambahComboBox.addItem(rs.getString("kategori"));                
+            }
+            mStatement.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     /**
