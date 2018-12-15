@@ -1,51 +1,51 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
-//import com.sun.istack.internal.logging.Logger;
 import java.sql.*;
-import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
-import java.util.logging.*;
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import login.koneksi1;
 /**
  *
  * @author Angga Maulana A
  */
 
-import sun.util.logging.PlatformLogger;
-
 public class LoginGUI extends javax.swing.JFrame {
-    private static Connection koneksi;
-    java.sql.Connection conn = null;
-    Statement st;
-    
-    private JFrame frame;
+    koneksi1 login;
 
     /**
      * Creates new form LoginGUI
      */
     public LoginGUI() {
         initComponents();
+        login = new koneksi1();
+        login.Class();
+        this.setLocationRelativeTo(null);
     }
     
-    private static void buka_koneksi(){
-        if (koneksi == null) {
-            try {
-                String url = "jdbc:mysql://localhost/perpustakaan";
-                String user = "root";
-                String password = "";
-                DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-                koneksi = DriverManager.getConnection(url, user, password);
-            } catch (SQLException t) {
-                System.out.println("Error membuat koneksi");
+    private void masuk(){
+        try {
+            String nama = User.getText();
+            String pass = new String(Pass.getPassword());
+            login.ss = login.cc.createStatement();
+            String sql = "Select * From Tlogin Where username  = '"+nama+"' And password ='"+pass+"'";
+            login.rr = login.ss.executeQuery(sql);
+            if(login.rr.next()){
+                if (Pass.getText().equals(login.rr.getString("password"))){
+                    new AdminGUI().show();
+                    new TransaksiGUI().show();
+                    this.dispose();
+                }
+                else {
+                    JOptionPane.showMessageDialog(rootPane, "Password Salah, Silahkan Coba Lagi !!");
+                    Pass.setText("");
+                    Pass.requestFocus();
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Login Gagal !!");
             }
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, e);
         }
-    }
-    
+    }   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,6 +65,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Form");
+        setLocationByPlatform(true);
 
         jLabelUsername.setText("Username");
 
@@ -132,7 +133,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginButton)
                     .addComponent(adminButton))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -144,58 +145,11 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        String username = User.getText();
-        String password = Pass.getText();
-        
-//        try {
-//            int log = 1;
-//            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/perpustakaandatabase", "perpustakaan", "LoginGui");
-//            st = (Statement) conn.createStatement();
-//            rs =  st.executeQuery("select * from perpustkaan");
-//        
-//            while (rs.next()){
-//                if (rs.getString(1).equals(username) && rs.getString(2).equals(password))
-//                {
-//                    log = 0;
-//                    break;
-//                }
-//            }
-//            if(log == 0){
-//                
-//                CloseMe();
-//                TransaksiGUI perpustakaan = new TransaksiGUI();
-//                perpustakaan.setVisible(true);
-//            }
-//            else
-//                JOptionPane.showMessageDialog(null, "Gagal Masuk", "Username & Password Salah", JOptionPane.ERROR_MESSAGE);
-//            User.setText("");
-//            Pass.setText("");
-//            User.grabFocus();  
-//        }
-//        catch (SQLException ex){
-//            Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE,null,ex);
-//        } 
-        
-        buka_koneksi();
-        try {
-        String queryString = "SELECT username, password from umum where username ='" + username + "'";
-            PreparedStatement pst = koneksi.prepareStatement(queryString);
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {                
-                if (password.equals(rs.getString("password"))) {
-                    this.setVisible(false);
-                    new TransaksiGUI().setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Username / password salah!");
-                }
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
+        masuk();
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
-
+        masuk();
     }//GEN-LAST:event_adminButtonActionPerformed
 
     
@@ -243,8 +197,5 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelUsername;
     private javax.swing.JButton loginButton;
     // End of variables declaration//GEN-END:variables
-private void CloseMe(){
-            WindowEvent meClose = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-            Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(meClose);
-    }
+
 }
