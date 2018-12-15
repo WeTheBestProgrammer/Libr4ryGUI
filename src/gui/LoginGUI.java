@@ -1,6 +1,7 @@
 package gui;
 
 //import com.sun.istack.internal.logging.Logger;
+import database.Conector;
 import java.awt.Dimension;
 import java.sql.*;
 import java.awt.Toolkit;
@@ -26,19 +27,7 @@ public class LoginGUI extends javax.swing.JFrame {
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
     
-    private static void buka_koneksi(){
-        if (koneksi == null) {
-            try {
-                String url = "jdbc:mysql://localhost/perpustakaan";
-                String user = "root";
-                String password = "";
-                DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-                koneksi = DriverManager.getConnection(url, user, password);
-            } catch (SQLException t) {
-                System.out.println("Error membuat koneksi");
-            }
-        }
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -170,8 +159,7 @@ public class LoginGUI extends javax.swing.JFrame {
 //        catch (SQLException ex){
 //            Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE,null,ex);
 //        } 
-        
-        buka_koneksi();
+        Conector.buka_koneksi();
         try {
         String queryString = "SELECT username, password from umum where username ='" + username + "'";
             PreparedStatement pst = koneksi.prepareStatement(queryString);
