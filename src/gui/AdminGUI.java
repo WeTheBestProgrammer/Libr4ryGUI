@@ -145,6 +145,11 @@ public class AdminGUI extends javax.swing.JFrame {
 
         jLabelJenisBuku.setText("Jenis Buku");
 
+        jenisBukuComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jenisBukuComboBoxItemStateChanged(evt);
+            }
+        });
         jenisBukuComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jenisBukuComboBoxActionPerformed(evt);
@@ -433,6 +438,26 @@ public class AdminGUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, e);
             }
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void jenisBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jenisBukuComboBoxItemStateChanged
+        // TODO add your handling code here:
+        judulBukuComboBox.removeAllItems();
+        buka_koneksi();
+        ResultSet rs = null;
+        String ktgr = String.valueOf(jenisBukuComboBox.getSelectedItem());
+        String sql = "SELECT judul from buku";
+        try {
+            PreparedStatement mStatement = koneksi.prepareStatement(sql);
+            Statement state = koneksi.createStatement();
+            rs =  state.executeQuery("select judul from buku where kategori = '" +ktgr+ "'");
+            while (rs.next()) {                
+                judulBukuComboBox.addItem(rs.getString("judul"));
+            }
+            mStatement.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+        }
+    }//GEN-LAST:event_jenisBukuComboBoxItemStateChanged
 
     /**
      * @param args the command line arguments
