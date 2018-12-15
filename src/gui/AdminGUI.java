@@ -166,6 +166,17 @@ public class AdminGUI extends javax.swing.JFrame {
 
         jLabel1.setText("Jenis Buku");
 
+        jenisBukuTambahComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jenisBukuTambahComboBoxItemStateChanged(evt);
+            }
+        });
+        jenisBukuTambahComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jenisBukuTambahComboBoxActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Judul Buku");
 
         jLabel4.setText("Jumlah Buku");
@@ -341,6 +352,30 @@ public class AdminGUI extends javax.swing.JFrame {
         cancelTambahButton.setEnabled(false);
         
     }//GEN-LAST:event_ubahDataBukuRadioButtonActionPerformed
+
+    private void jenisBukuTambahComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisBukuTambahComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jenisBukuTambahComboBoxActionPerformed
+
+    private void jenisBukuTambahComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jenisBukuTambahComboBoxItemStateChanged
+        // TODO add your handling code here:
+        judulBukuTambahComboBox.removeAllItems();
+        buka_koneksi();
+        ResultSet rs = null;
+        String ktgr = String.valueOf(jenisBukuTambahComboBox.getSelectedItem());
+        String sql = "SELECT kategori from buku";
+        try {
+            PreparedStatement mStatement = koneksi.prepareStatement(sql);
+            Statement state = koneksi.createStatement();
+            rs =  state.executeQuery("select distinct kategori from buku");
+            while (rs.next()) {                
+                jenisBukuTambahComboBox.addItem(rs.getString("kategori"));
+            }
+            mStatement.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+        }
+    }//GEN-LAST:event_jenisBukuTambahComboBoxItemStateChanged
 
     /**
      * @param args the command line arguments
