@@ -29,8 +29,7 @@ public class LoginGUI extends javax.swing.JFrame {
     private static void buka_koneksi(){
         if (koneksi == null) {
             try {
-                String url = "jdbc:smysql://localhost/perpustakaan";
-//                String url = "jdbc:mysql://127.0.0.1/3306/perpustakaan";
+                String url = "jdbc:mysql://localhost/perpustakaan";
                 String user = "root";
                 String password = "";
                 DriverManager.registerDriver(new com.mysql.jdbc.Driver());
