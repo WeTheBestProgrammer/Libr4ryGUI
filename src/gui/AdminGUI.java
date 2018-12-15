@@ -28,7 +28,7 @@ public class AdminGUI extends javax.swing.JFrame {
         jenisBukuComboBox.setEnabled(false);
         jenisBukuTambahComboBox.setEnabled(false);
         judulBukuComboBox.setEnabled(false);
-        judulBukuTambahComboBox.setEnabled(false);
+        judulTambahTextField.setEnabled(false);
         jumlahBukuTextField.setEnabled(false);
         jumlahBukuTambahTextField.setEnabled(false);
         biayaPeminjamanTextField.setEnabled(false);
@@ -104,7 +104,6 @@ public class AdminGUI extends javax.swing.JFrame {
         tambahDataBukuRadioButton = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jenisBukuTambahComboBox = new javax.swing.JComboBox<>();
-        judulBukuTambahComboBox = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jumlahBukuTambahTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -112,6 +111,7 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         cancelTambahButton = new javax.swing.JButton();
         saveTambahButton = new javax.swing.JButton();
+        judulTambahTextField = new javax.swing.JTextField();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -241,8 +241,8 @@ public class AdminGUI extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(biayaPeminjamanTambahTextField)
                                     .addComponent(jumlahBukuTambahTextField)
-                                    .addComponent(judulBukuTambahComboBox, 0, 218, Short.MAX_VALUE)
-                                    .addComponent(jenisBukuTambahComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jenisBukuTambahComboBox, 0, 218, Short.MAX_VALUE)
+                                    .addComponent(judulTambahTextField)))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(saveTambahButton)
@@ -258,7 +258,7 @@ public class AdminGUI extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 8, Short.MAX_VALUE)
+                .addGap(0, 5, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ubahDataBukuRadioButton)
                     .addComponent(tambahDataBukuRadioButton))
@@ -291,9 +291,9 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(judulBukuTambahComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel3)
+                            .addComponent(judulTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jumlahBukuTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
@@ -327,7 +327,7 @@ public class AdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         jenisBukuTambahComboBox.setEnabled(true);
-        judulBukuTambahComboBox.setEnabled(true);
+        judulTambahTextField.setEnabled(true);
         jumlahBukuTambahTextField.setEnabled(true);
         biayaPeminjamanTambahTextField.setEnabled(true);
         saveTambahButton.setEnabled(true);
@@ -352,7 +352,7 @@ public class AdminGUI extends javax.swing.JFrame {
         cancelButton.setEnabled(true);
         logoutButton.setEnabled(true);
         jenisBukuTambahComboBox.setEnabled(false);
-        judulBukuTambahComboBox.setEnabled(false);
+        judulTambahTextField.setEnabled(false);
         jumlahBukuTambahTextField.setEnabled(false);
         biayaPeminjamanTambahTextField.setEnabled(false);
         saveTambahButton.setEnabled(false);
@@ -458,7 +458,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jenisBukuComboBox;
     private javax.swing.JComboBox<String> jenisBukuTambahComboBox;
     private javax.swing.JComboBox<String> judulBukuComboBox;
-    private javax.swing.JComboBox<String> judulBukuTambahComboBox;
+    private javax.swing.JTextField judulTambahTextField;
     private javax.swing.JTextField jumlahBukuTambahTextField;
     private javax.swing.JTextField jumlahBukuTextField;
     private javax.swing.JButton logoutButton;
