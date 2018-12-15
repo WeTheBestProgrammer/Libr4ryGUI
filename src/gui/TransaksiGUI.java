@@ -26,6 +26,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private static Connection koneksi;
     int code;
     int harga = 0;
+    int total = 0;
     DateFormat dateFormat;
     SimpleDateFormat simpleDateFormat;
     Date date;
@@ -94,8 +95,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
                     }
                     
                 }
-                biayaTextField.setText(harga + " X " + c + " = " +
-                            (harga * Character.getNumericValue(c)));
+                total = harga * Character.getNumericValue(c);
+                biayaTextField.setText(harga + " X " + c + " = " + total);
             }
         });
     }
@@ -508,6 +509,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
         }
         
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, 1);  // number of days to add
+        String dt = sdf.format(c.getTime());  // dt is now the new date
+        
         input.isiData(Integer.parseInt(nomorPeminjamanPeminjaman.getText()),
                       namaMahasiswaTextField.getText(),
                       String.valueOf(kategoriBukuComboBox.getSelectedItem()),
@@ -516,7 +523,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                       dateFormat.format(date),
                       dateFormat.format(date),
                       harga,
-                      Integer.parseInt( biayaTextField.getText())
+                      total
                       );
         LihatDataMahasiswa();
     }//GEN-LAST:event_pinjamButtonActionPerformed
