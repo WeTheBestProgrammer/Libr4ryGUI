@@ -136,7 +136,7 @@ public class LoginGUI extends javax.swing.JFrame {
             PreparedStatement pst = koneksi.prepareStatement(queryString);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {                
-                if (password.equals(rs.getString("password"))) {
+                if (password.equals(rs.getString("password")) || username.equals(rs.getString("username"))) {
                     this.setVisible(false);
                     new TransaksiGUI().setVisible(true);
                 } else {
