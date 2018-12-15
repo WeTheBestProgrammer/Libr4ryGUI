@@ -12,7 +12,7 @@ import java.sql.*;
  * @author Ahmad Musyadad A
  */
 public class Conector {
-    private static Connection koneksi;
+    public static Connection koneksi;
     public static void buka_koneksi(){
         if (koneksi == null) {
             try {

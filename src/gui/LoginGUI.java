@@ -133,10 +133,10 @@ public class LoginGUI extends javax.swing.JFrame {
         Conector.buka_koneksi();
         try {
         String queryString = "SELECT username, password from umum where username ='" + username + "'";
-            PreparedStatement pst = koneksi.prepareStatement(queryString);
+            PreparedStatement pst = Conector.koneksi.prepareStatement(queryString);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {                
-                if (password.equals(rs.getString("password")) || username.equals(rs.getString("username"))) {
+                if (password.equals(rs.getString("password")) && username.equals(rs.getString("username"))) {
                     this.setVisible(false);
                     new TransaksiGUI().setVisible(true);
                 } else {

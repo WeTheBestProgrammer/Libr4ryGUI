@@ -385,17 +385,16 @@ public class AdminGUI extends javax.swing.JFrame {
     private void saveTambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTambahButtonActionPerformed
         // TODO add your handling code here:
         buka_koneksi();
-        if (databaru == true) { // prosess simpan atau edit
             try {
-                String sql = "insert into buku values('"+jenisBukuTambahComboBox.getSelectedItem()+"','"+judulTambahTextField.getText()+"','"+biayaPeminjamanTambahTextField.getText()+"')";
+                String sql = "insert into buku (kategori, judul, harga_sat) values('"+jenisBukuTambahComboBox.getSelectedItem()+"','"+judulTambahTextField.getText()+"','"+biayaPeminjamanTambahTextField.getText()+"')";
     //            java.sql.Connection conn = (java.sql.Connection)gui.koneksi.koneksiDB();
-                java.sql.PreparedStatement pst = koneksi.prepareStatement(sql);
+                PreparedStatement pst = koneksi.prepareStatement(sql);
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "berhasil disimpan");
+                pst.close();
             } catch (SQLException | HeadlessException e) {
                 JOptionPane.showMessageDialog(null, e);
             }   
-        }
     }//GEN-LAST:event_saveTambahButtonActionPerformed
 
     /**
