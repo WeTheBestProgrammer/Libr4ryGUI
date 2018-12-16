@@ -571,6 +571,19 @@ public class TransaksiGUI extends javax.swing.JFrame {
                       total
                       );
         LihatDataMahasiswa();
+        
+        try {
+            PreparedStatement mStatement = koneksi.prepareStatement(sql);
+            Statement state = koneksi.createStatement();
+            rs =  state.executeQuery("insert into datatransaksi (nomorPeminjam, username, idbuku, jumlah, lamaPinjam, biaya)"
+                    + "values ('");
+            while (rs.next()) {                
+                harga = rs.getInt("harga_sat");
+            }
+            mStatement.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+        }
     }//GEN-LAST:event_pinjamButtonActionPerformed
 
     private void jRadioButtonPengembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPengembalianActionPerformed

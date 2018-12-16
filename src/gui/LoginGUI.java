@@ -153,7 +153,7 @@ public class LoginGUI extends javax.swing.JFrame {
         
         Conector.buka_koneksi();
         try {
-        String queryString = "SELECT username, password from umum where username ='" + username + "'";
+        String queryString = "SELECT username, password from admin where username ='" + username + "'";
             PreparedStatement pst = Conector.koneksi.prepareStatement(queryString);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {                
