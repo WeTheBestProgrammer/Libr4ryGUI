@@ -176,6 +176,11 @@ public class AdminGUI extends javax.swing.JFrame {
         });
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         logoutButton.setText("Logout");
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
@@ -218,6 +223,11 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabel5.setText("Biaya Peminjaman");
 
         cancelTambahButton.setText("Cancel");
+        cancelTambahButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelTambahButtonActionPerformed(evt);
+            }
+        });
 
         saveTambahButton.setText("Save");
         saveTambahButton.addActionListener(new java.awt.event.ActionListener() {
@@ -475,6 +485,18 @@ public class AdminGUI extends javax.swing.JFrame {
         LoginGUI s =  new LoginGUI();
         s.setVisible(true);
     }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        new AdminGUI().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void cancelTambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelTambahButtonActionPerformed
+        // TODO add your handling code here:
+        new AdminGUI().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_cancelTambahButtonActionPerformed
 
     /**
      * @param args the command line arguments
