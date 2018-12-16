@@ -25,6 +25,7 @@ public class AdminGUI extends javax.swing.JFrame {
         ButtonGroup group = new ButtonGroup();
         group.add(ubahDataBukuRadioButton);
         group.add(tambahDataBukuRadioButton);
+        group.add(hapusDataBukuRadioButton);
         jenisBukuComboBox.setEnabled(false);
         jenisBukuTambahComboBox.setEnabled(false);
         judulBukuComboBox.setEnabled(false);
@@ -39,6 +40,12 @@ public class AdminGUI extends javax.swing.JFrame {
         jenisBukuComboBox.setEnabled(false);
         saveTambahButton.setEnabled(false);
         cancelTambahButton.setEnabled(false);
+        jenisBukuHapusComboBox.setEnabled(false);
+        judulBukuHapusComboBox.setEnabled(false);
+        jumlahBukuHapusTextField.setEnabled(false);
+        biayaPeminjamanHapusTextField.setEnabled(false);
+        saveHapusButton.setEnabled(false);
+        cancelHapusButton.setEnabled(false);
         
     }
     
@@ -89,6 +96,23 @@ public class AdminGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
         }    
     }
+    
+    private void isiComboBoxHapus(){
+       buka_koneksi();
+        ResultSet rs = null;
+        String sql = "SELECT kategori from buku";
+        try {
+            PreparedStatement mStatement = koneksi.prepareStatement(sql);
+            Statement state = koneksi.createStatement();
+            rs =  state.executeQuery("select distinct kategori from buku");
+            while (rs.next()) {                
+                jenisBukuHapusComboBox.addItem(rs.getString("kategori"));
+            }
+            mStatement.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+        }    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -129,7 +153,7 @@ public class AdminGUI extends javax.swing.JFrame {
         cancelTambahButton = new javax.swing.JButton();
         saveTambahButton = new javax.swing.JButton();
         judulTambahTextField = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        hapusDataBukuRadioButton = new javax.swing.JRadioButton();
         jenisBukuHapusComboBox = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         judulBukuHapusComboBox = new javax.swing.JComboBox<>();
@@ -247,7 +271,12 @@ public class AdminGUI extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton1.setText("Hapus Data Buku");
+        hapusDataBukuRadioButton.setText("Hapus Data Buku");
+        hapusDataBukuRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusDataBukuRadioButtonActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Jenis Buku");
 
@@ -266,6 +295,11 @@ public class AdminGUI extends javax.swing.JFrame {
         cancelHapusButton.setText("Cancel");
 
         saveHapusButton.setText("Save");
+        saveHapusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveHapusButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -332,7 +366,7 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
+                        .addComponent(hapusDataBukuRadioButton)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,7 +394,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ubahDataBukuRadioButton)
                     .addComponent(tambahDataBukuRadioButton)
-                    .addComponent(jRadioButton1))
+                    .addComponent(hapusDataBukuRadioButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelJenisBuku)
@@ -465,6 +499,12 @@ public class AdminGUI extends javax.swing.JFrame {
         biayaPeminjamanTextField.setEnabled(false);
         saveButton.setEnabled(false);
         cancelButton.setEnabled(false);
+        jenisBukuHapusComboBox.setEnabled(false);
+        judulBukuHapusComboBox.setEnabled(false);
+        jumlahBukuHapusTextField.setEnabled(false);
+        biayaPeminjamanHapusTextField.setEnabled(false);
+        saveHapusButton.setEnabled(false);
+        cancelHapusButton.setEnabled(false);
         isiComboBoxKategori();
     }//GEN-LAST:event_tambahDataBukuRadioButtonActionPerformed
 
@@ -483,6 +523,12 @@ public class AdminGUI extends javax.swing.JFrame {
         biayaPeminjamanTambahTextField.setEnabled(false);
         saveTambahButton.setEnabled(false);
         cancelTambahButton.setEnabled(false);
+        jenisBukuHapusComboBox.setEnabled(false);
+        judulBukuHapusComboBox.setEnabled(false);
+        jumlahBukuHapusTextField.setEnabled(false);
+        biayaPeminjamanHapusTextField.setEnabled(false);
+        saveHapusButton.setEnabled(false);
+        cancelHapusButton.setEnabled(false);
         isiComboBoxUbah();
     }//GEN-LAST:event_ubahDataBukuRadioButtonActionPerformed
 
@@ -586,6 +632,47 @@ public class AdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jumlahBukuHapusTextFieldActionPerformed
 
+    private void saveHapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveHapusButtonActionPerformed
+        // TODO add your handling code here:
+        buka_koneksi();
+            try {
+                String sql = "delete from karyawan where judul='"+judulBukuHapusComboBox.getSelectedItem()+"'";
+                PreparedStatement pst = koneksi.prepareStatement(sql);
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "berhasil dihapus");
+                pst.close();
+                jenisBukuHapusComboBox.setSelectedItem("");
+                judulBukuHapusComboBox.setSelectedItem("");
+                jumlahBukuHapusTextField.setText("");
+                biayaPeminjamanHapusTextField.setText("");
+            } catch (SQLException | HeadlessException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+    }//GEN-LAST:event_saveHapusButtonActionPerformed
+
+    private void hapusDataBukuRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusDataBukuRadioButtonActionPerformed
+        // TODO add your handling code here:
+        jenisBukuHapusComboBox.setEnabled(true);
+        judulBukuHapusComboBox.setEnabled(true);
+        jumlahBukuHapusTextField.setEnabled(true);
+        biayaPeminjamanHapusTextField.setEnabled(true);
+        saveHapusButton.setEnabled(true);
+        cancelHapusButton.setEnabled(true);
+        logoutButton.setEnabled(true);
+        jenisBukuComboBox.setEnabled(false);
+        judulBukuComboBox.setEnabled(false);
+        jumlahBukuTextField.setEnabled(false);
+        biayaPeminjamanTextField.setEnabled(false);
+        saveButton.setEnabled(false);
+        cancelButton.setEnabled(false);
+        jenisBukuTambahComboBox.setEnabled(false);
+        judulTambahTextField.setEnabled(false);
+        jumlahBukuTambahTextField.setEnabled(false);
+        biayaPeminjamanTambahTextField.setEnabled(false);
+        saveTambahButton.setEnabled(false);
+        cancelTambahButton.setEnabled(false);
+    }//GEN-LAST:event_hapusDataBukuRadioButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -630,6 +717,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton cancelHapusButton;
     private javax.swing.JButton cancelTambahButton;
+    private javax.swing.JRadioButton hapusDataBukuRadioButton;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JLabel jLabel1;
@@ -646,7 +734,6 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelJudulBuku;
     private javax.swing.JLabel jLabelJumlahBuku;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox<String> jenisBukuComboBox;

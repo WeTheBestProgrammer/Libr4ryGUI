@@ -138,7 +138,7 @@
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="hapusDataBukuRadioButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -174,7 +174,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="ubahDataBukuRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tambahDataBukuRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="hapusDataBukuRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -433,10 +433,13 @@
     </Component>
     <Component class="javax.swing.JTextField" name="judulTambahTextField">
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+    <Component class="javax.swing.JRadioButton" name="hapusDataBukuRadioButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hapus Data Buku"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hapusDataBukuRadioButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="jenisBukuHapusComboBox">
       <Properties>
@@ -494,6 +497,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveHapusButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
