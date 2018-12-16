@@ -29,6 +29,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
     int code;
     int harga = 0;
     int total = 0;
+    String dendastrng = null;
     DateFormat dateFormat;
     SimpleDateFormat simpleDateFormat;
     Date date;
@@ -538,11 +539,13 @@ public class TransaksiGUI extends javax.swing.JFrame {
         Conector.buka_koneksi();
         
         ResultSet rs = null;
+        ResultSet in = null;
         ResultSet denda = null;
         
         String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
         String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
         String sql = "SELECT harga_sat from buku";
+        String sql2 = "SELECT dendaKeterlambatan from buku";
         try {
             PreparedStatement mStatement = koneksi.prepareStatement(sql);
             Statement state = koneksi.createStatement();
@@ -556,6 +559,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         }
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMdd");
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         c.add(Calendar.DATE, Integer.parseInt(jTextFieldLamaPeminjaman.getText()));  // number of days to add
@@ -576,20 +580,24 @@ public class TransaksiGUI extends javax.swing.JFrame {
         try {
             PreparedStatement mStatement = koneksi.prepareStatement(sql);
             Statement state = koneksi.createStatement();
-            denda = state.executeQuery("select dendaketerlambatan from buku where judul = '" 
-                    + String.valueOf(judulBukuComboBox.getSelectedItem()) + "' "
-                    + "and kategoi = '" + String.valueOf(kategoriBukuComboBox.getSelectedItem()) + "'");
-            rs =  state.executeQuery("insert into datatransaksi (nomorPeminjam, nama, judul, lamaPinjam, biaya)"
-                    + "values ('" + Integer.parseInt(nomorPeminjamanPeminjaman.getText()) + "', '"
-                    + namaMahasiswaTextField.getText() + "', '"
-                    + String.valueOf(judulBukuComboBox.getSelectedItem()) + "', '"
-                    + sdf.format(date) +"', '"
-                    + dt + "', '"
-                    + total + "', '"
-                    + denda);
-            while (rs.next()) {                
-                harga = rs.getInt("harga_sat");
+            denda = state.executeQuery("select dendaKeterlambatan from buku where judul = '" 
+                    + judul
+                    + "' and kategori = '" + ktgr + "'");
+            
+            while (denda.next()) {                
+                dendastrng = denda.getString("dendaKeterlambatan");
             }
+//            System.out.println(sdf2.format(date));
+            in =  state.executeQuery("INSERT INTO datatransaksi (nomorPeminjam, nama, judul, tanggalpinjam, tanggalkembali, lamaPinjam, biaya, dendaKeterlambatan) values "
+                    + "("
+                    + Integer.parseInt(nomorPeminjamanPeminjaman.getText()) + ", '"
+                    + namaMahasiswaTextField.getText() + "', '"
+                    + judul + "', '"
+                    + sdf.format(date) + "', '"
+                    + dt + "', "
+                    + Integer.parseInt(jTextFieldLamaPeminjaman.getText()) + ", "
+                    + total + ", "
+                    + dendastrng + ")");
             mStatement.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
