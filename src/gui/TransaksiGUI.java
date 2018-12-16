@@ -575,7 +575,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         try {
             PreparedStatement mStatement = koneksi.prepareStatement(sql);
             Statement state = koneksi.createStatement();
-            rs =  state.executeQuery("insert into datatransaksi (nomorPeminjam, username, idbuku, jumlah, lamaPinjam, biaya)"
+            rs =  state.executeQuery("insert into dendaKeterlambatan (nomorPeminjam, username, idbuku, jumlah, lamaPinjam, biaya)"
                     + "values ('");
             while (rs.next()) {                
                 harga = rs.getInt("harga_sat");
