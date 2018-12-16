@@ -17,6 +17,8 @@ import java.text.*;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -82,6 +84,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
                     String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
                     String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
                     String sql = "SELECT harga_sat from buku";
+                    
+                    
                     try {
                         PreparedStatement mStatement = koneksi.prepareStatement(sql);
                         Statement state = koneksi.createStatement();
@@ -89,14 +93,37 @@ public class TransaksiGUI extends javax.swing.JFrame {
                         while (rs.next()) {                
                             harga = rs.getInt("harga_sat");
                         }
+                        
                         mStatement.close();
                     } catch (Exception l) {
                         JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
                     }
-                    
                 }
-                total = harga * Character.getNumericValue(c);
-                biayaTextField.setText(harga + " X " + c + " = " + total);
+                
+            }
+        });
+        
+        jTextFieldLamaPeminjaman.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                warn();
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                warn();
+            }
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                warn();
+            }
+
+            public void warn() {
+                try {
+                    total = harga * Integer.parseInt(jTextFieldLamaPeminjaman.getText()); 
+                    biayaTextField.setText(harga + " X " + jTextFieldLamaPeminjaman.getText() + " = " + total);
+                } catch (Exception e) {
+                    biayaTextField.setText(harga + "");
+                }
             }
         });
     }
@@ -140,7 +167,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         for (Item item: input.getData()) {
             String arrayTransaksi[] = {String.valueOf(item.getCodePinjam()),
                                         item.getNamaMahasiswa(), item.getKategoriBuku(), item.getJudulBuku(),
-                                        String.valueOf(item.getLamaPinjam()),
+                                        String.valueOf(item.getLamaPinjam()) + " Hari",
                                         String.valueOf(item.getTanggalPinjam()),
                                         String.valueOf(item.getTanggalKembali()),
                                         String.valueOf(item.getHarga()),
@@ -277,9 +304,27 @@ public class TransaksiGUI extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        });
+        tabelTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelTransaksiMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabelTransaksi);
 
+        judulBukuComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                judulBukuComboBoxItemStateChanged(evt);
+            }
+        });
         judulBukuComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 judulBukuComboBoxActionPerformed(evt);
@@ -642,6 +687,37 @@ public class TransaksiGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jTextFieldLamaPeminjamanKeyTyped
+
+    private void judulBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_judulBukuComboBoxItemStateChanged
+        // TODO add your handling code here:
+                Conector.buka_koneksi();
+                ResultSet rs = null;
+                String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
+                String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
+                String sql = "SELECT harga_sat from buku";
+                    
+                try {
+                    PreparedStatement mStatement = koneksi.prepareStatement(sql);
+                    Statement state = koneksi.createStatement();
+                    rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
+                    while (rs.next()) {                
+                        harga = rs.getInt("harga_sat");
+                        biayaTextField.setText(harga + "");
+                    }
+                        
+                    mStatement.close();
+                } catch (Exception l) {
+                    JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+                }
+    }//GEN-LAST:event_judulBukuComboBoxItemStateChanged
+
+    private void tabelTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelTransaksiMouseClicked
+        // TODO add your handling code here:
+        boolean click =  tabelTransaksi.isEditing();
+        if (click == false) { //Supaya tidak bisa mengedit tabel
+            JOptionPane.showMessageDialog(this, "Cannot edit cell of table", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_tabelTransaksiMouseClicked
 
     /**
      * @param args the command line arguments
