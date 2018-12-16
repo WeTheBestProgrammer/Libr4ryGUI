@@ -148,9 +148,27 @@ public class LoginGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loginButtonActionPerformed
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
+        String username = User.getText();
+        String password = Pass.getText();
+        
+        Conector.buka_koneksi();
+        try {
+        String queryString = "SELECT username, password from umum where username ='" + username + "'";
+            PreparedStatement pst = Conector.koneksi.prepareStatement(queryString);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {                
+                if (password.equals(rs.getString("password")) && username.equals(rs.getString("username"))) {
+                    this.setVisible(false);
+                    new AdminGUI().setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Username / password salah!");
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_adminButtonActionPerformed
-
-    
+        
     /**
      * @param args the command line arguments
      */
