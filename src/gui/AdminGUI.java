@@ -178,6 +178,11 @@ public class AdminGUI extends javax.swing.JFrame {
         cancelButton.setText("Cancel");
 
         logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
 
         ubahDataBukuRadioButton.setText("Ubah Data Buku");
         ubahDataBukuRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -463,6 +468,13 @@ public class AdminGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
         }
     }//GEN-LAST:event_jenisBukuComboBoxItemStateChanged
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        LoginGUI s =  new LoginGUI();
+        s.setVisible(true);
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
