@@ -538,6 +538,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         Conector.buka_koneksi();
         
         ResultSet rs = null;
+        ResultSet denda = null;
         
         String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
         String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
@@ -575,10 +576,17 @@ public class TransaksiGUI extends javax.swing.JFrame {
         try {
             PreparedStatement mStatement = koneksi.prepareStatement(sql);
             Statement state = koneksi.createStatement();
-            rs =  state.executeQuery("insert into datatransaksi (nomorPeminjam, nama, judul, jumlah, lamaPinjam, biaya)"
+            denda = state.executeQuery("select dendaketerlambatan from buku where judul = '" 
+                    + String.valueOf(judulBukuComboBox.getSelectedItem()) + "' "
+                    + "and kategoi = '" + String.valueOf(kategoriBukuComboBox.getSelectedItem()) + "'");
+            rs =  state.executeQuery("insert into datatransaksi (nomorPeminjam, nama, judul, lamaPinjam, biaya)"
                     + "values ('" + Integer.parseInt(nomorPeminjamanPeminjaman.getText()) + "', '"
                     + namaMahasiswaTextField.getText() + "', '"
-                    );
+                    + String.valueOf(judulBukuComboBox.getSelectedItem()) + "', '"
+                    + sdf.format(date) +"', '"
+                    + dt + "', '"
+                    + total + "', '"
+                    + denda);
             while (rs.next()) {                
                 harga = rs.getInt("harga_sat");
             }
