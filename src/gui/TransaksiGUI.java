@@ -613,6 +613,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
+        new TransaksiGUI().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jRadioButtonPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPeminjamanActionPerformed
