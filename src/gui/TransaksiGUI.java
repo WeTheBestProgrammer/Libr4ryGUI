@@ -167,7 +167,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         for (Item item: input.getData()) {
             String arrayTransaksi[] = {String.valueOf(item.getCodePinjam()),
                                         item.getNamaMahasiswa(), item.getKategoriBuku(), item.getJudulBuku(),
-                                        String.valueOf(item.getLamaPinjam()),
+                                        String.valueOf(item.getLamaPinjam()) + " Hari",
                                         String.valueOf(item.getTanggalPinjam()),
                                         String.valueOf(item.getTanggalKembali()),
                                         String.valueOf(item.getHarga()),
@@ -304,7 +304,20 @@ public class TransaksiGUI extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        });
+        tabelTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelTransaksiMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabelTransaksi);
 
         judulBukuComboBox.addItemListener(new java.awt.event.ItemListener() {
@@ -697,6 +710,14 @@ public class TransaksiGUI extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
                 }
     }//GEN-LAST:event_judulBukuComboBoxItemStateChanged
+
+    private void tabelTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelTransaksiMouseClicked
+        // TODO add your handling code here:
+        boolean click =  tabelTransaksi.isEditing();
+        if (click == false) { //Supaya tidak bisa mengedit tabel
+            JOptionPane.showMessageDialog(this, "Cannot edit cell of table", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_tabelTransaksiMouseClicked
 
     /**
      * @param args the command line arguments
