@@ -34,6 +34,8 @@ public class AdminGUI extends javax.swing.JFrame {
         jumlahBukuTambahTextField.setEnabled(false);
         biayaPeminjamanTextField.setEnabled(false);
         biayaPeminjamanTambahTextField.setEnabled(false);
+        dendaPeminjamanTextField.setEnabled(false);
+        dendaPeminjamanTambahTextField.setEnabled(false);
         logoutButton.setEnabled(false);
         saveButton.setEnabled(false);
         cancelButton.setEnabled(false);
@@ -42,8 +44,6 @@ public class AdminGUI extends javax.swing.JFrame {
         cancelTambahButton.setEnabled(false);
         jenisBukuHapusComboBox.setEnabled(false);
         judulBukuHapusComboBox.setEnabled(false);
-        jumlahBukuHapusTextField.setEnabled(false);
-        biayaPeminjamanHapusTextField.setEnabled(false);
         saveHapusButton.setEnabled(false);
         cancelHapusButton.setEnabled(false);
         
@@ -64,7 +64,7 @@ public class AdminGUI extends javax.swing.JFrame {
     }
     
     private void isiComboBoxKategori(){
-       buka_koneksi();
+        buka_koneksi();
         ResultSet rs = null;
         String sql = "SELECT kategori from buku";
         try {
@@ -81,7 +81,7 @@ public class AdminGUI extends javax.swing.JFrame {
     }
     
     private void isiComboBoxUbah(){
-       buka_koneksi();
+        buka_koneksi();
         ResultSet rs = null;
         String sql = "SELECT kategori from buku";
         try {
@@ -98,7 +98,7 @@ public class AdminGUI extends javax.swing.JFrame {
     }
     
     private void isiComboBoxHapus(){
-       buka_koneksi();
+        buka_koneksi();
         ResultSet rs = null;
         String sql = "SELECT kategori from buku";
         try {
@@ -158,12 +158,12 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         judulBukuHapusComboBox = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jumlahBukuHapusTextField = new javax.swing.JTextField();
-        biayaPeminjamanHapusTextField = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         cancelHapusButton = new javax.swing.JButton();
         saveHapusButton = new javax.swing.JButton();
+        dendaPeminjamanTambahTextField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        dendaPeminjamanTextField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -193,6 +193,12 @@ public class AdminGUI extends javax.swing.JFrame {
 
         jLabelJudulBuku.setText("Judul Buku");
 
+        judulBukuComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                judulBukuComboBoxActionPerformed(evt);
+            }
+        });
+
         jLabelJumlahBuku.setText("Jumlah Buku");
 
         jumlahBukuTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -202,6 +208,12 @@ public class AdminGUI extends javax.swing.JFrame {
         });
 
         jLabelBiayaPeminjaman.setText("Biaya Peminjaman");
+
+        biayaPeminjamanTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                biayaPeminjamanTextFieldActionPerformed(evt);
+            }
+        });
 
         saveButton.setText("Save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -278,21 +290,33 @@ public class AdminGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Jenis Buku");
-
-        jLabel7.setText("Judul Buku");
-
-        jumlahBukuHapusTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jumlahBukuHapusTextFieldActionPerformed(evt);
+        jenisBukuHapusComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jenisBukuHapusComboBoxItemStateChanged(evt);
             }
         });
 
-        jLabel8.setText("Jumlah Buku");
+        jLabel6.setText("Jenis Buku");
 
-        jLabel9.setText("Biaya Peminjaman");
+        judulBukuHapusComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                judulBukuHapusComboBoxItemStateChanged(evt);
+            }
+        });
+        judulBukuHapusComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                judulBukuHapusComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Judul Buku");
 
         cancelHapusButton.setText("Cancel");
+        cancelHapusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelHapusButtonActionPerformed(evt);
+            }
+        });
 
         saveHapusButton.setText("Save");
         saveHapusButton.addActionListener(new java.awt.event.ActionListener() {
@@ -300,6 +324,16 @@ public class AdminGUI extends javax.swing.JFrame {
                 saveHapusButtonActionPerformed(evt);
             }
         });
+
+        jLabel8.setText("Denda Keterlambatan");
+
+        dendaPeminjamanTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dendaPeminjamanTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Denda Keterlambatan");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -309,32 +343,41 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelJenisBuku)
-                                    .addComponent(jLabelJudulBuku)
-                                    .addComponent(jLabelJumlahBuku))
-                                .addGap(35, 35, 35)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(judulBukuComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 191, Short.MAX_VALUE)
-                                        .addComponent(jenisBukuComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jumlahBukuTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(logoutButton)
-                                    .addGap(75, 75, 75)
-                                    .addComponent(saveButton)
-                                    .addGap(24, 24, 24)
-                                    .addComponent(cancelButton)
-                                    .addGap(13, 13, 13))
+                                .addComponent(saveButton)
+                                .addGap(101, 101, 101))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabelBiayaPeminjaman)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(biayaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabelJenisBuku)
+                                        .addComponent(jLabelJudulBuku)
+                                        .addComponent(jLabelJumlahBuku))
+                                    .addGap(67, 67, 67)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jenisBukuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(judulBukuComboBox, 0, 189, Short.MAX_VALUE)
+                                            .addComponent(jumlahBukuTextField))))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(logoutButton)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelBiayaPeminjaman)
+                                            .addComponent(jLabel9)))
+                                    .addGap(21, 21, 21)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(biayaPeminjamanTextField)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(cancelButton)
+                                            .addComponent(dendaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 187, Short.MAX_VALUE)
+                                .addComponent(saveTambahButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(cancelTambahButton))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(40, 40, 40)
@@ -342,22 +385,18 @@ public class AdminGUI extends javax.swing.JFrame {
                                             .addComponent(jLabel3)
                                             .addComponent(jLabel1)
                                             .addComponent(jLabel4)
-                                            .addComponent(jLabel5))
-                                        .addGap(18, 18, Short.MAX_VALUE))
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel8))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel2)
                                         .addGap(164, 164, 164)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jumlahBukuTambahTextField, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(judulTambahTextField, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jenisBukuTambahComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(biayaPeminjamanTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(saveTambahButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(cancelTambahButton)))
+                                    .addComponent(biayaPeminjamanTambahTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                                    .addComponent(dendaPeminjamanTambahTextField))))
                         .addGap(66, 66, 66))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ubahDataBukuRadioButton)
@@ -366,25 +405,21 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(hapusDataBukuRadioButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addGap(39, 39, 39)
+                            .addComponent(jLabel7))
+                        .addGap(59, 59, 59)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(judulBukuHapusComboBox, 0, 164, Short.MAX_VALUE)
-                            .addComponent(jenisBukuHapusComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jumlahBukuHapusTextField)
-                            .addComponent(biayaPeminjamanHapusTextField)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(saveHapusButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(cancelHapusButton)))
+                            .addComponent(judulBukuHapusComboBox, 0, 195, Short.MAX_VALUE)
+                            .addComponent(jenisBukuHapusComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hapusDataBukuRadioButton)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(saveHapusButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(cancelHapusButton)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -406,65 +441,56 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addComponent(jLabel6)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelJudulBuku)
-                            .addComponent(judulBukuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelJumlahBuku)
-                            .addComponent(jumlahBukuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelBiayaPeminjaman)
-                            .addComponent(biayaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(saveButton)
-                            .addComponent(cancelButton)
-                            .addComponent(logoutButton)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(jLabel3)
-                                                    .addComponent(judulTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(judulBukuHapusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel7))))
-                                        .addGap(21, 21, 21)
+                                        .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jumlahBukuTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel4)))
+                                            .addComponent(jLabel3)
+                                            .addComponent(judulTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(60, 60, 60)
+                                        .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jumlahBukuHapusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel8))))
-                                .addGap(19, 19, 19)
+                                            .addComponent(judulBukuHapusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel7))))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(biayaPeminjamanTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5)))
+                                    .addComponent(cancelHapusButton)
+                                    .addComponent(saveHapusButton)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(99, 99, 99)
+                                .addGap(21, 21, 21)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(biayaPeminjamanHapusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(judulBukuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelJudulBuku))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jumlahBukuTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jumlahBukuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelJumlahBuku))))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(biayaPeminjamanTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(biayaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelBiayaPeminjaman))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dendaPeminjamanTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(dendaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cancelTambahButton)
+                            .addComponent(saveTambahButton)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(183, 183, 183)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cancelTambahButton)
-                                .addComponent(saveTambahButton))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cancelHapusButton)
-                                .addComponent(saveHapusButton)))))
+                            .addComponent(cancelButton)
+                            .addComponent(saveButton)
+                            .addComponent(logoutButton))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(75, 75, 75)
@@ -490,6 +516,7 @@ public class AdminGUI extends javax.swing.JFrame {
         judulTambahTextField.setEnabled(true);
         jumlahBukuTambahTextField.setEnabled(true);
         biayaPeminjamanTambahTextField.setEnabled(true);
+        dendaPeminjamanTambahTextField.setEnabled(true);
         saveTambahButton.setEnabled(true);
         cancelTambahButton.setEnabled(true);
         logoutButton.setEnabled(true);
@@ -497,12 +524,11 @@ public class AdminGUI extends javax.swing.JFrame {
         judulBukuComboBox.setEnabled(false);
         jumlahBukuTextField.setEnabled(false);
         biayaPeminjamanTextField.setEnabled(false);
+        dendaPeminjamanTextField.setEnabled(false);
         saveButton.setEnabled(false);
         cancelButton.setEnabled(false);
         jenisBukuHapusComboBox.setEnabled(false);
         judulBukuHapusComboBox.setEnabled(false);
-        jumlahBukuHapusTextField.setEnabled(false);
-        biayaPeminjamanHapusTextField.setEnabled(false);
         saveHapusButton.setEnabled(false);
         cancelHapusButton.setEnabled(false);
         isiComboBoxKategori();
@@ -514,6 +540,7 @@ public class AdminGUI extends javax.swing.JFrame {
         judulBukuComboBox.setEnabled(true);
         jumlahBukuTextField.setEnabled(true);
         biayaPeminjamanTextField.setEnabled(true);
+        dendaPeminjamanTextField.setEnabled(true);
         saveButton.setEnabled(true);
         cancelButton.setEnabled(true);
         logoutButton.setEnabled(true);
@@ -521,12 +548,11 @@ public class AdminGUI extends javax.swing.JFrame {
         judulTambahTextField.setEnabled(false);
         jumlahBukuTambahTextField.setEnabled(false);
         biayaPeminjamanTambahTextField.setEnabled(false);
+        dendaPeminjamanTambahTextField.setEnabled(false);
         saveTambahButton.setEnabled(false);
         cancelTambahButton.setEnabled(false);
         jenisBukuHapusComboBox.setEnabled(false);
         judulBukuHapusComboBox.setEnabled(false);
-        jumlahBukuHapusTextField.setEnabled(false);
-        biayaPeminjamanHapusTextField.setEnabled(false);
         saveHapusButton.setEnabled(false);
         cancelHapusButton.setEnabled(false);
         isiComboBoxUbah();
@@ -628,23 +654,17 @@ public class AdminGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cancelTambahButtonActionPerformed
 
-    private void jumlahBukuHapusTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumlahBukuHapusTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jumlahBukuHapusTextFieldActionPerformed
-
     private void saveHapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveHapusButtonActionPerformed
         // TODO add your handling code here:
         buka_koneksi();
             try {
-                String sql = "delete from karyawan where judul='"+judulBukuHapusComboBox.getSelectedItem()+"'";
+                String sql = "delete from buku where judul='"+judulBukuHapusComboBox.getSelectedItem()+"'";
                 PreparedStatement pst = koneksi.prepareStatement(sql);
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "berhasil dihapus");
                 pst.close();
                 jenisBukuHapusComboBox.setSelectedItem("");
                 judulBukuHapusComboBox.setSelectedItem("");
-                jumlahBukuHapusTextField.setText("");
-                biayaPeminjamanHapusTextField.setText("");
             } catch (SQLException | HeadlessException e) {
                 JOptionPane.showMessageDialog(null, e);
             }
@@ -654,8 +674,6 @@ public class AdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         jenisBukuHapusComboBox.setEnabled(true);
         judulBukuHapusComboBox.setEnabled(true);
-        jumlahBukuHapusTextField.setEnabled(true);
-        biayaPeminjamanHapusTextField.setEnabled(true);
         saveHapusButton.setEnabled(true);
         cancelHapusButton.setEnabled(true);
         logoutButton.setEnabled(true);
@@ -663,15 +681,65 @@ public class AdminGUI extends javax.swing.JFrame {
         judulBukuComboBox.setEnabled(false);
         jumlahBukuTextField.setEnabled(false);
         biayaPeminjamanTextField.setEnabled(false);
+        dendaPeminjamanTextField.setEnabled(false);
         saveButton.setEnabled(false);
         cancelButton.setEnabled(false);
         jenisBukuTambahComboBox.setEnabled(false);
         judulTambahTextField.setEnabled(false);
         jumlahBukuTambahTextField.setEnabled(false);
         biayaPeminjamanTambahTextField.setEnabled(false);
+        dendaPeminjamanTambahTextField.setEnabled(false);
         saveTambahButton.setEnabled(false);
         cancelTambahButton.setEnabled(false);
+        isiComboBoxHapus();
     }//GEN-LAST:event_hapusDataBukuRadioButtonActionPerformed
+
+    private void judulBukuComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_judulBukuComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_judulBukuComboBoxActionPerformed
+
+    private void judulBukuHapusComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_judulBukuHapusComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_judulBukuHapusComboBoxActionPerformed
+
+    private void judulBukuHapusComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_judulBukuHapusComboBoxItemStateChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_judulBukuHapusComboBoxItemStateChanged
+
+    private void jenisBukuHapusComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jenisBukuHapusComboBoxItemStateChanged
+        // TODO add your handling code here:
+        judulBukuHapusComboBox.removeAllItems();
+        buka_koneksi();
+        ResultSet rs = null;
+        String ktgr = String.valueOf(jenisBukuHapusComboBox.getSelectedItem());
+        String sql = "SELECT judul from buku";
+        try {
+            PreparedStatement mStatement = koneksi.prepareStatement(sql);
+            Statement state = koneksi.createStatement();
+            rs =  state.executeQuery("select judul from buku where kategori = '" +ktgr+ "'");
+            while (rs.next()) {                
+                judulBukuHapusComboBox.addItem(rs.getString("judul"));
+            }
+            mStatement.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+        }
+    }//GEN-LAST:event_jenisBukuHapusComboBoxItemStateChanged
+
+    private void cancelHapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelHapusButtonActionPerformed
+        // TODO add your handling code here:
+        new AdminGUI().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_cancelHapusButtonActionPerformed
+
+    private void dendaPeminjamanTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dendaPeminjamanTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dendaPeminjamanTextFieldActionPerformed
+
+    private void biayaPeminjamanTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_biayaPeminjamanTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_biayaPeminjamanTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -710,13 +778,14 @@ public class AdminGUI extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField biayaPeminjamanHapusTextField;
     private javax.swing.JTextField biayaPeminjamanTambahTextField;
     private javax.swing.JTextField biayaPeminjamanTextField;
     private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton cancelHapusButton;
     private javax.swing.JButton cancelTambahButton;
+    private javax.swing.JTextField dendaPeminjamanTambahTextField;
+    private javax.swing.JTextField dendaPeminjamanTextField;
     private javax.swing.JRadioButton hapusDataBukuRadioButton;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
@@ -742,7 +811,6 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> judulBukuComboBox;
     private javax.swing.JComboBox<String> judulBukuHapusComboBox;
     private javax.swing.JTextField judulTambahTextField;
-    private javax.swing.JTextField jumlahBukuHapusTextField;
     private javax.swing.JTextField jumlahBukuTambahTextField;
     private javax.swing.JTextField jumlahBukuTextField;
     private javax.swing.JButton logoutButton;
