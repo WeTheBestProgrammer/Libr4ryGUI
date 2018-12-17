@@ -124,6 +124,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 tanggalKembaliTextField.setText("");
                 buka_koneksi();
                 ResultSet rs = null;
+                Date tempkembali;
                 String sql = "SELECT tanggalpinjam, tanggalkembali from datatransaksi";
                 PreparedStatement mStatement = koneksi.prepareStatement(sql);
                 Statement state = koneksi.createStatement();
@@ -133,6 +134,11 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 while (rs.next()) {
                     tanggalPeminjamanTextField.setText(rs.getString("tanggalpinjam"));
                     tanggalKembaliTextField.setText(rs.getString("tanggalkembali"));
+//                    tempkembali
+                }
+                
+                if (rs.getString("tanggalkembali").equals(dateFormat.format(date)) ) {
+                    keterlambatanTextField.setText("");
                 }
             } catch (Exception e) {
                 System.err.println("Got an exception!");
@@ -151,30 +157,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 } else {
                 }
                 
-            }
-        });
-        
-        nomorPeminjamanPengembalian.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                warn();
-            }
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                warn();
-            }
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                warn();
-            }
-
-            public void warn() {
-                try {
-                    total = harga * Integer.parseInt(jTextFieldLamaPeminjaman.getText()); 
-                    biayaTextField.setText(harga + " X " + jTextFieldLamaPeminjaman.getText() + " = " + total);
-                } catch (Exception e) {
-                    biayaTextField.setText(harga + "");
-                }
             }
         });
     }
@@ -229,7 +211,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
         }
         tabel = new DefaultTableModel(objekMahasiswa, namaKolom);
         tabelTransaksi.setModel(tabel);
-        //LihatDataMahasiswa();
     }
     
     
@@ -619,7 +600,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
         c.setTime(date);
         c.add(Calendar.DATE, Integer.parseInt(jTextFieldLamaPeminjaman.getText()));  // number of days to add
         String dt = sdf.format(c.getTime());  // dt is now the new date
-//        dtDate = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
         
         input.isiData(Integer.parseInt(nomorPeminjamanPeminjaman.getText()),
                       namaMahasiswaTextField.getText(),
