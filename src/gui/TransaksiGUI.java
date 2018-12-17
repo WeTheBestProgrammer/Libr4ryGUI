@@ -32,7 +32,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
     String dendastrng = null;
     DateFormat dateFormat;
     SimpleDateFormat simpleDateFormat;
-    Date date;
+    Date date, dtDate;
     InputData input;
     DefaultTableModel tabel;
     Item item;
@@ -545,7 +545,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
         String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
         String sql = "SELECT harga_sat from buku";
-        String sql2 = "SELECT dendaKeterlambatan from buku";
+        String sql2 = "insert into dendaKeterlambatan from buku";
         try {
             PreparedStatement mStatement = koneksi.prepareStatement(sql);
             Statement state = koneksi.createStatement();
@@ -564,6 +564,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         c.setTime(date);
         c.add(Calendar.DATE, Integer.parseInt(jTextFieldLamaPeminjaman.getText()));  // number of days to add
         String dt = sdf.format(c.getTime());  // dt is now the new date
+//        dtDate = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
         
         input.isiData(Integer.parseInt(nomorPeminjamanPeminjaman.getText()),
                       namaMahasiswaTextField.getText(),
@@ -578,20 +579,26 @@ public class TransaksiGUI extends javax.swing.JFrame {
         LihatDataMahasiswa();
         
         try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sql);
-            Statement state = koneksi.createStatement();
-            denda = state.executeQuery("select dendaKeterlambatan from buku where judul = '" 
-                    + judul
-                    + "' and kategori = '" + ktgr + "'");
-            
-            while (denda.next()) {                
-                dendastrng = denda.getString("dendaKeterlambatan");
-            }
+            buka_koneksi();
+            String sqlin = "INSERT INTO `datatransaksi`(`nomorPeminjam`, `nama`, `judul`, `tanggalpinjam`, `tanggalkembali`, `lamaPinjam`, `biaya`, `dendaKeterlambatan`)"
+                    + " VALUES (10,'sfa','asdd', " + sdf2.format(date) + ", " + sdf2.format(date) +", 14, 1212, 13)";
+            PreparedStatement mStatementIn = koneksi.prepareStatement(sqlin);
+            mStatementIn.execute();
+//            Statement state = koneksi.createStatement();
+//            denda = state.executeQuery("select dendaKeterlambatan from buku where judul = '" 
+//                    + judul
+//                    + "' and kategori = '" + ktgr + "'");
+//            
+//            while (denda.next()) {                
+//                dendastrng = denda.getString("dendaKeterlambatan");
+//            }
 //            System.out.println(sdf2.format(date));
-            in =  state.executeQuery("INSERT INTO `datatransaksi`(`nomorPeminjam`, `nama`, `judul`, `tanggalpinjam`, `tanggalkembali`, `lamaPinjam`, `biaya`, `dendaKeterlambatan`) VALUES (13,'sfa','asdd',19990920,20090219,14,12,13)");
-            mStatement.close();
+//            in =  state.executeQuery("INSERT INTO `datatransaksi`(`nomorPeminjam`, `nama`, `judul`, `tanggalpinjam`, `tanggalkembali`, `lamaPinjam`, `biaya`, `dendaKeterlambatan`)"
+//                    + " VALUES (13,'sfa','asdd', 19990920, 20090219, 14, 12, 13)");
+            mStatementIn.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+            System.err.println("Got an exception!");
+      System.err.println(e.getMessage());
         }
     }//GEN-LAST:event_pinjamButtonActionPerformed
 
