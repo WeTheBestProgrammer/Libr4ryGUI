@@ -585,9 +585,10 @@ public class AdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         buka_koneksi();
             try {
-                String sql = "insert into buku (kategori, judul, jml_buku, harga_sat) values "
+                String sql = "insert into buku (kategori, judul, jml_buku, harga_sat, dendaKeterlambatan) values "
                         + "('"+jenisBukuTambahComboBox.getSelectedItem()+"','"+judulTambahTextField.getText()+"',"
-                        + "'"+jumlahBukuTambahTextField.getText()+"','"+biayaPeminjamanTambahTextField.getText()+"')";
+                        + "'"+jumlahBukuTambahTextField.getText()+"','"+biayaPeminjamanTambahTextField.getText()+"',"
+                        + "'" + dendaPeminjamanTambahTextField.getText()+"')";
     //            java.sql.Connection conn = (java.sql.Connection)gui.koneksi.koneksiDB();
                 PreparedStatement pst = koneksi.prepareStatement(sql);
                 pst.execute();
@@ -605,6 +606,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 String sql = "update buku SET kategori='"+jenisBukuComboBox.getSelectedItem()+
                         "',judul='"+judulBukuComboBox.getSelectedItem()+"',jml_buku='"+jumlahBukuTextField.getText()+
                         "',harga_sat='"+biayaPeminjamanTextField.getText()+
+                        "', dendaKeterlambatan'" + dendaPeminjamanTextField.getText()+
                         "' where judul = '" + judulBukuComboBox.getSelectedItem() + "'";
 
                 PreparedStatement pst = koneksi.prepareStatement(sql);
