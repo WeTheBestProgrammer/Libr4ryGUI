@@ -124,7 +124,11 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 tanggalKembaliTextField.setText("");
                 buka_koneksi();
                 ResultSet rs = null;
-                Date tempkembali;
+                Date datekembali = null, datenow;
+                
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                
+                datenow = date;
                 String sql = "SELECT tanggalpinjam, tanggalkembali from datatransaksi";
                 PreparedStatement mStatement = koneksi.prepareStatement(sql);
                 Statement state = koneksi.createStatement();
@@ -134,11 +138,15 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 while (rs.next()) {
                     tanggalPeminjamanTextField.setText(rs.getString("tanggalpinjam"));
                     tanggalKembaliTextField.setText(rs.getString("tanggalkembali"));
-//                    tempkembali
+                    datekembali = sdf.parse(rs.getString("tanggalkembali"));
                 }
                 
-                if (rs.getString("tanggalkembali").equals(dateFormat.format(date)) ) {
-                    keterlambatanTextField.setText("");
+                if (datekembali.before(datenow)) {
+                    System.err.println("Date specified [" + datekembali + "] is before today [" + datenow + "]");
+                    keterlambatanTextField.setText("Terlambat!");
+                } else {
+                    System.err.println("Date specified [" + datekembali + "] is NOT before today [" + datenow + "]");
+                    keterlambatanTextField.setText("Tidak Terlambat");
                 }
             } catch (Exception e) {
                 System.err.println("Got an exception!");
