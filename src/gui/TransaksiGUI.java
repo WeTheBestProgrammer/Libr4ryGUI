@@ -580,21 +580,25 @@ public class TransaksiGUI extends javax.swing.JFrame {
         
         try {
             buka_koneksi();
+            Statement state = koneksi.createStatement();
+            denda = state.executeQuery("select dendaKeterlambatan from buku where judul = '" 
+                    + judul
+                    + "' and kategori = '" + ktgr + "'");
+            
+            while (denda.next()) {                
+                dendastrng = denda.getString("dendaKeterlambatan");
+            }
             String sqlin = "INSERT INTO `datatransaksi`(`nomorPeminjam`, `nama`, `judul`, `tanggalpinjam`, `tanggalkembali`, `lamaPinjam`, `biaya`, `dendaKeterlambatan`)"
-                    + " VALUES (10,'sfa','asdd', " + sdf2.format(date) + ", " + sdf2.format(date) +", 14, 1212, 13)";
+                    + " VALUES ("+ Integer.parseInt(nomorPeminjamanPeminjaman.getText()) + ",' "
+                    + namaMahasiswaTextField.getText() +"', '"
+                    + judulBukuComboBox.getSelectedItem() + "', "
+                    + sdf2.format(date) + ", "
+                    + sdf2.format(c.getTime()) + ", "
+                    + Integer.parseInt(jTextFieldLamaPeminjaman.getText()) + ", "
+                    + this.total + ", "
+                    + Integer.parseInt(dendastrng) + ")";
             PreparedStatement mStatementIn = koneksi.prepareStatement(sqlin);
             mStatementIn.execute();
-//            Statement state = koneksi.createStatement();
-//            denda = state.executeQuery("select dendaKeterlambatan from buku where judul = '" 
-//                    + judul
-//                    + "' and kategori = '" + ktgr + "'");
-//            
-//            while (denda.next()) {                
-//                dendastrng = denda.getString("dendaKeterlambatan");
-//            }
-//            System.out.println(sdf2.format(date));
-//            in =  state.executeQuery("INSERT INTO `datatransaksi`(`nomorPeminjam`, `nama`, `judul`, `tanggalpinjam`, `tanggalkembali`, `lamaPinjam`, `biaya`, `dendaKeterlambatan`)"
-//                    + " VALUES (13,'sfa','asdd', 19990920, 20090219, 14, 12, 13)");
             mStatementIn.close();
         } catch (Exception e) {
             System.err.println("Got an exception!");
