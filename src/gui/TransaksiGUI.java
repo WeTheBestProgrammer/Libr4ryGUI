@@ -127,6 +127,37 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 }
             }
         });
+        
+        nomorPeminjamanPengembalian.addKeyListener(new KeyAdapter() {     
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE) || (c < 0))) {
+                    e.consume();
+                } else {
+//                    Conector.buka_koneksi();
+//                    ResultSet rs = null;
+//        
+//                    String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
+//                    String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
+//                    String sql = "SELECT harga_sat from buku";
+//                    
+//                    
+//                    try {
+//                        PreparedStatement mStatement = koneksi.prepareStatement(sql);
+//                        Statement state = koneksi.createStatement();
+//                        rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
+//                        while (rs.next()) {                
+//                            harga = rs.getInt("harga_sat");
+//                        }
+//                        
+//                        mStatement.close();
+//                    } catch (Exception l) {
+////                        JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+//                    }
+                }
+                
+            }
+        });
     }
 
     private static void buka_koneksi(){
@@ -280,6 +311,11 @@ public class TransaksiGUI extends javax.swing.JFrame {
         nomorPeminjamanPengembalian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomorPeminjamanPengembalianActionPerformed(evt);
+            }
+        });
+        nomorPeminjamanPengembalian.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nomorPeminjamanPengembalianKeyPressed(evt);
             }
         });
 
@@ -753,6 +789,29 @@ public class TransaksiGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Cannot edit cell of table", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_tabelTransaksiMouseClicked
+
+    private void nomorPeminjamanPengembalianKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomorPeminjamanPengembalianKeyPressed
+        // TODO add your handling code here:
+        try {
+                    buka_koneksi();
+                    ResultSet rs = null;
+//        
+//                    String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
+//                    String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
+                    String sql = "SELECT tanggalpinjam, tanggalkembali from datatransaksi";
+                    PreparedStatement mStatement = koneksi.prepareStatement(sql);
+                    Statement state = koneksi.createStatement();
+                    rs =  state.executeQuery("SELECT tanggalpinjam, tanggalkembali from datatransaksi where nomorPeminjam = " 
+                            + Integer.parseInt(nomorPeminjamanPengembalian.getText()));
+                    while (rs.next()) {
+                        tanggalPeminjamanTextField.setText(rs.getString("tanggalpinjam"));
+                        tanggalKembaliTextField.setText(rs.getString("tanggalkembali"));
+                    }
+                } catch (Exception e) {
+                    System.err.println("Got an exception!");
+      System.err.println(e.getMessage());
+                }
+    }//GEN-LAST:event_nomorPeminjamanPengembalianKeyPressed
 
     /**
      * @param args the command line arguments
