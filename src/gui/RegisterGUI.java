@@ -194,7 +194,6 @@ public class RegisterGUI extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
-        
         String fname = fName.getText();
         String lname = lName.getText();
         String username = usrName.getText();
@@ -202,20 +201,8 @@ public class RegisterGUI extends javax.swing.JFrame {
         String repassword = String.valueOf(passRe.getPassword());
         String alamat = address.getText();
         
-        if(usrName.equals("")){
-            JOptionPane.showMessageDialog(null, "Masukkan Username Anda");
-        }
-        else if (passCd.equals("")){
-            JOptionPane.showMessageDialog(null, "Msukkan Password Anda");
-        }
-        else if (passRe.equals("")){
-            JOptionPane.showMessageDialog(null, "Masukkan Ulang Password Anda");
-        }
-        else{
-       
         PreparedStatement ps;
         String query = "INSERT INTO `umum`(`username`, `password`, `fname`, `lname`, `alamat`,) VALUES (?,?,?,?,?);";
-        ConnectionPerpus.getConnection();
         try {
             ps = ConnectionPerpus.getConnection().prepareStatement(query);
             ps.setString(1, fname);
@@ -231,7 +218,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(RegisterGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
+        
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed

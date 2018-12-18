@@ -115,7 +115,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 
         
         nomorPeminjamanPengembalian.getDocument().addDocumentListener(new DocumentListener() {
-            private Object Days;
             @Override
             public void changedUpdate(DocumentEvent e) {
                 warn();
@@ -136,7 +135,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 database.DatabaseConnector.cekNomorPeminjaman(nomorPinjam);
             try {
                 
-                buka_koneksi();
+                Conector.buka_koneksi();
                 ResultSet rs = null;
                 Date datekembali = null, datenow;
                 
@@ -158,15 +157,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 }
                 
                 if (datekembali.before(datenow)) {
-//                    System.err.println("Date specified [" + datekembali + "] is before today [" + datenow + "]");
                     keterlambatanTextField.setText("Terlambat!");
                     long diffInMillies = Math.abs(datenow.getTime() - datekembali.getTime());
                     long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
                     int denda = (int)diff * dendaterlambat;
-//                    var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
                     dendaTextField.setText(denda + "");
                 } else {
-//                    System.err.println("Date specified [" + datekembali + "] is NOT before today [" + datenow + "]");
                     keterlambatanTextField.setText("Tidak Terlambat");
                     dendaTextField.setText("-");
                 }
@@ -207,24 +203,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
         });
     }
 
-    private static void buka_koneksi(){
-        if (koneksi == null) {
-            try {
-//                String url = "jdbc:mysql://localhost/perpustakaan";
-                String url = "jdbc:mysql://192.168.100.4:3306/perpustakaan";
-                String user = "root";
-                String password = "pass";
-                DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-                koneksi = DriverManager.getConnection(url, user, password);
-            } catch (SQLException t) {
-//                System.out.println("Error membuat koneksi");
-                System.err.print(t);
-            }
-        }
-    }
-    
     private void isiComboBoxKategori(){
-        buka_koneksi();
+        database.Conector.buka_koneksi();
         ResultSet rs = null;
         String sql = "SELECT kategori from buku";
         try {
@@ -686,7 +666,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         LihatDataMahasiswa();
         
         try {
-            buka_koneksi();
+            Conector.buka_koneksi();
             Statement state = koneksi.createStatement();
             denda = state.executeQuery("select dendaKeterlambatan from buku where judul = '" 
                     + judul
@@ -771,7 +751,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private void kategoriBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_kategoriBukuComboBoxItemStateChanged
         // TODO add your handling code here:
         judulBukuComboBox.removeAllItems();
-        buka_koneksi();
+        Conector.buka_koneksi();
         ResultSet rs = null;
         String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
         String sql = "SELECT judul from buku";

@@ -19,7 +19,7 @@ public class ConnectionPerpus {
         try{
             Class.forName("com.mysql.jdbc.Driver");
 //            conn = DriverManager.getConnection("jdbc:mysql://localhost/perpustakaan", "root", "");
-            conn = DriverManager.getConnection ("jdbc:mysql://192.168.100.4:3306/perpustakaan","","");
+            conn = DriverManager.getConnection("jdbc:mysql://192.168.100.4:3306/perpustakaan", "root", "pass");
         } catch (Exception ex){
             System.out.println(ex.getMessage());
         }
