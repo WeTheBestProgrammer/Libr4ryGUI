@@ -87,7 +87,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                     String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
                     String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
                     
-                    DatabaseConnector.setHarga(ktgr, judul);
+//                    DatabaseConnector.setHarga(ktgr, judul);
                     String sql = "SELECT harga_sat from buku";
                     
                     
