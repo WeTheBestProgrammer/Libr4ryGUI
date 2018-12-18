@@ -163,8 +163,6 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         dendaPeminjamanTextField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jButtonMinus = new javax.swing.JButton();
-        jButtonPlus = new javax.swing.JButton();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -341,10 +339,6 @@ public class AdminGUI extends javax.swing.JFrame {
 
         jLabel9.setText("Denda Keterlambatan");
 
-        jButtonMinus.setText("-");
-
-        jButtonPlus.setText("+");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -361,17 +355,11 @@ public class AdminGUI extends javax.swing.JFrame {
                                     .addComponent(jLabelJumlahBuku))
                                 .addGap(67, 67, 67)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jenisBukuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(judulBukuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButtonMinus)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jumlahBukuTextField)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButtonPlus))))
+                                    .addComponent(jenisBukuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(judulBukuComboBox, 0, 189, Short.MAX_VALUE)
+                                        .addComponent(jumlahBukuTextField)))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelBiayaPeminjaman)
@@ -486,10 +474,8 @@ public class AdminGUI extends javax.swing.JFrame {
                             .addComponent(jumlahBukuTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
                             .addComponent(jumlahBukuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelJumlahBuku)
-                            .addComponent(jButtonMinus)
-                            .addComponent(jButtonPlus))))
-                .addGap(18, 18, 18)
+                            .addComponent(jLabelJumlahBuku))))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(biayaPeminjamanTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
@@ -499,9 +485,9 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dendaPeminjamanTambahTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(dendaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(dendaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cancelTambahButton)
@@ -764,24 +750,6 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void judulBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_judulBukuComboBoxItemStateChanged
         // TODO add your handling code here:
-        buka_koneksi();
-        ResultSet rs = null;
-        String ktgr = String.valueOf(jenisBukuComboBox.getSelectedItem());
-        String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
-        String sql = "SELECT jml_buku, harga_sat, dendaKeterlambatan from buku";
-        try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sql);
-            Statement state = koneksi.createStatement();
-            rs =  state.executeQuery("SELECT jml_buku, harga_sat, dendaKeterlambatan from buku where kategori = '" + ktgr + "' and judul = '" + judul + "'");
-            while (rs.next()) {                
-                jumlahBukuTextField.setText(rs.getString("jml_buku"));
-                biayaPeminjamanTextField.setText(rs.getString("harga_sat"));
-                dendaPeminjamanTextField.setText(rs.getString("dendaKeterlambatan"));
-            }
-            mStatement.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
-        }
     }//GEN-LAST:event_judulBukuComboBoxItemStateChanged
 
     /**
@@ -830,8 +798,6 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JTextField dendaPeminjamanTambahTextField;
     private javax.swing.JTextField dendaPeminjamanTextField;
     private javax.swing.JRadioButton hapusDataBukuRadioButton;
-    private javax.swing.JButton jButtonMinus;
-    private javax.swing.JButton jButtonPlus;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JLabel jLabel1;
