@@ -115,7 +115,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 
         
         nomorPeminjamanPengembalian.getDocument().addDocumentListener(new DocumentListener() {
-            private Object Days;
             @Override
             public void changedUpdate(DocumentEvent e) {
                 warn();
