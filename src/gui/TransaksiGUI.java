@@ -80,29 +80,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE) || (c < 0))) {
                     e.consume();
                 } else {
-                    Conector.buka_koneksi();
-        
-                    ResultSet rs = null;
-        
-                    String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
-                    String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
-                    
-                    DatabaseConnector.setHarga(ktgr, judul);
-                    String sql = "SELECT harga_sat from buku";
-                    
-                    
-                    try {
-                        PreparedStatement mStatement = koneksi.prepareStatement(sql);
-                        Statement state = koneksi.createStatement();
-                        rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
-                        while (rs.next()) {                
-                            harga = rs.getInt("harga_sat");
-//                            biayaTextField.setText(harga + " X " + jTextFieldLamaPeminjaman.getText() + " = " + (harga * Integer.parseInt(jTextFieldLamaPeminjaman.getText())));
-                        }
-                        mStatement.close();
-                    } catch (Exception l) {
-                        System.err.println(l);
-                    }
+                    database.DatabaseConnector.setHarga(dendastrng, dendastrng);
                 }
                 
             }
@@ -123,27 +101,15 @@ public class TransaksiGUI extends javax.swing.JFrame {
             }
 
             public void warn() {
-                Conector.buka_koneksi();
-        
-                    ResultSet rs = null;
-        
-                    String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
-                    String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
-                    String sql = "SELECT harga_sat from buku";
-                    
-                    
-                    try {
-                        PreparedStatement mStatement = koneksi.prepareStatement(sql);
-                        Statement state = koneksi.createStatement();
-                        rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
-                        while (rs.next()) {                
-                            harga = rs.getInt("harga_sat");
-                            biayaTextField.setText(harga + " X " + jTextFieldLamaPeminjaman.getText() + " = " + (harga * Integer.parseInt(jTextFieldLamaPeminjaman.getText())));
-                        }
-                        mStatement.close();
-                    } catch (Exception l) {
-                        biayaTextField.setText(harga + "");
-                    }
+                String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
+                String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
+                try {
+                    int lamaPinjam = Integer.parseInt(jTextFieldLamaPeminjaman.getText());
+                    biayaTextField.setText(String.valueOf(database.DatabaseConnector.setTotalBiaya(ktgr, judul, lamaPinjam)));
+                } catch (Exception e) {
+                    biayaTextField.setText(harga + "");
+                }
+                
             }
         });
                 
