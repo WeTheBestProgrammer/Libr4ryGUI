@@ -29,7 +29,6 @@ public class DatabaseConnector {
                 DriverManager.registerDriver(new com.mysql.jdbc.Driver());
                 koneksi = DriverManager.getConnection(url, user, password);
             } catch (SQLException t) {
-//                System.out.println("Error membuat koneksi");
                 System.err.print(t);
             }
         }
@@ -54,7 +53,7 @@ public class DatabaseConnector {
         }
     }
     
-    public static int setTotalBiaya(String kategori, String judul){
+    public static String setTotalBiaya(String kategori, String judul, int lamaPinjam){
         buka_koneksi();
         ResultSet rs = null;
         String sql = "SELECT harga_sat from buku";
@@ -64,13 +63,13 @@ public class DatabaseConnector {
             rs =  state.executeQuery("select harga_sat from buku where kategori = '" +kategori+ "' and judul ='" + judul + "'");
             while (rs.next()) {                
                 harga = rs.getInt("harga_sat");
-                return harga;
+                return harga + " X " + lamaPinjam + " = " + (harga*lamaPinjam);
             }
             mStatement.close();
         } catch (Exception l) {
-            return harga;
+            return harga + "";
         }
-        return 0;
+        return null;
     }
     
     public static void cekNomorPeminjaman(String nomorPinjam){
