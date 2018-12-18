@@ -103,6 +103,7 @@ public class DatabaseConnector {
                 System.err.println(e.getMessage());
         }
     }
-    
-    
+    public void isiComboKategori(){
+        
+    }
 }
