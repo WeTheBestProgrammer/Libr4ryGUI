@@ -76,7 +76,7 @@ public class DatabaseConnector {
         try {
             buka_koneksi();
             ResultSet rs = null;
-            java.util.Date datekembali = null, datenow;
+            Date datekembali = null, datenow;
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
