@@ -164,9 +164,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
             }
 
             public void warn() {
-            try {
                 tanggalPeminjamanTextField.setText("");
                 tanggalKembaliTextField.setText("");
+                String nomorPinjam = nomorPeminjamanPengembalian.getText();
+                database.DatabaseConnector.cekNomorPeminjaman(nomorPinjam);
+            try {
+                
                 buka_koneksi();
                 ResultSet rs = null;
                 Date datekembali = null, datenow;
@@ -179,7 +182,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 PreparedStatement mStatement = koneksi.prepareStatement(sql);
                 Statement state = koneksi.createStatement();
                 rs =  state.executeQuery("SELECT tanggalpinjam, tanggalkembali, dendaKeterlambatan from datatransaksi where nomorPeminjam = " 
-                     + Integer.parseInt(nomorPeminjamanPengembalian.getText()));
+                     + Integer.parseInt(nomorPinjam));
             
                 while (rs.next()) {
                     tanggalPeminjamanTextField.setText(rs.getString("tanggalpinjam"));
