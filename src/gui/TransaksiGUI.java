@@ -7,6 +7,7 @@ package gui;
  */
 import buku.InputData;
 import buku.Item;
+import database.DatabaseConnector;
 import database.Conector;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -85,6 +86,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
         
                     String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
                     String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
+                    
+                    DatabaseConnector.setHarga(ktgr, judul);
                     String sql = "SELECT harga_sat from buku";
                     
                     
@@ -238,13 +241,15 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private static void buka_koneksi(){
         if (koneksi == null) {
             try {
-                String url = "jdbc:mysql://localhost/perpustakaan";
+//                String url = "jdbc:mysql://localhost/perpustakaan";
+                String url = "jdbc:mysql://192.168.100.4:3306/perpustakaan";
                 String user = "root";
-                String password = "";
+                String password = "pass";
                 DriverManager.registerDriver(new com.mysql.jdbc.Driver());
                 koneksi = DriverManager.getConnection(url, user, password);
             } catch (SQLException t) {
-                System.out.println("Error membuat koneksi");
+//                System.out.println("Error membuat koneksi");
+                System.err.print(t);
             }
         }
     }

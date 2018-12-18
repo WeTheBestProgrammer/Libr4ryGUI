@@ -46,7 +46,6 @@ public class AdminGUI extends javax.swing.JFrame {
         judulBukuHapusComboBox.setEnabled(false);
         saveHapusButton.setEnabled(false);
         cancelHapusButton.setEnabled(false);
-        
     }
     
     private static void buka_koneksi(){
@@ -193,6 +192,11 @@ public class AdminGUI extends javax.swing.JFrame {
 
         jLabelJudulBuku.setText("Judul Buku");
 
+        judulBukuComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                judulBukuComboBoxItemStateChanged(evt);
+            }
+        });
         judulBukuComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 judulBukuComboBoxActionPerformed(evt);
@@ -743,6 +747,10 @@ public class AdminGUI extends javax.swing.JFrame {
     private void biayaPeminjamanTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_biayaPeminjamanTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_biayaPeminjamanTextFieldActionPerformed
+
+    private void judulBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_judulBukuComboBoxItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_judulBukuComboBoxItemStateChanged
 
     /**
      * @param args the command line arguments
