@@ -661,6 +661,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
         String sql = "SELECT harga_sat from buku";
         String sql2 = "insert into dendaKeterlambatan from buku";
+        String sql3 = "SELECT jml_buku from buku";
         try {
             PreparedStatement mStatement = koneksi.prepareStatement(sql);
             Statement state = koneksi.createStatement();
@@ -671,6 +672,24 @@ public class TransaksiGUI extends javax.swing.JFrame {
             mStatement.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+        }
+        
+        try {
+            int tempjumlah = 0;
+            PreparedStatement updateStatement = koneksi.prepareStatement(sql3);
+            Statement state = koneksi.createStatement();
+            rs = state.executeQuery("select jml_buku from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
+            while (rs.next()) {                
+                tempjumlah = rs.getInt("jml_buku");
+            }
+            
+            String updatejmlbuku = "UPDATE `buku` SET `jml_buku`= " + (tempjumlah-1) + " WHERE kategori = '" +ktgr+ "' and judul ='" + judul + "'";
+            PreparedStatement pst = koneksi.prepareStatement(updatejmlbuku);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "berhasil disimpan");
+            pst.close();
+        } catch (Exception e) {
+            System.err.print(e);
         }
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
