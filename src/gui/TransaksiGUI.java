@@ -894,6 +894,39 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void prosesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prosesButtonActionPerformed
         // TODO add your handling code here:
+        try {
+            String sql1 = "SELECT judul from datatransaksi";
+            String sql3 = "SELECT jml_buku from buku";
+            
+            int tempjumlah = 0;
+            String judul = null;
+            PreparedStatement getStatement = koneksi.prepareStatement(sql1);
+            Statement state = koneksi.createStatement();
+            ResultSet rs = state.executeQuery("select judul from datatransaksi where nomorPeminjam = '" + nomorPeminjamanPengembalian.getText() + "'");
+            while (rs.next()) {             
+                judul = rs.getString("judul");
+            }
+            
+            Statement state2 = koneksi.createStatement();
+            ResultSet rs2 = state2.executeQuery("select jml_buku from buku where judul = '" + judul + "'");
+            while (rs2.next()) {             
+                tempjumlah = rs2.getInt("jml_buku");
+            }
+            
+            System.out.println(tempjumlah);
+            PreparedStatement setStatement = koneksi.prepareStatement(sql3);
+            String updatejmlbuku = "UPDATE `buku` SET `jml_buku`= " + (tempjumlah+1) + " WHERE judul ='" + judul + "'";
+            PreparedStatement pst = koneksi.prepareStatement(updatejmlbuku);
+            String deleteTransaksi = "DELETE FROM datatransaksi WHERE nomorPeminjam = '" + nomorPeminjamanPengembalian.getText() + "'";
+            PreparedStatement pst2 = koneksi.prepareStatement(deleteTransaksi);
+            pst.execute();
+            pst2.execute();
+            JOptionPane.showMessageDialog(null, "berhasil disimpan");
+            pst.close();
+            pst2.close();
+        } catch (Exception e) {
+            System.err.print(e);
+        }
     }//GEN-LAST:event_prosesButtonActionPerformed
 
     /**
