@@ -6,6 +6,9 @@
 package database;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.concurrent.TimeUnit;
+import java.util.Date;
 
 /**
  *
@@ -13,7 +16,8 @@ import java.sql.*;
  */
 public class DatabaseConnector {
     private static Connection koneksi;
-    int harga = 0;
+    static int harga = 0;
+    static Date date, dtDate;
     
     private static void buka_koneksi(){
         if (koneksi == null) {
@@ -31,7 +35,7 @@ public class DatabaseConnector {
         }
     }
     
-    public void setHarga(String kategori, String judul){
+    public static void setHarga(String kategori, String judul){
         buka_koneksi();
         ResultSet rs = null;
         
@@ -49,4 +53,57 @@ public class DatabaseConnector {
             System.err.println(l);
         }
     }
+    
+    public static int setTotalBiaya(String kategori, String judul){
+        buka_koneksi();
+        ResultSet rs = null;
+        String sql = "SELECT harga_sat from buku";
+        try {
+            PreparedStatement mStatement = koneksi.prepareStatement(sql);
+            Statement state = koneksi.createStatement();
+            rs =  state.executeQuery("select harga_sat from buku where kategori = '" +kategori+ "' and judul ='" + judul + "'");
+            while (rs.next()) {                
+                harga = rs.getInt("harga_sat");
+                return harga;
+            }
+            mStatement.close();
+        } catch (Exception l) {
+            return harga;
+        }
+        return 0;
+    }
+    
+    public static void cekNomorPeminjaman(String nomorPinjam){
+        try {
+            buka_koneksi();
+            ResultSet rs = null;
+            java.util.Date datekembali = null, datenow;
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            datenow = date;
+            int dendaterlambat = 0;
+            String sql = "SELECT tanggalpinjam, tanggalkembali, dendaKeterlambatan from datatransaksi";
+            PreparedStatement mStatement = koneksi.prepareStatement(sql);
+            Statement state = koneksi.createStatement();
+            rs =  state.executeQuery("SELECT tanggalpinjam, tanggalkembali, dendaKeterlambatan from datatransaksi where nomorPeminjam = " 
+                + Integer.parseInt(nomorPinjam));
+
+            while (rs.next()) {
+                datekembali = sdf.parse(rs.getString("tanggalkembali"));
+                dendaterlambat = rs.getInt("dendaKeterlambatan");
+            }
+
+            if (datekembali.before(datenow)) {
+                long diffInMillies = Math.abs(datenow.getTime() - datekembali.getTime());
+                long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+                int denda = (int)diff * dendaterlambat;
+            }
+        } catch (Exception e) {
+                System.err.println("Got an exception!");
+                System.err.println(e.getMessage());
+        }
+    }
+    
+    
 }
