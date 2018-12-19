@@ -696,11 +696,15 @@ public class TransaksiGUI extends javax.swing.JFrame {
         dendaTextField.setEnabled(false);
         nomorPeminjamanPeminjaman.setEnabled(false);
         kategoriBukuComboBox.setEnabled(false);
+        kategoriBukuComboBox.removeAllItems();
         judulBukuComboBox.setEnabled(false);
+        judulBukuComboBox.removeAllItems();
         namaMahasiswaTextField.setEnabled(false);
         namaMahasiswaTextField.setText("");
         biayaTextField.setEnabled(false);
         jTextFieldLamaPeminjaman.setEnabled(false);
+        jTextFieldLamaPeminjaman.setText("");
+        biayaTextField.setText("");
         prosesButton.setEnabled(false);
         pinjamButton.setEnabled(false);
         jButtonSave.setEnabled(false);
