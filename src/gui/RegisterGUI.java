@@ -198,8 +198,16 @@ public class RegisterGUI extends javax.swing.JFrame {
         String lname = lName.getText();
         String username = usrName.getText();
         String password = String.valueOf(passCd.getPassword());
-        String repassword = String.valueOf(passRe.getPassword());
+        
+        if (username.equals("")){
+            JOptionPane.showMessageDialog(null, "Harap masukkan username");
+        }
+        else if (!password.equals("")){
+            JOptionPane.showMessageDialog(null, "Harap masukkan password anda");
+        }
+        
         String alamat = address.getText();
+        
         
         PreparedStatement ps;
         String query = "INSERT INTO `umum`(`username`, `password`, `fname`, `lname`, `alamat`) VALUES (?,?,?,?,?);";
