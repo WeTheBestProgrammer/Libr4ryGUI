@@ -112,9 +112,9 @@ public class DatabaseConnector {
         try {
             PreparedStatement mStatement = koneksi.prepareStatement(sql);
             Statement state = koneksi.createStatement();
-            rs =  state.executeQuery("select count(nomorPeminjam) from datatransaksi where nomorPeminjam = " + code + "");
+            rs =  state.executeQuery("select max(nomorPeminjam) from datatransaksi");
             while (rs.next()) {                
-                tempCode = rs.getInt("count(nomorPeminjam)");
+                tempCode = rs.getInt("max(nomorPeminjam");
             }
             System.out.println(tempCode);
             if (tempCode > 0) {
