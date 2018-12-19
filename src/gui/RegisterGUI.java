@@ -202,21 +202,20 @@ public class RegisterGUI extends javax.swing.JFrame {
         String alamat = address.getText();
         
         PreparedStatement ps;
-        String query = "INSERT INTO `umum`(`username`, `password`, `fname`, `lname`, `alamat`,) VALUES (?,?,?,?,?);";
+        String query = "INSERT INTO `umum`(`username`, `password`, `fname`, `lname`, `alamat`) VALUES (?,?,?,?,?);";
         try {
             ps = ConnectionPerpus.getConnection().prepareStatement(query);
             ps.setString(1, fname);
             ps.setString(2, lname);
             ps.setString(3, username);
             ps.setString(4, password);
-            ps.setString(5, repassword);
-            ps.setString(6, alamat);
+            ps.setString(5, alamat);
             
             if(ps.executeUpdate()>0){
                 JOptionPane.showMessageDialog(null, "Data telah ditambah");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(RegisterGUI.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
         }
         
     }//GEN-LAST:event_btnRegisterActionPerformed
