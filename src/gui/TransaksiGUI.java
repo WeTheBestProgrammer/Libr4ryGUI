@@ -71,9 +71,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	date = new Date();
         input = new InputData();
-        
-        
-        
+
         jTextFieldLamaPeminjaman.addKeyListener(new KeyAdapter() {     
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
@@ -204,19 +202,19 @@ public class TransaksiGUI extends javax.swing.JFrame {
     }
 
     private void isiComboBoxKategori(){
-        database.Conector.buka_koneksi();
+        Conector.buka_koneksi();
         ResultSet rs = null;
         String sql = "SELECT kategori from buku";
         try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sql);
-            Statement state = koneksi.createStatement();
+            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
+            Statement state = Conector.koneksi.createStatement();
             rs =  state.executeQuery("select distinct kategori from buku");
             while (rs.next()) {                
                 kategoriBukuComboBox.addItem(rs.getString("kategori"));
             }
             mStatement.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+            System.err.println(e);
         }
     }
     
@@ -617,8 +615,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
         String sql2 = "insert into dendaKeterlambatan from buku";
         String sql3 = "SELECT jml_buku from buku";
         try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sql);
-            Statement state = koneksi.createStatement();
+            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
+            Statement state = Conector.koneksi.createStatement();
             rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
             while (rs.next()) {                
                 harga = rs.getInt("harga_sat");
@@ -630,15 +628,15 @@ public class TransaksiGUI extends javax.swing.JFrame {
         
         try {
             int tempjumlah = 0;
-            PreparedStatement updateStatement = koneksi.prepareStatement(sql3);
-            Statement state = koneksi.createStatement();
+            PreparedStatement updateStatement = Conector.koneksi.prepareStatement(sql3);
+            Statement state = Conector.koneksi.createStatement();
             rs = state.executeQuery("select jml_buku from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
             while (rs.next()) {                
                 tempjumlah = rs.getInt("jml_buku");
             }
             
             String updatejmlbuku = "UPDATE `buku` SET `jml_buku`= " + (tempjumlah-1) + " WHERE kategori = '" +ktgr+ "' and judul ='" + judul + "'";
-            PreparedStatement pst = koneksi.prepareStatement(updatejmlbuku);
+            PreparedStatement pst = Conector.koneksi.prepareStatement(updatejmlbuku);
             pst.execute();
             JOptionPane.showMessageDialog(null, "berhasil disimpan");
             pst.close();
@@ -661,13 +659,13 @@ public class TransaksiGUI extends javax.swing.JFrame {
                       sdf.format(date),
                       dt,
                       harga,
-                      total
+                      database.DatabaseConnector.harga
                       );
         LihatDataMahasiswa();
         
         try {
             Conector.buka_koneksi();
-            Statement state = koneksi.createStatement();
+            Statement state = Conector.koneksi.createStatement();
             denda = state.executeQuery("select dendaKeterlambatan from buku where judul = '" 
                     + judul
                     + "' and kategori = '" + ktgr + "'");
@@ -682,15 +680,17 @@ public class TransaksiGUI extends javax.swing.JFrame {
                     + sdf2.format(date) + ", "
                     + sdf2.format(c.getTime()) + ", "
                     + Integer.parseInt(jTextFieldLamaPeminjaman.getText()) + ", "
-                    + this.total + ", "
+                    + database.DatabaseConnector.harga + ", "
                     + Integer.parseInt(dendastrng) + ")";
-            PreparedStatement mStatementIn = koneksi.prepareStatement(sqlin);
+            PreparedStatement mStatementIn = Conector.koneksi.prepareStatement(sqlin);
             mStatementIn.execute();
             mStatementIn.close();
         } catch (Exception e) {
             System.err.println("Got an exception!");
-      System.err.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
+        code++;
+        nomorPeminjamanPeminjaman.setText(database.DatabaseConnector.checkCode(dateFormat.format(date)+String.format("%02d", code)));
     }//GEN-LAST:event_pinjamButtonActionPerformed
 
     private void jRadioButtonPengembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPengembalianActionPerformed
@@ -739,7 +739,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         jButtonSave.setEnabled(false);
         jButtonCancel.setEnabled(false);
         
-        nomorPeminjamanPeminjaman.setText(dateFormat.format(date)+String.format("%02d", code));
+        nomorPeminjamanPeminjaman.setText(database.DatabaseConnector.checkCode(dateFormat.format(date)+String.format("%02d", code)));
         isiComboBoxKategori();
     }//GEN-LAST:event_jRadioButtonPeminjamanActionPerformed
 
@@ -756,8 +756,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
         String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
         String sql = "SELECT judul from buku";
         try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sql);
-            Statement state = koneksi.createStatement();
+            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
+            Statement state = Conector.koneksi.createStatement();
             rs =  state.executeQuery("select judul from buku where kategori = '" +ktgr+ "'");
             while (rs.next()) {                
                 judulBukuComboBox.addItem(rs.getString("judul"));
@@ -819,8 +819,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 String sql = "SELECT harga_sat from buku";
                     
                 try {
-                    PreparedStatement mStatement = koneksi.prepareStatement(sql);
-                    Statement state = koneksi.createStatement();
+                    PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
+                    Statement state = Conector.koneksi.createStatement();
                     rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
                     while (rs.next()) {                
                         harga = rs.getInt("harga_sat");
