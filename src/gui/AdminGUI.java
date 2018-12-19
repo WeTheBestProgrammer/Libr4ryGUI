@@ -17,6 +17,7 @@ import javax.swing.*;
 public class AdminGUI extends javax.swing.JFrame {
     private static Connection koneksi;
     public boolean databaru;
+    int jml = 0, harga = 0, denda = 0;
     /**
      * Creates new form AdminGUI
      */
@@ -51,9 +52,11 @@ public class AdminGUI extends javax.swing.JFrame {
     private static void buka_koneksi(){
         if (koneksi == null) {
             try {
-                String url = "jdbc:mysql://localhost/perpustakaan";
+//                String url = "jdbc:mysql://localhost/perpustakaan";
+                String url = "jdbc:mysql://192.168.100.4:3306/perpustakaan";
                 String user = "root";
-                String password = "";
+//                String password = "";
+                String password = "pass";
                 DriverManager.registerDriver(new com.mysql.jdbc.Driver());
                 koneksi = DriverManager.getConnection(url, user, password);
             } catch (SQLException t) {
@@ -75,7 +78,7 @@ public class AdminGUI extends javax.swing.JFrame {
             }
             mStatement.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+            System.err.println(e);
         }    
     }
     
@@ -750,6 +753,28 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void judulBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_judulBukuComboBoxItemStateChanged
         // TODO add your handling code here:
+        Conector.buka_koneksi();
+        ResultSet rs = null;
+        String ktgr = String.valueOf(jenisBukuComboBox.getSelectedItem());
+        String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
+        String sql = "select jml_buku, harga_sat, dendaKeterlambatan from buku";
+        
+        try {
+            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
+            Statement state = Conector.koneksi.createStatement();
+            rs = state.executeQuery("select jml_buku, harga_sat, dendaKeterlambatan from buku where kategori = '" + ktgr + "' and judul ='" + judul + "'");
+            while (rs.next()) {
+                jml = rs.getInt("jml_buku");
+                harga = rs.getInt("harga_sat");
+                denda = rs.getInt("dendaKeterlambatan");
+                jumlahBukuTextField.setText(jml + "");
+                biayaPeminjamanTextField.setText(harga + "");
+                dendaPeminjamanTextField.setText(denda + "");
+            }
+            mStatement.close();
+        } catch (Exception l) {
+            System.err.println(l);
+        }
     }//GEN-LAST:event_judulBukuComboBoxItemStateChanged
 
     /**

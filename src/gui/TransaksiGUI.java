@@ -63,7 +63,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
         dendaTextField.setEnabled(false);
         prosesButton.setEnabled(false);
         pinjamButton.setEnabled(false);
-        jButtonSave.setEnabled(false);
         jButtonCancel.setEnabled(false);
         
         code = 0; //untuk code transaksi digit terakhir
@@ -165,6 +164,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                     dendaTextField.setText("-");
                 }
                 prosesButton.setEnabled(true);
+                
             } catch (Exception e) {
                 System.err.println("Got an exception!");
                 System.err.println(e.getMessage());
@@ -263,13 +263,13 @@ public class TransaksiGUI extends javax.swing.JFrame {
         judulBukuComboBox = new javax.swing.JComboBox<>();
         jRadioButtonPeminjaman = new javax.swing.JRadioButton();
         jRadioButtonPengembalian = new javax.swing.JRadioButton();
-        jButtonSave = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
         nomorPeminjamanPeminjaman = new javax.swing.JTextField();
         jLabelNomorPeminjaman = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldLamaPeminjaman = new javax.swing.JTextField();
         jLabelHari = new javax.swing.JLabel();
+        jButtonLogout = new javax.swing.JButton();
 
         jTextField4.setText("jTextField4");
 
@@ -399,13 +399,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
             }
         });
 
-        jButtonSave.setText("Save");
-        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveActionPerformed(evt);
-            }
-        });
-
         jButtonCancel.setText("Cancel");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -436,6 +429,13 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
         jLabelHari.setText("Hari");
 
+        jButtonLogout.setText("Logout");
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -443,6 +443,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -507,14 +513,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                                 .addComponent(nomorPeminjamanPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(26, 26, 26))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(249, 249, 249)
-                                .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54)
-                                .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)))
+                        .addComponent(jScrollPane2)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -577,11 +576,11 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 .addComponent(pinjamButton)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSave)
-                    .addComponent(jButtonCancel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonCancel)
+                    .addComponent(jButtonLogout))
+                .addContainerGap())
         );
 
         pack();
@@ -629,7 +628,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
             String updatejmlbuku = "UPDATE `buku` SET `jml_buku`= " + (tempjumlah-1) + " WHERE kategori = '" +ktgr+ "' and judul ='" + judul + "'";
             PreparedStatement pst = Conector.koneksi.prepareStatement(updatejmlbuku);
             pst.execute();
-            JOptionPane.showMessageDialog(null, "berhasil disimpan");
             pst.close();
         } catch (Exception e) {
             System.err.print(e);
@@ -650,7 +648,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                       sdf.format(date),
                       dt,
                       harga,
-                      database.DatabaseConnector.harga
+                      database.DatabaseConnector.total
                       );
         LihatDataMahasiswa();
         
@@ -671,7 +669,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                     + sdf2.format(date) + ", "
                     + sdf2.format(c.getTime()) + ", "
                     + Integer.parseInt(jTextFieldLamaPeminjaman.getText()) + ", "
-                    + database.DatabaseConnector.harga + ", "
+                    + database.DatabaseConnector.total + ", "
                     + Integer.parseInt(dendastrng) + ")";
             PreparedStatement mStatementIn = Conector.koneksi.prepareStatement(sqlin);
             mStatementIn.execute();
@@ -696,20 +694,20 @@ public class TransaksiGUI extends javax.swing.JFrame {
         dendaTextField.setEnabled(false);
         nomorPeminjamanPeminjaman.setEnabled(false);
         kategoriBukuComboBox.setEnabled(false);
+        kategoriBukuComboBox.removeAllItems();
         judulBukuComboBox.setEnabled(false);
+        judulBukuComboBox.removeAllItems();
         namaMahasiswaTextField.setEnabled(false);
         namaMahasiswaTextField.setText("");
         biayaTextField.setEnabled(false);
         jTextFieldLamaPeminjaman.setEnabled(false);
+        jTextFieldLamaPeminjaman.setText("");
+        biayaTextField.setText("");
         prosesButton.setEnabled(false);
         pinjamButton.setEnabled(false);
-        jButtonSave.setEnabled(false);
         jButtonCancel.setEnabled(false);
+        jButtonCancel.setEnabled(true);
     }//GEN-LAST:event_jRadioButtonPengembalianActionPerformed
-
-    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
@@ -719,21 +717,27 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void jRadioButtonPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPeminjamanActionPerformed
         nomorPeminjamanPeminjaman.setEnabled(false);
+        nomorPeminjamanPeminjaman.setText("");
         kategoriBukuComboBox.setEnabled(true);
         judulBukuComboBox.setEnabled(true);
         namaMahasiswaTextField.setEnabled(true);
         biayaTextField.setEnabled(true);
         jTextFieldLamaPeminjaman.setEnabled(true);
         tanggalKembaliTextField.setEnabled(false);
+        tanggalKembaliTextField.setText("");
         tanggalPeminjamanTextField.setEnabled(false);
+        tanggalPeminjamanTextField.setText("");
         nomorPeminjamanPengembalian.setEnabled(false);
+        nomorPeminjamanPengembalian.setText("");
         keterlambatanTextField.setEnabled(false);
+        keterlambatanTextField.setText("");
         dendaTextField.setEnabled(false);
+        dendaTextField.setText("");
         prosesButton.setEnabled(false);
         pinjamButton.setEnabled(true);
-        jButtonSave.setEnabled(false);
         jButtonCancel.setEnabled(false);
-        
+        jButtonCancel.setEnabled(true);
+
         nomorPeminjamanPeminjaman.setText(database.DatabaseConnector.checkCode(dateFormat.format(date)+String.format("%02d", code)));
         isiComboBoxKategori();
     }//GEN-LAST:event_jRadioButtonPeminjamanActionPerformed
@@ -790,7 +794,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
         jTextFieldLamaPeminjaman.setEnabled(false);
         prosesButton.setEnabled(false);
         pinjamButton.setEnabled(false);
-        jButtonSave.setEnabled(false);
         jButtonCancel.setEnabled(false);
     }//GEN-LAST:event_nomorPeminjamanPengembalianActionPerformed
 
@@ -849,25 +852,25 @@ public class TransaksiGUI extends javax.swing.JFrame {
             
             int tempjumlah = 0;
             String judul = null;
-            PreparedStatement getStatement = koneksi.prepareStatement(sql1);
-            Statement state = koneksi.createStatement();
+            PreparedStatement getStatement = Conector.koneksi.prepareStatement(sql1);
+            Statement state = Conector.koneksi.createStatement();
             ResultSet rs = state.executeQuery("select judul from datatransaksi where nomorPeminjam = '" + nomorPeminjamanPengembalian.getText() + "'");
             while (rs.next()) {             
                 judul = rs.getString("judul");
             }
             
-            Statement state2 = koneksi.createStatement();
+            Statement state2 = Conector.koneksi.createStatement();
             ResultSet rs2 = state2.executeQuery("select jml_buku from buku where judul = '" + judul + "'");
             while (rs2.next()) {             
                 tempjumlah = rs2.getInt("jml_buku");
             }
             
             System.out.println(tempjumlah);
-            PreparedStatement setStatement = koneksi.prepareStatement(sql3);
+            PreparedStatement setStatement = Conector.koneksi.prepareStatement(sql3);
             String updatejmlbuku = "UPDATE `buku` SET `jml_buku`= " + (tempjumlah+1) + " WHERE judul ='" + judul + "'";
-            PreparedStatement pst = koneksi.prepareStatement(updatejmlbuku);
+            PreparedStatement pst = Conector.koneksi.prepareStatement(updatejmlbuku);
             String deleteTransaksi = "DELETE FROM datatransaksi WHERE nomorPeminjam = '" + nomorPeminjamanPengembalian.getText() + "'";
-            PreparedStatement pst2 = koneksi.prepareStatement(deleteTransaksi);
+            PreparedStatement pst2 = Conector.koneksi.prepareStatement(deleteTransaksi);
             pst.execute();
             pst2.execute();
             JOptionPane.showMessageDialog(null, "berhasil disimpan");
@@ -882,6 +885,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
             System.err.print(e);
         }
     }//GEN-LAST:event_prosesButtonActionPerformed
+
+    private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new LoginGUI().setVisible(true);
+    }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -923,7 +932,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JTextField dendaTextField;
     private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonSave;
+    private javax.swing.JButton jButtonLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelBiaya;
     private javax.swing.JLabel jLabelDenda;
