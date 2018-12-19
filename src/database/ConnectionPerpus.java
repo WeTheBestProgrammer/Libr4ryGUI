@@ -7,12 +7,14 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 /**
  *
  * @author Angga Maulana A
  */
 public class ConnectionPerpus {
+    public static ConnectionPerpus koneksi1;
     public static Connection getConnection(){
         
         Connection conn = null;
@@ -25,4 +27,6 @@ public class ConnectionPerpus {
         }
         return conn;
     }
+
+
 }

@@ -1,6 +1,7 @@
 package gui;
 
 import database.Conector;
+import database.ConnectionPerpus;
 import java.awt.Dimension;
 import java.sql.*;
 import java.awt.Toolkit;
@@ -167,7 +168,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 }
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            System.err.println(e);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
