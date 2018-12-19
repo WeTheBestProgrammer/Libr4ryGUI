@@ -63,7 +63,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
         dendaTextField.setEnabled(false);
         prosesButton.setEnabled(false);
         pinjamButton.setEnabled(false);
-        jButtonSave.setEnabled(false);
         jButtonCancel.setEnabled(false);
         
         code = 0; //untuk code transaksi digit terakhir
@@ -165,6 +164,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                     dendaTextField.setText("-");
                 }
                 prosesButton.setEnabled(true);
+                
             } catch (Exception e) {
                 System.err.println("Got an exception!");
                 System.err.println(e.getMessage());
@@ -263,13 +263,13 @@ public class TransaksiGUI extends javax.swing.JFrame {
         judulBukuComboBox = new javax.swing.JComboBox<>();
         jRadioButtonPeminjaman = new javax.swing.JRadioButton();
         jRadioButtonPengembalian = new javax.swing.JRadioButton();
-        jButtonSave = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
         nomorPeminjamanPeminjaman = new javax.swing.JTextField();
         jLabelNomorPeminjaman = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldLamaPeminjaman = new javax.swing.JTextField();
         jLabelHari = new javax.swing.JLabel();
+        jButtonLogout = new javax.swing.JButton();
 
         jTextField4.setText("jTextField4");
 
@@ -399,13 +399,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
             }
         });
 
-        jButtonSave.setText("Save");
-        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveActionPerformed(evt);
-            }
-        });
-
         jButtonCancel.setText("Cancel");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -436,6 +429,13 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
         jLabelHari.setText("Hari");
 
+        jButtonLogout.setText("Logout");
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -443,6 +443,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -507,14 +513,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                                 .addComponent(nomorPeminjamanPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(26, 26, 26))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(249, 249, 249)
-                                .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54)
-                                .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)))
+                        .addComponent(jScrollPane2)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -577,11 +576,11 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 .addComponent(pinjamButton)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSave)
-                    .addComponent(jButtonCancel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonCancel)
+                    .addComponent(jButtonLogout))
+                .addContainerGap())
         );
 
         pack();
@@ -707,13 +706,9 @@ public class TransaksiGUI extends javax.swing.JFrame {
         biayaTextField.setText("");
         prosesButton.setEnabled(false);
         pinjamButton.setEnabled(false);
-        jButtonSave.setEnabled(false);
         jButtonCancel.setEnabled(false);
+        jButtonCancel.setEnabled(true);
     }//GEN-LAST:event_jRadioButtonPengembalianActionPerformed
-
-    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
@@ -740,9 +735,9 @@ public class TransaksiGUI extends javax.swing.JFrame {
         dendaTextField.setText("");
         prosesButton.setEnabled(false);
         pinjamButton.setEnabled(true);
-        jButtonSave.setEnabled(false);
         jButtonCancel.setEnabled(false);
-        
+        jButtonCancel.setEnabled(true);
+
         nomorPeminjamanPeminjaman.setText(database.DatabaseConnector.checkCode(dateFormat.format(date)+String.format("%02d", code)));
         isiComboBoxKategori();
     }//GEN-LAST:event_jRadioButtonPeminjamanActionPerformed
@@ -799,7 +794,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
         jTextFieldLamaPeminjaman.setEnabled(false);
         prosesButton.setEnabled(false);
         pinjamButton.setEnabled(false);
-        jButtonSave.setEnabled(false);
         jButtonCancel.setEnabled(false);
     }//GEN-LAST:event_nomorPeminjamanPengembalianActionPerformed
 
@@ -892,6 +886,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_prosesButtonActionPerformed
 
+    private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new LoginGUI().setVisible(true);
+    }//GEN-LAST:event_jButtonLogoutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -932,7 +932,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JTextField dendaTextField;
     private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonSave;
+    private javax.swing.JButton jButtonLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelBiaya;
     private javax.swing.JLabel jLabelDenda;
