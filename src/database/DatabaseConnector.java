@@ -16,7 +16,7 @@ import java.util.Date;
  */
 public class DatabaseConnector {
     private static Connection koneksi;
-    public static int harga = 0, tempCode, temp;
+    public static int harga = 0, tempCode, temp, total;
     static Date date, dtDate;
     
     private static void buka_koneksi(){
@@ -63,7 +63,8 @@ public class DatabaseConnector {
             rs =  state.executeQuery("select harga_sat from buku where kategori = '" +kategori+ "' and judul ='" + judul + "'");
             while (rs.next()) {                
                 harga = rs.getInt("harga_sat");
-                return harga + " X " + lamaPinjam + " = " + (harga*lamaPinjam);
+                total = harga*lamaPinjam;
+                return harga + " X " + lamaPinjam + " = " + total;
             }
             mStatement.close();
         } catch (Exception l) {

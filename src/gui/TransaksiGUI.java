@@ -628,7 +628,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
             String updatejmlbuku = "UPDATE `buku` SET `jml_buku`= " + (tempjumlah-1) + " WHERE kategori = '" +ktgr+ "' and judul ='" + judul + "'";
             PreparedStatement pst = Conector.koneksi.prepareStatement(updatejmlbuku);
             pst.execute();
-            JOptionPane.showMessageDialog(null, "berhasil disimpan");
             pst.close();
         } catch (Exception e) {
             System.err.print(e);
@@ -649,7 +648,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                       sdf.format(date),
                       dt,
                       harga,
-                      database.DatabaseConnector.harga
+                      database.DatabaseConnector.total
                       );
         LihatDataMahasiswa();
         
@@ -670,7 +669,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                     + sdf2.format(date) + ", "
                     + sdf2.format(c.getTime()) + ", "
                     + Integer.parseInt(jTextFieldLamaPeminjaman.getText()) + ", "
-                    + database.DatabaseConnector.harga + ", "
+                    + database.DatabaseConnector.total + ", "
                     + Integer.parseInt(dendastrng) + ")";
             PreparedStatement mStatementIn = Conector.koneksi.prepareStatement(sqlin);
             mStatementIn.execute();
@@ -729,6 +728,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         tanggalPeminjamanTextField.setEnabled(false);
         tanggalPeminjamanTextField.setText("");
         nomorPeminjamanPengembalian.setEnabled(false);
+        nomorPeminjamanPengembalian.setText("");
         keterlambatanTextField.setEnabled(false);
         keterlambatanTextField.setText("");
         dendaTextField.setEnabled(false);
