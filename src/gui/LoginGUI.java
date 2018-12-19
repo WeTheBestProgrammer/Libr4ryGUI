@@ -64,7 +64,7 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
 
-        loginButton.setText("Login");
+        loginButton.setText("User");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonActionPerformed(evt);
@@ -89,7 +89,7 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Register");
+        jLabel2.setText(" Register User");
 
         toRegister1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         toRegister1.setText("...Click disini");
@@ -125,13 +125,15 @@ public class LoginGUI extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(adminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jLabel3)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(toRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(toRegister1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(toRegister1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(toRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -195,10 +197,10 @@ public class LoginGUI extends javax.swing.JFrame {
         String username = User.getText();
         String password = Pass.getText();
         
-        ConnectionPerpus.buka_koneksi1();
+        ConnectionPerpus.buka_koneksi();
         try {
         String queryString = "SELECT username, password from admin where username ='" + username + "'";
-            PreparedStatement pst = ConnectionPerpus.koneksi1.prepareStatement(queryString);
+            PreparedStatement pst = ConnectionPerpus.koneksi2.prepareStatement(queryString);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {                
                 if (password.equals(rs.getString("password")) && username.equals(rs.getString("username"))) {

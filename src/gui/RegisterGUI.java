@@ -1,5 +1,6 @@
 package gui;
 
+import database.Conector;
 import database.ConnectionPerpus;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -88,7 +89,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("Register");
+        jLabel6.setText("Register User");
 
         exitBtn.setText("Cancel");
         exitBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -132,8 +133,8 @@ public class RegisterGUI extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(147, 147, 147))
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(123, 123, 123))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,11 +209,11 @@ public class RegisterGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ulangi masukkan password!!!");
         }
          else{
-             
+        Conector.buka_koneksi();    
         PreparedStatement ps;
         String query = "INSERT INTO `umum`(`fname`, `lname`, `username`, `password`,`alamat`) VALUES (?,?,?,?,?);";
         try {
-            ps = ConnectionPerpus.koneksi1.prepareStatement(query);
+            ps = Conector.koneksi.prepareStatement(query);
             ps.setString(1, fname);
             ps.setString(2, lname);
             ps.setString(3, username);
