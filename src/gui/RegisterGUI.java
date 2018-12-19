@@ -198,19 +198,22 @@ public class RegisterGUI extends javax.swing.JFrame {
         String lname = lName.getText();
         String username = usrName.getText();
         String password = String.valueOf(passCd.getPassword());
-        
-        if (username.equals("")){
-            JOptionPane.showMessageDialog(null, "Harap masukkan username");
-        }
-        else if (!password.equals("")){
-            JOptionPane.showMessageDialog(null, "Harap masukkan password anda");
-        }
-        
+        String rePassword = String.valueOf(passRe.getPassword());
         String alamat = address.getText();
         
-        
+        if (username.equals("")){
+            JOptionPane.showMessageDialog(null, "Harap masukkan username!!!");
+        }
+        else if (password.equals("")){
+            JOptionPane.showMessageDialog(null, "Harap masukkan password!!!");
+        }
+         else if (!password.equals(rePassword)){
+            JOptionPane.showMessageDialog(null, "Ulangi masukkan password!!!");
+        }
+         else{
+             
         PreparedStatement ps;
-        String query = "INSERT INTO `umum`(`username`, `password`, `fname`, `lname`, `alamat`) VALUES (?,?,?,?,?);";
+        String query = "INSERT INTO `umum`(`fname`, `lname`, `username`, `password`,`alamat`) VALUES (?,?,?,?,?);";
         try {
             ps = ConnectionPerpus.getConnection().prepareStatement(query);
             ps.setString(1, fname);
@@ -225,7 +228,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println(ex);
         }
-        
+        }
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
