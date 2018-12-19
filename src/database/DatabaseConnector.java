@@ -16,7 +16,7 @@ import java.util.Date;
  */
 public class DatabaseConnector {
     private static Connection koneksi;
-    static int harga = 0;
+    public static int harga = 0, tempCode;
     static Date date, dtDate;
     
     private static void buka_koneksi(){
@@ -103,7 +103,29 @@ public class DatabaseConnector {
                 System.err.println(e.getMessage());
         }
     }
-    public void isiComboKategori(){
+    public static String checkCode(String code){
+        buka_koneksi();
+        ResultSet rs = null;
         
+        String sql = "SELECT nomorPeminjam from datatransaksi";
+                    
+        try {
+            PreparedStatement mStatement = koneksi.prepareStatement(sql);
+            Statement state = koneksi.createStatement();
+            rs =  state.executeQuery("select count(nomorPeminjam) from datatransaksi where nomorPeminjam = " + code + "");
+            while (rs.next()) {                
+                tempCode = rs.getInt("count(nomorPeminjam)");
+            }
+            System.out.println(tempCode);
+            if (tempCode > 0) {
+                int temp = Integer.parseInt(code);
+                temp+= tempCode;
+                return String.valueOf(temp);
+            }
+            mStatement.close();
+        } catch (Exception l) {
+            System.err.println(l);
+        }
+        return code;
     }
 }
