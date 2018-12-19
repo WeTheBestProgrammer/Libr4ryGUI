@@ -142,8 +142,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 datenow = date;
                 int dendaterlambat = 0;
                 String sql = "SELECT tanggalpinjam, tanggalkembali, dendaKeterlambatan from datatransaksi";
-                PreparedStatement mStatement = koneksi.prepareStatement(sql);
-                Statement state = koneksi.createStatement();
+                PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
+                Statement state = Conector.koneksi.createStatement();
                 rs =  state.executeQuery("SELECT tanggalpinjam, tanggalkembali, dendaKeterlambatan from datatransaksi where nomorPeminjam = " 
                      + Integer.parseInt(nomorPinjam));
             
@@ -164,27 +164,13 @@ public class TransaksiGUI extends javax.swing.JFrame {
                     keterlambatanTextField.setText("Tidak Terlambat");
                     dendaTextField.setText("-");
                 }
-                
-                tanggalKembaliTextField.setEnabled(true);
-                tanggalPeminjamanTextField.setEnabled(true);
-                nomorPeminjamanPengembalian.setEnabled(true);
-                keterlambatanTextField.setEnabled(true);
-                dendaTextField.setEnabled(true);
-                nomorPeminjamanPeminjaman.setEnabled(false);
-                kategoriBukuComboBox.setEnabled(false);
-                judulBukuComboBox.setEnabled(false);
-                namaMahasiswaTextField.setEnabled(false);
-                biayaTextField.setEnabled(false);
-                jTextFieldLamaPeminjaman.setEnabled(false);
                 prosesButton.setEnabled(true);
-                pinjamButton.setEnabled(false);
-                jButtonSave.setEnabled(false);
-                jButtonCancel.setEnabled(false);
             } catch (Exception e) {
                 System.err.println("Got an exception!");
                 System.err.println(e.getMessage());
                 tanggalPeminjamanTextField.setText("");
                 tanggalKembaliTextField.setText("");
+                prosesButton.setEnabled(false);
                 }
             }
         });
@@ -603,7 +589,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void pinjamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinjamButtonActionPerformed
         // TODO add your handling code here:
-        Conector.buka_koneksi();
+        if (namaMahasiswaTextField.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Please insert name");
+        } else if (jTextFieldLamaPeminjaman.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Please insert amount of days");
+        } else {
+            Conector.buka_koneksi();
         
         ResultSet rs = null;
         ResultSet in = null;
@@ -691,6 +682,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
         }
         code++;
         nomorPeminjamanPeminjaman.setText(database.DatabaseConnector.checkCode(dateFormat.format(date)+String.format("%02d", code)));
+        jTextFieldLamaPeminjaman.setText("");
+        }
     }//GEN-LAST:event_pinjamButtonActionPerformed
 
     private void jRadioButtonPengembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPengembalianActionPerformed
@@ -698,12 +691,14 @@ public class TransaksiGUI extends javax.swing.JFrame {
         tanggalKembaliTextField.setEnabled(false);
         tanggalPeminjamanTextField.setEnabled(false);
         nomorPeminjamanPengembalian.setEnabled(true);
+        nomorPeminjamanPeminjaman.setText("");
         keterlambatanTextField.setEnabled(false);
         dendaTextField.setEnabled(false);
         nomorPeminjamanPeminjaman.setEnabled(false);
         kategoriBukuComboBox.setEnabled(false);
         judulBukuComboBox.setEnabled(false);
         namaMahasiswaTextField.setEnabled(false);
+        namaMahasiswaTextField.setText("");
         biayaTextField.setEnabled(false);
         jTextFieldLamaPeminjaman.setEnabled(false);
         prosesButton.setEnabled(false);
@@ -878,6 +873,11 @@ public class TransaksiGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "berhasil disimpan");
             pst.close();
             pst2.close();
+            nomorPeminjamanPeminjaman.setText("");
+            tanggalPeminjamanTextField.setText("");
+            tanggalKembaliTextField.setText("");
+            keterlambatanTextField.setText("");
+            dendaTextField.setText("");
         } catch (Exception e) {
             System.err.print(e);
         }

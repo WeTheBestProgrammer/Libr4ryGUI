@@ -16,7 +16,7 @@ import java.util.Date;
  */
 public class DatabaseConnector {
     private static Connection koneksi;
-    public static int harga = 0, tempCode;
+    public static int harga = 0, tempCode, temp;
     static Date date, dtDate;
     
     private static void buka_koneksi(){
@@ -114,18 +114,19 @@ public class DatabaseConnector {
             Statement state = koneksi.createStatement();
             rs =  state.executeQuery("select max(nomorPeminjam) from datatransaksi");
             while (rs.next()) {                
-                tempCode = rs.getInt("max(nomorPeminjam");
+                tempCode = rs.getInt("max(nomorPeminjam)");
             }
             System.out.println(tempCode);
-            if (tempCode > 0) {
-                int temp = Integer.parseInt(code);
-                temp+= tempCode;
-                return String.valueOf(temp);
+            if (tempCode >= Integer.parseInt(code)) {
+                tempCode++;
+                return String.valueOf(tempCode);
+            } else {
+                return String.valueOf(code);
             }
-            mStatement.close();
+//            mStatement.close();
         } catch (Exception l) {
             System.err.println(l);
         }
-        return code;
+        return String.valueOf(tempCode);
     }
 }
