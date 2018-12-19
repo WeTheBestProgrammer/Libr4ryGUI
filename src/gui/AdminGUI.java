@@ -51,9 +51,11 @@ public class AdminGUI extends javax.swing.JFrame {
     private static void buka_koneksi(){
         if (koneksi == null) {
             try {
-                String url = "jdbc:mysql://localhost/perpustakaan";
+//                String url = "jdbc:mysql://localhost/perpustakaan";
+                String url = "jdbc:mysql://192.168.100.4:3306/perpustakaan";
                 String user = "root";
-                String password = "";
+//                String password = "";
+                String password = "pass";
                 DriverManager.registerDriver(new com.mysql.jdbc.Driver());
                 koneksi = DriverManager.getConnection(url, user, password);
             } catch (SQLException t) {
@@ -750,6 +752,24 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void judulBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_judulBukuComboBoxItemStateChanged
         // TODO add your handling code here:
+        Conector.buka_koneksi();
+        ResultSet rs = null;
+        String ktgr = String.valueOf(jenisBukuComboBox.getSelectedItem());
+        String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
+        String sql = "SELECT harga_sat frombuku";
+        
+        try {
+            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
+            Statement state = Conector.koneksi.createStatement();
+            rs = state.executeQuery("select jml_buku, harga_sat, dendaKeterlambatan from buku where kategori = '" + "' and judul ='" + judul + "'");
+            while (rs.next()) {
+                harga = rs.getInt("harga_sat");
+                biayaPeminjamanTextField.setText(harga + "");
+            }
+            mStatement.close();
+        } catch (Exception l) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+        }
     }//GEN-LAST:event_judulBukuComboBoxItemStateChanged
 
     /**
