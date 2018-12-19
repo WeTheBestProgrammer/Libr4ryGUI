@@ -212,7 +212,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         PreparedStatement ps;
         String query = "INSERT INTO `umum`(`fname`, `lname`, `username`, `password`,`alamat`) VALUES (?,?,?,?,?);";
         try {
-            ps = ConnectionPerpus.getConnection().prepareStatement(query);
+            ps = ConnectionPerpus.koneksi1.prepareStatement(query);
             ps.setString(1, fname);
             ps.setString(2, lname);
             ps.setString(3, username);

@@ -8,25 +8,48 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  *
  * @author Angga Maulana A
  */
 public class ConnectionPerpus {
-    public static ConnectionPerpus koneksi1;
-    public static Connection getConnection(){
-        
-        Connection conn = null;
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-//            conn = DriverManager.getConnection("jdbc:mysql://localhost/perpustakaan", "root", "");
-            conn = DriverManager.getConnection("jdbc:mysql://192.168.100.4:3306/perpustakaan", "root", "pass");
-        } catch (Exception ex){
-            System.out.println(ex.getMessage());
+    public static Connection koneksi1;
+    public static void buka_koneksi1(){
+        if (koneksi1 == null) {
+            try {
+//                String url = "jdbc:mysql://localhost/perpustakaan";
+                String url = "jdbc:mysql://192.168.100.4:3306/perpustakaan";
+                String user = "root";
+//                String password = "";
+                String password = "pass";
+                DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+                koneksi1 = DriverManager.getConnection(url, user, password);
+            } catch (SQLException t) {
+                System.out.println("Error membuat koneksi");
+            }
         }
-        return conn;
     }
-
-
 }
+//public class ConnectionPerpus {
+//    public static ConnectionPerpus koneksi1;
+//    public static Connection getConnection(){
+//        
+//        Connection conn = null;
+//        try{
+//            Class.forName("com.mysql.jdbc.Driver");
+////            conn = DriverManager.getConnection("jdbc:mysql://localhost/perpustakaan", "root", "");
+//            conn = DriverManager.getConnection("jdbc:mysql://192.168.100.4:3306/perpustakaan", "root", "pass");
+//        } catch (Exception ex){
+//            System.out.println(ex.getMessage());
+//        }
+//        return conn;
+//    }
+//
+//    public PreparedStatement prepareStatement(String queryString) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
+
+

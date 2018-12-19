@@ -47,6 +47,8 @@ public class LoginGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         toRegister = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        toRegister1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Form");
@@ -89,6 +91,16 @@ public class LoginGUI extends javax.swing.JFrame {
 
         jLabel2.setText("Register");
 
+        toRegister1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        toRegister1.setText("...Click disini");
+        toRegister1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                toRegister1MouseClicked(evt);
+            }
+        });
+
+        jLabel3.setText("Register Admin");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,17 +117,21 @@ public class LoginGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(toRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(User, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(Pass, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(adminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(adminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(toRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(toRegister1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -139,7 +155,11 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(toRegister, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(jLabel2))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(toRegister1, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE))
+                .addGap(8, 8, 8))
         );
 
         pack();
@@ -175,10 +195,10 @@ public class LoginGUI extends javax.swing.JFrame {
         String username = User.getText();
         String password = Pass.getText();
         
-        Conector.buka_koneksi();
+        ConnectionPerpus.buka_koneksi1();
         try {
         String queryString = "SELECT username, password from admin where username ='" + username + "'";
-            PreparedStatement pst = Conector.koneksi.prepareStatement(queryString);
+            PreparedStatement pst = ConnectionPerpus.koneksi1.prepareStatement(queryString);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {                
                 if (password.equals(rs.getString("password")) && username.equals(rs.getString("username"))) {
@@ -202,6 +222,16 @@ public class LoginGUI extends javax.swing.JFrame {
         rtg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_toRegisterMouseClicked
+
+    private void toRegister1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toRegister1MouseClicked
+        // TODO add your handling code here:
+        RegisterAdmin rtg  = new RegisterAdmin();
+        rtg.setVisible(true);
+        rtg.pack();
+        rtg.setLocationRelativeTo(null);
+        rtg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_toRegister1MouseClicked
         
     /**
      * @param args the command line arguments
@@ -244,10 +274,12 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JButton adminButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelUsername;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel toRegister;
+    private javax.swing.JLabel toRegister1;
     // End of variables declaration//GEN-END:variables
 
 }
