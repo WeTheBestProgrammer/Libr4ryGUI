@@ -723,16 +723,21 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void jRadioButtonPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPeminjamanActionPerformed
         nomorPeminjamanPeminjaman.setEnabled(false);
+        nomorPeminjamanPeminjaman.setText("");
         kategoriBukuComboBox.setEnabled(true);
         judulBukuComboBox.setEnabled(true);
         namaMahasiswaTextField.setEnabled(true);
         biayaTextField.setEnabled(true);
         jTextFieldLamaPeminjaman.setEnabled(true);
         tanggalKembaliTextField.setEnabled(false);
+        tanggalKembaliTextField.setText("");
         tanggalPeminjamanTextField.setEnabled(false);
+        tanggalPeminjamanTextField.setText("");
         nomorPeminjamanPengembalian.setEnabled(false);
         keterlambatanTextField.setEnabled(false);
+        keterlambatanTextField.setText("");
         dendaTextField.setEnabled(false);
+        dendaTextField.setText("");
         prosesButton.setEnabled(false);
         pinjamButton.setEnabled(true);
         jButtonSave.setEnabled(false);
@@ -853,25 +858,25 @@ public class TransaksiGUI extends javax.swing.JFrame {
             
             int tempjumlah = 0;
             String judul = null;
-            PreparedStatement getStatement = koneksi.prepareStatement(sql1);
-            Statement state = koneksi.createStatement();
+            PreparedStatement getStatement = Conector.koneksi.prepareStatement(sql1);
+            Statement state = Conector.koneksi.createStatement();
             ResultSet rs = state.executeQuery("select judul from datatransaksi where nomorPeminjam = '" + nomorPeminjamanPengembalian.getText() + "'");
             while (rs.next()) {             
                 judul = rs.getString("judul");
             }
             
-            Statement state2 = koneksi.createStatement();
+            Statement state2 = Conector.koneksi.createStatement();
             ResultSet rs2 = state2.executeQuery("select jml_buku from buku where judul = '" + judul + "'");
             while (rs2.next()) {             
                 tempjumlah = rs2.getInt("jml_buku");
             }
             
             System.out.println(tempjumlah);
-            PreparedStatement setStatement = koneksi.prepareStatement(sql3);
+            PreparedStatement setStatement = Conector.koneksi.prepareStatement(sql3);
             String updatejmlbuku = "UPDATE `buku` SET `jml_buku`= " + (tempjumlah+1) + " WHERE judul ='" + judul + "'";
-            PreparedStatement pst = koneksi.prepareStatement(updatejmlbuku);
+            PreparedStatement pst = Conector.koneksi.prepareStatement(updatejmlbuku);
             String deleteTransaksi = "DELETE FROM datatransaksi WHERE nomorPeminjam = '" + nomorPeminjamanPengembalian.getText() + "'";
-            PreparedStatement pst2 = koneksi.prepareStatement(deleteTransaksi);
+            PreparedStatement pst2 = Conector.koneksi.prepareStatement(deleteTransaksi);
             pst.execute();
             pst2.execute();
             JOptionPane.showMessageDialog(null, "berhasil disimpan");
