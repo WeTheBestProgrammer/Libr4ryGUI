@@ -32,24 +32,3 @@ public class ConnectionPerpus {
         }
     }
 }
-//public class ConnectionPerpus {
-//    public static ConnectionPerpus koneksi1;
-//    public static Connection getConnection(){
-//        
-//        Connection conn = null;
-//        try{
-//            Class.forName("com.mysql.jdbc.Driver");
-////            conn = DriverManager.getConnection("jdbc:mysql://localhost/perpustakaan", "root", "");
-//            conn = DriverManager.getConnection("jdbc:mysql://192.168.100.4:3306/perpustakaan", "root", "pass");
-//        } catch (Exception ex){
-//            System.out.println(ex.getMessage());
-//        }
-//        return conn;
-//    }
-//
-//    public PreparedStatement prepareStatement(String queryString) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
-
-

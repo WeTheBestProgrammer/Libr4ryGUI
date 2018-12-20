@@ -7,7 +7,6 @@ package gui;
  */
 import buku.InputData;
 import buku.Item;
-import database.DatabaseConnector;
 import database.Conector;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -44,6 +43,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
      */
     public TransaksiGUI() {
         initComponents();
+        setTitle("Perpustakaan");
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         
@@ -72,6 +72,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         input = new InputData();
 
         jTextFieldLamaPeminjaman.addKeyListener(new KeyAdapter() {     
+            @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
                 if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE) || (c < 0))) {
@@ -103,7 +104,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 try {
                     int lamaPinjam = Integer.parseInt(jTextFieldLamaPeminjaman.getText());
                     biayaTextField.setText(String.valueOf(database.DatabaseConnector.setTotalBiaya(ktgr, judul, lamaPinjam)));
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                     biayaTextField.setText(harga + "");
                 }
                 
