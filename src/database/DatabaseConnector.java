@@ -118,7 +118,6 @@ public class DatabaseConnector {
             while (rs.next()) {                
                 tempCode = rs.getInt("max(nomorPeminjam)");
             }
-            System.out.println(tempCode);
             if (tempCode >= Integer.parseInt(code)) {
                 tempCode++;
                 return String.valueOf(tempCode);
