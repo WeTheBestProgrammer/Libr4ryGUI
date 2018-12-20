@@ -672,7 +672,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         kategoriBukuComboBox.setEnabled(true);
         judulBukuComboBox.setEnabled(true);
         namaMahasiswaTextField.setEnabled(true);
-        biayaTextField.setEnabled(true);
+        biayaTextField.setEnabled(false);
         jTextFieldLamaPeminjaman.setEnabled(true);
         tanggalKembaliTextField.setEnabled(false);
         tanggalKembaliTextField.setText("");

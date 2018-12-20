@@ -75,7 +75,7 @@ public class CoverGUI extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 14)); // NOI18N
         jLabel8.setText("Angga, Ahmad, Khoirul");
 
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angga Maulana A\\Documents\\GitHub\\Libr4ryGUI\\src\\gambar\\buku.gif")); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/buku.gif"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,7 +136,7 @@ public class CoverGUI extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addGap(31, 31, 31)
                 .addComponent(jButton1)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
