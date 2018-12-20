@@ -7,8 +7,8 @@ package gui;
  */
 import buku.InputData;
 import buku.Item;
-import database.DatabaseConnector;
 import database.Conector;
+import database.DatabaseConnector;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
@@ -44,6 +44,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
      */
     public TransaksiGUI() {
         initComponents();
+        setTitle("Perpustakaan");
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         
@@ -72,6 +73,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
         input = new InputData();
 
         jTextFieldLamaPeminjaman.addKeyListener(new KeyAdapter() {     
+            @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
                 if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE) || (c < 0))) {
@@ -103,7 +105,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 try {
                     int lamaPinjam = Integer.parseInt(jTextFieldLamaPeminjaman.getText());
                     biayaTextField.setText(String.valueOf(database.DatabaseConnector.setTotalBiaya(ktgr, judul, lamaPinjam)));
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                     biayaTextField.setText(harga + "");
                 }
                 
@@ -129,9 +131,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 tanggalPeminjamanTextField.setText("");
                 tanggalKembaliTextField.setText("");
                 String nomorPinjam = nomorPeminjamanPengembalian.getText();
-                database.DatabaseConnector.cekNomorPeminjaman(nomorPinjam);
             try {
-                
                 Conector.buka_koneksi();
                 ResultSet rs = null;
                 Date datekembali = null, datenow;
@@ -176,13 +176,13 @@ public class TransaksiGUI extends javax.swing.JFrame {
         });
         
         nomorPeminjamanPengembalian.addKeyListener(new KeyAdapter() {     
+            @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
                 if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE) || (c < 0))) {
                     e.consume();
                 } else {
                 }
-                
             }
         });
     }
@@ -206,7 +206,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
     
     public final void LihatDataMahasiswa(){
         String[] namaKolom = {"Nomor Peminjaman", "Nama Mahasiswa", "Kategori Buku", "Judul Buku", "Lama Peminjaman",
-            "Tanggal Penyewaan", "Tanggal Pengembalian", "Harga per hari", "Biaya Peminjaman"};
+                              "Tanggal Penyewaan", "Tanggal Pengembalian", "Harga per hari", "Biaya Peminjaman"};
         Object[][] objekMahasiswa = new Object [input.getData().size()][namaKolom.length];
         int i = 0;
         for (Item item: input.getData()) {
@@ -593,94 +593,45 @@ public class TransaksiGUI extends javax.swing.JFrame {
         } else if (jTextFieldLamaPeminjaman.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Please insert amount of days");
         } else {
-            Conector.buka_koneksi();
+            ResultSet rs = null;
+            ResultSet in = null;
+            ResultSet denda = null;
         
-        ResultSet rs = null;
-        ResultSet in = null;
-        ResultSet denda = null;
-        
-        String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
-        String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
-        String sql = "SELECT harga_sat from buku";
-        String sql2 = "insert into dendaKeterlambatan from buku";
-        String sql3 = "SELECT jml_buku from buku";
-        try {
-            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
-            Statement state = Conector.koneksi.createStatement();
-            rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
-            while (rs.next()) {                
-                harga = rs.getInt("harga_sat");
-            }
-            mStatement.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
-        }
-        
-        try {
-            int tempjumlah = 0;
-            PreparedStatement updateStatement = Conector.koneksi.prepareStatement(sql3);
-            Statement state = Conector.koneksi.createStatement();
-            rs = state.executeQuery("select jml_buku from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
-            while (rs.next()) {                
-                tempjumlah = rs.getInt("jml_buku");
-            }
+            String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
+            String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
+            String sql2 = "insert into dendaKeterlambatan from buku";
             
-            String updatejmlbuku = "UPDATE `buku` SET `jml_buku`= " + (tempjumlah-1) + " WHERE kategori = '" +ktgr+ "' and judul ='" + judul + "'";
-            PreparedStatement pst = Conector.koneksi.prepareStatement(updatejmlbuku);
-            pst.execute();
-            pst.close();
-        } catch (Exception e) {
-            System.err.print(e);
-        }
+            harga = DatabaseConnector.getHarga(ktgr, judul);
+            DatabaseConnector.getUpdateBuku(ktgr, judul);
         
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMdd");
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        c.add(Calendar.DATE, Integer.parseInt(jTextFieldLamaPeminjaman.getText()));  // number of days to add
-        String dt = sdf.format(c.getTime());  // dt is now the new date
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMdd");
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            c.add(Calendar.DATE, Integer.parseInt(jTextFieldLamaPeminjaman.getText()));  // number of days to add
+            String dt = sdf.format(c.getTime());  // dt is now the new date
         
-        input.isiData(Integer.parseInt(nomorPeminjamanPeminjaman.getText()),
-                      namaMahasiswaTextField.getText(),
-                      String.valueOf(kategoriBukuComboBox.getSelectedItem()),
-                      String.valueOf(judulBukuComboBox.getSelectedItem()),
-                      Integer.parseInt(jTextFieldLamaPeminjaman.getText()),
-                      sdf.format(date),
-                      dt,
-                      harga,
-                      database.DatabaseConnector.total
-                      );
-        LihatDataMahasiswa();
-        
-        try {
-            Conector.buka_koneksi();
-            Statement state = Conector.koneksi.createStatement();
-            denda = state.executeQuery("select dendaKeterlambatan from buku where judul = '" 
-                    + judul
-                    + "' and kategori = '" + ktgr + "'");
-            
-            while (denda.next()) {                
-                dendastrng = denda.getString("dendaKeterlambatan");
-            }
-            String sqlin = "INSERT INTO `datatransaksi`(`nomorPeminjam`, `nama`, `judul`, `tanggalpinjam`, `tanggalkembali`, `lamaPinjam`, `biaya`, `dendaKeterlambatan`)"
-                    + " VALUES ("+ Integer.parseInt(nomorPeminjamanPeminjaman.getText()) + ",' "
-                    + namaMahasiswaTextField.getText() +"', '"
-                    + judulBukuComboBox.getSelectedItem() + "', "
-                    + sdf2.format(date) + ", "
-                    + sdf2.format(c.getTime()) + ", "
-                    + Integer.parseInt(jTextFieldLamaPeminjaman.getText()) + ", "
-                    + database.DatabaseConnector.total + ", "
-                    + Integer.parseInt(dendastrng) + ")";
-            PreparedStatement mStatementIn = Conector.koneksi.prepareStatement(sqlin);
-            mStatementIn.execute();
-            mStatementIn.close();
-        } catch (Exception e) {
-            System.err.println("Got an exception!");
-            System.err.println(e.getMessage());
-        }
-        code++;
-        nomorPeminjamanPeminjaman.setText(database.DatabaseConnector.checkCode(dateFormat.format(date)+String.format("%02d", code)));
-        jTextFieldLamaPeminjaman.setText("");
+            input.isiData(Integer.parseInt(nomorPeminjamanPeminjaman.getText()),
+                          namaMahasiswaTextField.getText(),
+                          String.valueOf(kategoriBukuComboBox.getSelectedItem()),
+                          String.valueOf(judulBukuComboBox.getSelectedItem()),
+                          Integer.parseInt(jTextFieldLamaPeminjaman.getText()),
+                          sdf.format(date),
+                          dt,
+                          harga,
+                          database.DatabaseConnector.total
+                          );
+            LihatDataMahasiswa();
+            int nomorPinjam = Integer.parseInt(nomorPeminjamanPeminjaman.getText());
+            String nama = namaMahasiswaTextField.getText();
+            String tanggalPinjam = sdf2.format(date);
+            String tanggalKembali = sdf2.format(c.getTime());
+            int lamaPinjam = Integer.parseInt(jTextFieldLamaPeminjaman.getText());
+            DatabaseConnector.insertDataTransaksi(judul, ktgr, nomorPinjam,
+                    nama, tanggalPinjam, tanggalKembali, lamaPinjam);
+            code++;
+            nomorPeminjamanPeminjaman.setText(database.DatabaseConnector.checkCode(dateFormat.format(date)+String.format("%02d", code)));
+            jTextFieldLamaPeminjaman.setText("");
         }
     }//GEN-LAST:event_pinjamButtonActionPerformed
 
@@ -810,25 +761,24 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void judulBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_judulBukuComboBoxItemStateChanged
         // TODO add your handling code here:
-                Conector.buka_koneksi();
-                ResultSet rs = null;
-                String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
-                String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
-                String sql = "SELECT harga_sat from buku";
-                    
-                try {
-                    PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
-                    Statement state = Conector.koneksi.createStatement();
-                    rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
-                    while (rs.next()) {                
-                        harga = rs.getInt("harga_sat");
-                        biayaTextField.setText(harga + "");
-                    }
-                        
-                    mStatement.close();
-                } catch (Exception l) {
-                    JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
-                }
+        Conector.buka_koneksi();
+        ResultSet rs = null;
+        String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
+        String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
+        String sql = "SELECT harga_sat from buku";
+                  
+        try {
+            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
+            Statement state = Conector.koneksi.createStatement();
+            rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
+            while (rs.next()) {                
+                harga = rs.getInt("harga_sat");
+                biayaTextField.setText(harga + "");
+            }
+            mStatement.close();
+        } catch (Exception l) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+        }
     }//GEN-LAST:event_judulBukuComboBoxItemStateChanged
 
     private void tabelTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelTransaksiMouseClicked
