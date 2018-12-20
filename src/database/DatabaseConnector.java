@@ -9,6 +9,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -129,5 +130,74 @@ public class DatabaseConnector {
             System.err.println(l);
         }
         return String.valueOf(tempCode);
+    }
+    
+    public static int getHarga(String kategori, String judul){
+        Conector.buka_koneksi();
+        ResultSet rs = null;
+        String sql = "SELECT harga_sat from buku";
+        try {
+            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
+            Statement state = Conector.koneksi.createStatement();
+            rs =  state.executeQuery("select harga_sat from buku where kategori = '" + kategori + "' and judul ='" + judul + "'");
+            while (rs.next()) {                
+                return harga = rs.getInt("harga_sat");
+            }
+            mStatement.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+        }
+        return 0;
+    }
+    
+    public static void getUpdateBuku(String kategori, String judul){
+        ResultSet rs = null;
+        String sql3 = "SELECT jml_buku from buku";
+        try {
+            int tempjumlah = 0;
+            PreparedStatement updateStatement = Conector.koneksi.prepareStatement(sql3);
+            Statement state = Conector.koneksi.createStatement();
+            rs = state.executeQuery("select jml_buku from buku where kategori = '" + kategori + "' and judul ='" + judul + "'");
+            while (rs.next()) {                
+                tempjumlah = rs.getInt("jml_buku");
+            }
+            
+            String updatejmlbuku = "UPDATE `buku` SET `jml_buku`= " + (tempjumlah-1) + " WHERE kategori = '" + kategori + "' and judul ='" + judul + "'";
+            PreparedStatement pst = Conector.koneksi.prepareStatement(updatejmlbuku);
+            pst.execute();
+            pst.close();
+        } catch (Exception e) {
+            System.err.print(e);
+        }
+    }
+    
+    public static void insertDataTransaksi(String judul, String kategori, int nomorPinjam,
+            String nama, String tanggalPinjam, String tanggalKembali, int lamaPinjam){
+        int dendaString = 0;
+        try {
+            Conector.buka_koneksi();
+            Statement state = Conector.koneksi.createStatement();
+            ResultSet denda = state.executeQuery("select dendaKeterlambatan from buku where judul = '" 
+                              + judul + "' and kategori = '" + kategori + "'");
+             
+            while (denda.next()) {                
+                dendaString = denda.getInt("dendaKeterlambatan");
+            }
+            String sqlin = "INSERT INTO `datatransaksi`(`nomorPeminjam`, `nama`, `judul`, `tanggalpinjam`, `tanggalkembali`, `lamaPinjam`, `biaya`, `dendaKeterlambatan`)"
+                            + " VALUES ("+ nomorPinjam + ",' "
+                            + nama +"', '"
+                            + judul + "', "
+                            + tanggalPinjam + ", "
+                            + tanggalKembali + ", "
+                            + lamaPinjam + ", "
+                            + total + ", "
+                            + dendaString + ")";
+            PreparedStatement mStatementIn = Conector.koneksi.prepareStatement(sqlin);
+            mStatementIn.execute();
+            mStatementIn.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception!");
+            System.err.println(e.getMessage());
+        }
     }
 }
