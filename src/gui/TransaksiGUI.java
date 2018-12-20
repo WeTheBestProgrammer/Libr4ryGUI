@@ -627,7 +627,6 @@ public class TransaksiGUI extends javax.swing.JFrame {
             String tanggalPinjam = sdf2.format(date);
             String tanggalKembali = sdf2.format(c.getTime());
             int lamaPinjam = Integer.parseInt(jTextFieldLamaPeminjaman.getText());
-//            int biayaDenda = Integer.parseInt(dendastrng);
             DatabaseConnector.insertDataTransaksi(judul, ktgr, nomorPinjam,
                     nama, tanggalPinjam, tanggalKembali, lamaPinjam);
             code++;
@@ -762,25 +761,24 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void judulBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_judulBukuComboBoxItemStateChanged
         // TODO add your handling code here:
-                Conector.buka_koneksi();
-                ResultSet rs = null;
-                String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
-                String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
-                String sql = "SELECT harga_sat from buku";
-                    
-                try {
-                    PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
-                    Statement state = Conector.koneksi.createStatement();
-                    rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
-                    while (rs.next()) {                
-                        harga = rs.getInt("harga_sat");
-                        biayaTextField.setText(harga + "");
-                    }
-                        
-                    mStatement.close();
-                } catch (Exception l) {
-                    JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
-                }
+        Conector.buka_koneksi();
+        ResultSet rs = null;
+        String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
+        String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
+        String sql = "SELECT harga_sat from buku";
+                  
+        try {
+            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
+            Statement state = Conector.koneksi.createStatement();
+            rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
+            while (rs.next()) {                
+                harga = rs.getInt("harga_sat");
+                biayaTextField.setText(harga + "");
+            }
+            mStatement.close();
+        } catch (Exception l) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+        }
     }//GEN-LAST:event_judulBukuComboBoxItemStateChanged
 
     private void tabelTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelTransaksiMouseClicked

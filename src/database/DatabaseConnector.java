@@ -200,4 +200,23 @@ public class DatabaseConnector {
             System.err.println(e.getMessage());
         }
     }
+    
+    public static int setTextHarga(String kategori, String judul){
+        buka_koneksi();
+        ResultSet rs = null;
+        String sql = "SELECT harga_sat from buku";
+        try {
+            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
+            Statement state = Conector.koneksi.createStatement();
+            rs =  state.executeQuery("select harga_sat from buku where kategori = '" + kategori + "' and judul ='" + judul + "'");
+            while (rs.next()) {                
+                harga = rs.getInt("harga_sat");
+                return harga;
+            }
+            mStatement.close();
+        } catch (Exception l) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
+        }
+        return 0;
+    }
 }
