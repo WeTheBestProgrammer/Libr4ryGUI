@@ -27,21 +27,190 @@ public class UserGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        judulBukuComboBox = new javax.swing.JComboBox<>();
+        kategoriBukuComboBox = new javax.swing.JComboBox<>();
+        jLabelJenisBuku = new javax.swing.JLabel();
+        jLabelJudulBuku = new javax.swing.JLabel();
+        jLabelJumlahBuku = new javax.swing.JLabel();
+        jumlahBukuTextField = new javax.swing.JTextField();
+        jLabelBiayaPeminjaman = new javax.swing.JLabel();
+        biayaPeminjamanTextField = new javax.swing.JTextField();
+        dendaPeminjamanTextField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        judulBukuComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                judulBukuComboBoxItemStateChanged(evt);
+            }
+        });
+        judulBukuComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                judulBukuComboBoxActionPerformed(evt);
+            }
+        });
+
+        kategoriBukuComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                kategoriBukuComboBoxItemStateChanged(evt);
+            }
+        });
+        kategoriBukuComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kategoriBukuComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabelJenisBuku.setText("Kategori Buku");
+
+        jLabelJudulBuku.setText("Judul Buku");
+
+        jLabelJumlahBuku.setText("Jumlah Buku");
+
+        jumlahBukuTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jumlahBukuTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabelBiayaPeminjaman.setText("Biaya Peminjaman");
+
+        biayaPeminjamanTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                biayaPeminjamanTextFieldActionPerformed(evt);
+            }
+        });
+
+        dendaPeminjamanTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dendaPeminjamanTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Denda Keterlambatan");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelJenisBuku)
+                            .addComponent(jLabelJudulBuku))
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(kategoriBukuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(judulBukuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelJumlahBuku)
+                        .addGap(67, 67, 67)
+                        .addComponent(jumlahBukuTextField))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelBiayaPeminjaman)
+                            .addComponent(jLabel9))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(biayaPeminjamanTextField)
+                            .addComponent(dendaPeminjamanTextField))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelJenisBuku)
+                    .addComponent(kategoriBukuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelJudulBuku)
+                    .addComponent(judulBukuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jumlahBukuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelJumlahBuku))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(biayaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelBiayaPeminjaman))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dendaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void judulBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_judulBukuComboBoxItemStateChanged
+        // TODO add your handling code here:
+        Connector.buka_koneksi();
+        ResultSet rs = null;
+        String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
+        String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
+        String sql = "SELECT harga_sat from buku";
+
+        try {
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
+            rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
+            while (rs.next()) {
+                harga = rs.getInt("harga_sat");
+                biayaTextField.setText(harga + "");
+            }
+            mStatement.close();
+        } catch (Exception l) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_judulBukuComboBoxItemStateChanged
+
+    private void judulBukuComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_judulBukuComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_judulBukuComboBoxActionPerformed
+
+    private void kategoriBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_kategoriBukuComboBoxItemStateChanged
+        // TODO add your handling code here:
+        judulBukuComboBox.removeAllItems();
+        Connector.buka_koneksi();
+        ResultSet rs = null;
+        String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
+        String sql = "SELECT judul from buku";
+        try {
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
+            rs =  state.executeQuery("select judul from buku where kategori = '" +ktgr+ "'");
+            while (rs.next()) {
+                judulBukuComboBox.addItem(rs.getString("judul"));
+            }
+            mStatement.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_kategoriBukuComboBoxItemStateChanged
+
+    private void kategoriBukuComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategoriBukuComboBoxActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_kategoriBukuComboBoxActionPerformed
+
+    private void jumlahBukuTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumlahBukuTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jumlahBukuTextFieldActionPerformed
+
+    private void biayaPeminjamanTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_biayaPeminjamanTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_biayaPeminjamanTextFieldActionPerformed
+
+    private void dendaPeminjamanTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dendaPeminjamanTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dendaPeminjamanTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +248,15 @@ public class UserGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField biayaPeminjamanTextField;
+    private javax.swing.JTextField dendaPeminjamanTextField;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelBiayaPeminjaman;
+    private javax.swing.JLabel jLabelJenisBuku;
+    private javax.swing.JLabel jLabelJudulBuku;
+    private javax.swing.JLabel jLabelJumlahBuku;
+    private javax.swing.JComboBox<String> judulBukuComboBox;
+    private javax.swing.JTextField jumlahBukuTextField;
+    private javax.swing.JComboBox<String> kategoriBukuComboBox;
     // End of variables declaration//GEN-END:variables
 }
