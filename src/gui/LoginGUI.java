@@ -12,7 +12,6 @@ import javax.swing.*;
  */
 
 public class LoginGUI extends javax.swing.JFrame {
-    private static Connection koneksi;
     java.sql.Connection conn = null;
     Statement st;
     
@@ -228,7 +227,7 @@ public class LoginGUI extends javax.swing.JFrame {
         String username = User.getText();
         String password = Pass.getText();
 
-        connector.buka_koneksi();
+        Connector.buka_koneksi();
         try {
             String queryString = "SELECT username, password from admin where username ='" + username + "'";
             PreparedStatement pst = ConnectionPerpus.koneksi2.prepareStatement(queryString);
@@ -259,7 +258,7 @@ public class LoginGUI extends javax.swing.JFrame {
             while (rs.next()) {
                 if (password.equals(rs.getString("password")) && username.equals(rs.getString("username"))) {
                     this.setVisible(false);
-                    new TransaksiGUI().setVisible(true);
+                    new AdminTransaksiGUI().setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Username / password salah!");
                 }
