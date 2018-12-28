@@ -11,16 +11,16 @@ import java.sql.*;
  *
  * @author Ahmad Musyadad A
  */
-public class Conector {
+public class Connector {
     public static Connection koneksi;
     public static void buka_koneksi(){
         if (koneksi == null) {
             try {
-//                String url = "jdbc:mysql://localhost/perpustakaan";
-                String url = "jdbc:mysql://192.168.80.103:3306/perpustakaan";
+                String url = "jdbc:mysql://localhost/perpustakaan";
+//                String url = "jdbc:mysql://192.168.80.103:3306/perpustakaan";
                 String user = "root";
-//                String password = "";
-                String password = "pass";
+                String password = "";
+//                String password = "pass";
                 DriverManager.registerDriver(new com.mysql.jdbc.Driver());
                 koneksi = DriverManager.getConnection(url, user, password);
             } catch (SQLException t) {

@@ -35,6 +35,7 @@ public class DatabaseConnector {
         }
     }
     
+    
     public static void setHarga(String kategori, String judul){
         buka_koneksi();
         ResultSet rs = null;
@@ -132,12 +133,12 @@ public class DatabaseConnector {
     }
     
     public static int getHarga(String kategori, String judul){
-        Conector.buka_koneksi();
+        Connector.buka_koneksi();
         ResultSet rs = null;
         String sql = "SELECT harga_sat from buku";
         try {
-            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
-            Statement state = Conector.koneksi.createStatement();
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
             rs =  state.executeQuery("select harga_sat from buku where kategori = '" + kategori + "' and judul ='" + judul + "'");
             while (rs.next()) {                
                 return harga = rs.getInt("harga_sat");
@@ -154,15 +155,15 @@ public class DatabaseConnector {
         String sql3 = "SELECT jml_buku from buku";
         try {
             int tempjumlah = 0;
-            PreparedStatement updateStatement = Conector.koneksi.prepareStatement(sql3);
-            Statement state = Conector.koneksi.createStatement();
+            PreparedStatement updateStatement = Connector.koneksi.prepareStatement(sql3);
+            Statement state = Connector.koneksi.createStatement();
             rs = state.executeQuery("select jml_buku from buku where kategori = '" + kategori + "' and judul ='" + judul + "'");
             while (rs.next()) {                
                 tempjumlah = rs.getInt("jml_buku");
             }
             
             String updatejmlbuku = "UPDATE `buku` SET `jml_buku`= " + (tempjumlah-1) + " WHERE kategori = '" + kategori + "' and judul ='" + judul + "'";
-            PreparedStatement pst = Conector.koneksi.prepareStatement(updatejmlbuku);
+            PreparedStatement pst = Connector.koneksi.prepareStatement(updatejmlbuku);
             pst.execute();
             pst.close();
         } catch (Exception e) {
@@ -174,8 +175,8 @@ public class DatabaseConnector {
             String nama, String tanggalPinjam, String tanggalKembali, int lamaPinjam){
         int dendaString = 0;
         try {
-            Conector.buka_koneksi();
-            Statement state = Conector.koneksi.createStatement();
+            Connector.buka_koneksi();
+            Statement state = Connector.koneksi.createStatement();
             ResultSet denda = state.executeQuery("select dendaKeterlambatan from buku where judul = '" 
                               + judul + "' and kategori = '" + kategori + "'");
              
@@ -191,7 +192,7 @@ public class DatabaseConnector {
                             + lamaPinjam + ", "
                             + total + ", "
                             + dendaString + ")";
-            PreparedStatement mStatementIn = Conector.koneksi.prepareStatement(sqlin);
+            PreparedStatement mStatementIn = Connector.koneksi.prepareStatement(sqlin);
             mStatementIn.execute();
             mStatementIn.close();
         } catch (Exception e) {
@@ -205,8 +206,8 @@ public class DatabaseConnector {
         ResultSet rs = null;
         String sql = "SELECT harga_sat from buku";
         try {
-            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
-            Statement state = Conector.koneksi.createStatement();
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
             rs =  state.executeQuery("select harga_sat from buku where kategori = '" + kategori + "' and judul ='" + judul + "'");
             while (rs.next()) {                
                 harga = rs.getInt("harga_sat");

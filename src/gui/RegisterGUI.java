@@ -1,6 +1,6 @@
 package gui;
 
-import database.Conector;
+import database.Connector;
 import database.ConnectionPerpus;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -227,11 +227,11 @@ public class RegisterGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ulangi masukkan password!!!");
         }
          else{
-        Conector.buka_koneksi();    
+        Connector.buka_koneksi();    
         PreparedStatement ps;
         String query = "INSERT INTO `umum`(`fname`, `lname`, `username`, `password`,`alamat`) VALUES (?,?,?,?,?);";
         try {
-            ps = Conector.koneksi.prepareStatement(query);
+            ps = Connector.koneksi.prepareStatement(query);
             ps.setString(1, fname);
             ps.setString(2, lname);
             ps.setString(3, username);

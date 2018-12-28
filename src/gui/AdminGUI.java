@@ -5,7 +5,7 @@
  */
 package gui;
 
-import database.Conector;
+import database.Connector;
 import java.awt.HeadlessException;
 import java.sql.*;
 import javax.swing.*;
@@ -753,15 +753,15 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void judulBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_judulBukuComboBoxItemStateChanged
         // TODO add your handling code here:
-        Conector.buka_koneksi();
+        Connector.buka_koneksi();
         ResultSet rs = null;
         String ktgr = String.valueOf(jenisBukuComboBox.getSelectedItem());
         String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
         String sql = "select jml_buku, harga_sat, dendaKeterlambatan from buku";
         
         try {
-            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
-            Statement state = Conector.koneksi.createStatement();
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
             rs = state.executeQuery("select jml_buku, harga_sat, dendaKeterlambatan from buku where kategori = '" + ktgr + "' and judul ='" + judul + "'");
             while (rs.next()) {
                 jml = rs.getInt("jml_buku");

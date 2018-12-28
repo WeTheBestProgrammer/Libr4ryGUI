@@ -1,6 +1,6 @@
 package gui;
 
-import database.Conector;
+import database.Connector;
 import database.ConnectionPerpus;
 import java.awt.Dimension;
 import java.sql.*;
@@ -228,7 +228,7 @@ public class LoginGUI extends javax.swing.JFrame {
         String username = User.getText();
         String password = Pass.getText();
 
-        ConnectionPerpus.buka_koneksi();
+        connector.buka_koneksi();
         try {
             String queryString = "SELECT username, password from admin where username ='" + username + "'";
             PreparedStatement pst = ConnectionPerpus.koneksi2.prepareStatement(queryString);
@@ -251,10 +251,10 @@ public class LoginGUI extends javax.swing.JFrame {
         String username = User.getText();
         String password = Pass.getText();
 
-        Conector.buka_koneksi();
+        Connector.buka_koneksi();
         try {
             String queryString = "SELECT username, password from umum where username ='" + username + "'";
-            PreparedStatement pst = Conector.koneksi.prepareStatement(queryString);
+            PreparedStatement pst = Connector.koneksi.prepareStatement(queryString);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 if (password.equals(rs.getString("password")) && username.equals(rs.getString("username"))) {

@@ -7,7 +7,7 @@ package gui;
  */
 import buku.InputData;
 import buku.Item;
-import database.Conector;
+import database.Connector;
 import database.DatabaseConnector;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -132,7 +132,7 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 tanggalKembaliTextField.setText("");
                 String nomorPinjam = nomorPeminjamanPengembalian.getText();
             try {
-                Conector.buka_koneksi();
+                Connector.buka_koneksi();
                 ResultSet rs = null;
                 Date datekembali = null, datenow;
                 
@@ -141,8 +141,8 @@ public class TransaksiGUI extends javax.swing.JFrame {
                 datenow = date;
                 int dendaterlambat = 0;
                 String sql = "SELECT tanggalpinjam, tanggalkembali, dendaKeterlambatan from datatransaksi";
-                PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
-                Statement state = Conector.koneksi.createStatement();
+                PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+                Statement state = Connector.koneksi.createStatement();
                 rs =  state.executeQuery("SELECT tanggalpinjam, tanggalkembali, dendaKeterlambatan from datatransaksi where nomorPeminjam = " 
                      + Integer.parseInt(nomorPinjam));
             
@@ -188,12 +188,12 @@ public class TransaksiGUI extends javax.swing.JFrame {
     }
 
     private void isiComboBoxKategori(){
-        Conector.buka_koneksi();
+        Connector.buka_koneksi();
         ResultSet rs = null;
         String sql = "SELECT kategori from buku";
         try {
-            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
-            Statement state = Conector.koneksi.createStatement();
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
             rs =  state.executeQuery("select distinct kategori from buku");
             while (rs.next()) {                
                 kategoriBukuComboBox.addItem(rs.getString("kategori"));
@@ -701,13 +701,13 @@ public class TransaksiGUI extends javax.swing.JFrame {
     private void kategoriBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_kategoriBukuComboBoxItemStateChanged
         // TODO add your handling code here:
         judulBukuComboBox.removeAllItems();
-        Conector.buka_koneksi();
+        Connector.buka_koneksi();
         ResultSet rs = null;
         String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
         String sql = "SELECT judul from buku";
         try {
-            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
-            Statement state = Conector.koneksi.createStatement();
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
             rs =  state.executeQuery("select judul from buku where kategori = '" +ktgr+ "'");
             while (rs.next()) {                
                 judulBukuComboBox.addItem(rs.getString("judul"));
@@ -761,15 +761,15 @@ public class TransaksiGUI extends javax.swing.JFrame {
 
     private void judulBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_judulBukuComboBoxItemStateChanged
         // TODO add your handling code here:
-        Conector.buka_koneksi();
+        Connector.buka_koneksi();
         ResultSet rs = null;
         String ktgr = String.valueOf(kategoriBukuComboBox.getSelectedItem());
         String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
         String sql = "SELECT harga_sat from buku";
                   
         try {
-            PreparedStatement mStatement = Conector.koneksi.prepareStatement(sql);
-            Statement state = Conector.koneksi.createStatement();
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
             rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
             while (rs.next()) {                
                 harga = rs.getInt("harga_sat");
@@ -802,25 +802,25 @@ public class TransaksiGUI extends javax.swing.JFrame {
             
             int tempjumlah = 0;
             String judul = null;
-            PreparedStatement getStatement = Conector.koneksi.prepareStatement(sql1);
-            Statement state = Conector.koneksi.createStatement();
+            PreparedStatement getStatement = Connector.koneksi.prepareStatement(sql1);
+            Statement state = Connector.koneksi.createStatement();
             ResultSet rs = state.executeQuery("select judul from datatransaksi where nomorPeminjam = '" + nomorPeminjamanPengembalian.getText() + "'");
             while (rs.next()) {             
                 judul = rs.getString("judul");
             }
             
-            Statement state2 = Conector.koneksi.createStatement();
+            Statement state2 = Connector.koneksi.createStatement();
             ResultSet rs2 = state2.executeQuery("select jml_buku from buku where judul = '" + judul + "'");
             while (rs2.next()) {             
                 tempjumlah = rs2.getInt("jml_buku");
             }
             
             System.out.println(tempjumlah);
-            PreparedStatement setStatement = Conector.koneksi.prepareStatement(sql3);
+            PreparedStatement setStatement = Connector.koneksi.prepareStatement(sql3);
             String updatejmlbuku = "UPDATE `buku` SET `jml_buku`= " + (tempjumlah+1) + " WHERE judul ='" + judul + "'";
-            PreparedStatement pst = Conector.koneksi.prepareStatement(updatejmlbuku);
+            PreparedStatement pst = Connector.koneksi.prepareStatement(updatejmlbuku);
             String deleteTransaksi = "DELETE FROM datatransaksi WHERE nomorPeminjam = '" + nomorPeminjamanPengembalian.getText() + "'";
-            PreparedStatement pst2 = Conector.koneksi.prepareStatement(deleteTransaksi);
+            PreparedStatement pst2 = Connector.koneksi.prepareStatement(deleteTransaksi);
             pst.execute();
             pst2.execute();
             JOptionPane.showMessageDialog(null, "berhasil disimpan");
