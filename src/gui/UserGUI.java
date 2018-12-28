@@ -5,19 +5,39 @@
  */
 package gui;
 
+import database.Connector;
+import java.sql.*;
+import javax.swing.*;
 /**
  *
  * @author Ahmad Musyadad A
  */
 public class UserGUI extends javax.swing.JFrame {
-
+    int harga = 0;
     /**
      * Creates new form UserGUI
      */
     public UserGUI() {
         initComponents();
+        isiComboBoxKategori();
     }
 
+    private void isiComboBoxKategori(){
+        Connector.buka_koneksi();
+        ResultSet rs = null;
+        String sql = "SELECT kategori from buku";
+        try {
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
+            rs =  state.executeQuery("select distinct kategori from buku");
+            while (rs.next()) {                
+                kategoriBukuComboBox.addItem(rs.getString("kategori"));
+            }
+            mStatement.close();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,6 +57,7 @@ public class UserGUI extends javax.swing.JFrame {
         biayaPeminjamanTextField = new javax.swing.JTextField();
         dendaPeminjamanTextField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,6 +111,8 @@ public class UserGUI extends javax.swing.JFrame {
 
         jLabel9.setText("Denda Keterlambatan");
 
+        jLabel1.setText("Hari");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,8 +139,12 @@ public class UserGUI extends javax.swing.JFrame {
                             .addComponent(jLabel9))
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(biayaPeminjamanTextField)
-                            .addComponent(dendaPeminjamanTextField))))
+                            .addComponent(dendaPeminjamanTextField)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(biayaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -138,7 +165,8 @@ public class UserGUI extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(biayaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelBiayaPeminjaman))
+                    .addComponent(jLabelBiayaPeminjaman)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dendaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -163,7 +191,7 @@ public class UserGUI extends javax.swing.JFrame {
             rs =  state.executeQuery("select harga_sat from buku where kategori = '" +ktgr+ "' and judul ='" + judul + "'");
             while (rs.next()) {
                 harga = rs.getInt("harga_sat");
-                biayaTextField.setText(harga + "");
+                biayaPeminjamanTextField.setText(harga + "");
             }
             mStatement.close();
         } catch (Exception l) {
@@ -250,6 +278,7 @@ public class UserGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField biayaPeminjamanTextField;
     private javax.swing.JTextField dendaPeminjamanTextField;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelBiayaPeminjaman;
     private javax.swing.JLabel jLabelJenisBuku;
