@@ -17,7 +17,7 @@ public class Conector {
         if (koneksi == null) {
             try {
 //                String url = "jdbc:mysql://localhost/perpustakaan";
-                String url = "jdbc:mysql://192.168.100.4:3306/perpustakaan";
+                String url = "jdbc:mysql://192.168.80.103:3306/perpustakaan";
                 String user = "root";
 //                String password = "";
                 String password = "pass";
