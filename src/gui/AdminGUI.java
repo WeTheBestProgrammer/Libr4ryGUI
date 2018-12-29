@@ -47,6 +47,13 @@ public class AdminGUI extends javax.swing.JFrame {
         judulBukuHapusComboBox.setEnabled(false);
         saveHapusButton.setEnabled(false);
         cancelHapusButton.setEnabled(false);
+        jenisBukuTambahComboBox.addItemListener(e -> {
+        Object selectedItem = jenisBukuTambahComboBox.getSelectedItem();
+        boolean editable = selectedItem instanceof String
+            && ((String) selectedItem).equals("Other");
+        jenisBukuTambahComboBox.setEditable(editable);
+    });
+ 
     }
     
     private static void buka_koneksi(){
@@ -79,7 +86,8 @@ public class AdminGUI extends javax.swing.JFrame {
             mStatement.close();
         } catch (Exception e) {
             System.err.println(e);
-        }    
+        }
+        jenisBukuTambahComboBox.addItem("Other");
     }
     
     private void isiComboBoxUbah(){
@@ -529,14 +537,21 @@ public class AdminGUI extends javax.swing.JFrame {
         cancelTambahButton.setEnabled(true);
         logoutButton.setEnabled(true);
         jenisBukuComboBox.setEnabled(false);
+        jenisBukuComboBox.removeAllItems();
         judulBukuComboBox.setEnabled(false);
+        judulBukuComboBox.removeAllItems();
         jumlahBukuTextField.setEnabled(false);
+        jumlahBukuTextField.setText("");
         biayaPeminjamanTextField.setEnabled(false);
+        biayaPeminjamanTextField.setText("");
         dendaPeminjamanTextField.setEnabled(false);
+        dendaPeminjamanTextField.setText("");
         saveButton.setEnabled(false);
         cancelButton.setEnabled(false);
         jenisBukuHapusComboBox.setEnabled(false);
+        jenisBukuHapusComboBox.removeAllItems();
         judulBukuHapusComboBox.setEnabled(false);
+        judulBukuHapusComboBox.removeAllItems();
         saveHapusButton.setEnabled(false);
         cancelHapusButton.setEnabled(false);
         isiComboBoxKategori();
@@ -553,14 +568,21 @@ public class AdminGUI extends javax.swing.JFrame {
         cancelButton.setEnabled(true);
         logoutButton.setEnabled(true);
         jenisBukuTambahComboBox.setEnabled(false);
+        jenisBukuTambahComboBox.removeAllItems();
         judulTambahTextField.setEnabled(false);
+        judulTambahTextField.setText("");
         jumlahBukuTambahTextField.setEnabled(false);
+        jumlahBukuTambahTextField.setText("");
         biayaPeminjamanTambahTextField.setEnabled(false);
+        biayaPeminjamanTambahTextField.setText("");
         dendaPeminjamanTambahTextField.setEnabled(false);
+        dendaPeminjamanTambahTextField.setText("");
         saveTambahButton.setEnabled(false);
         cancelTambahButton.setEnabled(false);
         jenisBukuHapusComboBox.setEnabled(false);
+        jenisBukuHapusComboBox.removeAllItems();
         judulBukuHapusComboBox.setEnabled(false);
+        judulBukuHapusComboBox.removeAllItems();
         saveHapusButton.setEnabled(false);
         cancelHapusButton.setEnabled(false);
         isiComboBoxUbah();
@@ -573,19 +595,6 @@ public class AdminGUI extends javax.swing.JFrame {
     private void jenisBukuTambahComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jenisBukuTambahComboBoxItemStateChanged
         // TODO add your handling code here:
 //        judulBukuTambahComboBox.removeAllItems();
-        buka_koneksi();
-        ResultSet rs = null;
-//        String ktgr = String.valueOf(jenisBukuTambahComboBox.getSelectedItem());
-        String sql = "SELECT kategori from buku";
-        try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sql);
-            Statement state = koneksi.createStatement();
-            rs =  state.executeQuery("select distinct kategori from buku");
-                jenisBukuTambahComboBox.addItem(rs.getString("kategori"));
-            mStatement.close();
-        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
-        }
     }//GEN-LAST:event_jenisBukuTambahComboBoxItemStateChanged
 
     private void saveTambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTambahButtonActionPerformed
@@ -688,17 +697,27 @@ public class AdminGUI extends javax.swing.JFrame {
         cancelHapusButton.setEnabled(true);
         logoutButton.setEnabled(true);
         jenisBukuComboBox.setEnabled(false);
+        jenisBukuComboBox.removeAllItems();
         judulBukuComboBox.setEnabled(false);
+        judulBukuComboBox.removeAllItems();
         jumlahBukuTextField.setEnabled(false);
+        jumlahBukuTextField.setText("");
         biayaPeminjamanTextField.setEnabled(false);
+        biayaPeminjamanTextField.setText("");
         dendaPeminjamanTextField.setEnabled(false);
+        dendaPeminjamanTextField.setText("");
         saveButton.setEnabled(false);
         cancelButton.setEnabled(false);
         jenisBukuTambahComboBox.setEnabled(false);
+        jenisBukuTambahComboBox.removeAllItems();
         judulTambahTextField.setEnabled(false);
+        judulTambahTextField.removeAll();
         jumlahBukuTambahTextField.setEnabled(false);
+        jumlahBukuTambahTextField.setText("");
         biayaPeminjamanTambahTextField.setEnabled(false);
+        biayaPeminjamanTambahTextField.setText("");
         dendaPeminjamanTambahTextField.setEnabled(false);
+        dendaPeminjamanTambahTextField.setText("");
         saveTambahButton.setEnabled(false);
         cancelTambahButton.setEnabled(false);
         isiComboBoxHapus();

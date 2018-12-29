@@ -306,7 +306,6 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField Pass;
     private javax.swing.JTextField User;
@@ -322,5 +321,4 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JLabel toRegister;
     private javax.swing.JLabel toRegister1;
     // End of variables declaration//GEN-END:variables
-
 }
