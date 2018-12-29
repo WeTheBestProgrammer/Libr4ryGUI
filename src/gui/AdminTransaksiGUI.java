@@ -104,7 +104,7 @@ public class AdminTransaksiGUI extends javax.swing.JFrame {
                 String judul = String.valueOf(judulBukuComboBox.getSelectedItem());
                 try {
                     int lamaPinjam = Integer.parseInt(jTextFieldLamaPeminjaman.getText());
-                    biayaTextField.setText(String.valueOf(database.DatabaseConnector.setTotalBiaya(ktgr, judul, lamaPinjam)));
+                    biayaTextField.setText(String.valueOf(DatabaseConnector.setTotalBiaya(ktgr, judul, lamaPinjam)));
                 } catch (NumberFormatException e) {
                     biayaTextField.setText(harga + "");
                 }
@@ -270,6 +270,7 @@ public class AdminTransaksiGUI extends javax.swing.JFrame {
         jTextFieldLamaPeminjaman = new javax.swing.JTextField();
         jLabelHari = new javax.swing.JLabel();
         jButtonLogout = new javax.swing.JButton();
+        jButtonBack = new javax.swing.JButton();
 
         jTextField4.setText("jTextField4");
 
@@ -436,6 +437,13 @@ public class AdminTransaksiGUI extends javax.swing.JFrame {
             }
         });
 
+        jButtonBack.setText("Back");
+        jButtonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -445,6 +453,8 @@ public class AdminTransaksiGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
+                        .addComponent(jButtonBack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -579,7 +589,8 @@ public class AdminTransaksiGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancel)
-                    .addComponent(jButtonLogout))
+                    .addComponent(jButtonLogout)
+                    .addComponent(jButtonBack))
                 .addContainerGap())
         );
 
@@ -842,6 +853,13 @@ public class AdminTransaksiGUI extends javax.swing.JFrame {
         new LoginGUI().setVisible(true);
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
+    private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        OptionAdminGUI s =  new OptionAdminGUI();
+        s.setVisible(true);
+    }//GEN-LAST:event_jButtonBackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -882,6 +900,7 @@ public class AdminTransaksiGUI extends javax.swing.JFrame {
     private javax.swing.JTextField biayaTextField;
     private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JTextField dendaTextField;
+    private javax.swing.JButton jButtonBack;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JLabel jLabel1;

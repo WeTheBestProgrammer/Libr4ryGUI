@@ -5,6 +5,9 @@
  */
 package gui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 /**
  *
  * @author Ahmad Musyadad A
@@ -16,6 +19,9 @@ public class OptionAdminGUI extends javax.swing.JFrame {
      */
     public OptionAdminGUI() {
         initComponents();
+        setTitle("Admin");
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     /**
@@ -34,10 +40,25 @@ public class OptionAdminGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonTransaksi.setText("Transaksi");
+        jButtonTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTransaksiActionPerformed(evt);
+            }
+        });
 
         jButtonEdit.setText("Edit");
+        jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditActionPerformed(evt);
+            }
+        });
 
         jButtonLogout.setText("Logout");
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,6 +90,27 @@ public class OptionAdminGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        LoginGUI s =  new LoginGUI();
+        s.setVisible(true);
+    }//GEN-LAST:event_jButtonLogoutActionPerformed
+
+    private void jButtonTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTransaksiActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        AdminTransaksiGUI s =  new AdminTransaksiGUI();
+        s.setVisible(true);
+    }//GEN-LAST:event_jButtonTransaksiActionPerformed
+
+    private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        AdminGUI s =  new AdminGUI();
+        s.setVisible(true);
+    }//GEN-LAST:event_jButtonEditActionPerformed
 
     /**
      * @param args the command line arguments

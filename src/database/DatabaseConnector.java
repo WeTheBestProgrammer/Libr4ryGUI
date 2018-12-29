@@ -219,4 +219,42 @@ public class DatabaseConnector {
         }
         return 0;
     }
+    
+    public static int getJumlahBuku(String kategori, String judul){
+        Connector.buka_koneksi();
+        ResultSet rs = null;
+        String sql = "select jml_buku from buku";
+        
+        try {
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
+            rs = state.executeQuery("select jml_buku from buku where kategori = '" + kategori + "' and judul ='" + judul + "'");
+            while (rs.next()) {
+                return rs.getInt("jml_buku");
+            }
+            mStatement.close();
+        } catch (Exception l) {
+            System.err.println(l);
+        }
+        return 0;
+    }
+    
+    public static int getDenda(String kategori, String judul){
+        Connector.buka_koneksi();
+        ResultSet rs = null;
+        String sql = "select dendaKeterlambatan from buku";
+        
+        try {
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
+            rs = state.executeQuery("select dendaKeterlambatan from buku where kategori = '" + kategori + "' and judul ='" + judul + "'");
+            while (rs.next()) {
+                return rs.getInt("dendaKeterlambatan");
+            }
+            mStatement.close();
+        } catch (Exception l) {
+            System.err.println(l);
+        }
+        return 0;
+    }
 }

@@ -6,6 +6,7 @@
 package gui;
 
 import database.Connector;
+import database.DatabaseConnector;
 import java.sql.*;
 import javax.swing.*;
 /**
@@ -58,6 +59,7 @@ public class UserGUI extends javax.swing.JFrame {
         dendaPeminjamanTextField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jButtonLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,6 +115,13 @@ public class UserGUI extends javax.swing.JFrame {
 
         jLabel1.setText("Hari");
 
+        jButtonLogout.setText("Logout");
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,6 +155,10 @@ public class UserGUI extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +184,9 @@ public class UserGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dendaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonLogout)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -197,6 +212,9 @@ public class UserGUI extends javax.swing.JFrame {
         } catch (Exception l) {
             JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);
         }
+        
+        jumlahBukuTextField.setText(String.valueOf(DatabaseConnector.getJumlahBuku(ktgr, judul)));
+        dendaPeminjamanTextField.setText(String.valueOf(DatabaseConnector.getDenda(ktgr, judul)));
     }//GEN-LAST:event_judulBukuComboBoxItemStateChanged
 
     private void judulBukuComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_judulBukuComboBoxActionPerformed
@@ -240,6 +258,12 @@ public class UserGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dendaPeminjamanTextFieldActionPerformed
 
+    private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new LoginGUI().setVisible(true);
+    }//GEN-LAST:event_jButtonLogoutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -278,6 +302,7 @@ public class UserGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField biayaPeminjamanTextField;
     private javax.swing.JTextField dendaPeminjamanTextField;
+    private javax.swing.JButton jButtonLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelBiayaPeminjaman;

@@ -6,7 +6,9 @@
 package gui;
 
 import database.Connector;
+import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.sql.*;
 import javax.swing.*;
 
@@ -23,6 +25,9 @@ public class AdminGUI extends javax.swing.JFrame {
      */
     public AdminGUI() {
         initComponents();
+        setTitle("Edit Data");
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         ButtonGroup group = new ButtonGroup();
         group.add(ubahDataBukuRadioButton);
         group.add(tambahDataBukuRadioButton);
@@ -158,6 +163,7 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         dendaPeminjamanTextField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        jButtonBack = new javax.swing.JButton();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -334,6 +340,13 @@ public class AdminGUI extends javax.swing.JFrame {
 
         jLabel9.setText("Denda Keterlambatan");
 
+        jButtonBack.setText("Back");
+        jButtonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -364,8 +377,7 @@ public class AdminGUI extends javax.swing.JFrame {
                                     .addComponent(biayaPeminjamanTextField)
                                     .addComponent(dendaPeminjamanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(logoutButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(saveButton)
@@ -409,21 +421,28 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(judulBukuHapusComboBox, 0, 195, Short.MAX_VALUE)
-                            .addComponent(jenisBukuHapusComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hapusDataBukuRadioButton)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(saveHapusButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(cancelHapusButton)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addGap(59, 59, 59)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(judulBukuHapusComboBox, 0, 195, Short.MAX_VALUE)
+                                    .addComponent(jenisBukuHapusComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(hapusDataBukuRadioButton)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(saveHapusButton)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cancelHapusButton)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonBack)
+                        .addGap(28, 28, 28)
+                        .addComponent(logoutButton)
+                        .addGap(21, 21, 21))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -486,11 +505,11 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cancelTambahButton)
-                        .addComponent(saveTambahButton))
+                        .addComponent(saveTambahButton)
+                        .addComponent(jButtonBack)
+                        .addComponent(logoutButton))
                     .addComponent(cancelButton)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(saveButton)
-                        .addComponent(logoutButton)))
+                    .addComponent(saveButton))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(75, 75, 75)
@@ -780,6 +799,13 @@ public class AdminGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_judulBukuComboBoxItemStateChanged
 
+    private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        OptionAdminGUI s =  new OptionAdminGUI();
+        s.setVisible(true);
+    }//GEN-LAST:event_jButtonBackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -826,6 +852,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JTextField dendaPeminjamanTambahTextField;
     private javax.swing.JTextField dendaPeminjamanTextField;
     private javax.swing.JRadioButton hapusDataBukuRadioButton;
+    private javax.swing.JButton jButtonBack;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JLabel jLabel1;
