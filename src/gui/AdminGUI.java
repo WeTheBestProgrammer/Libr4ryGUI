@@ -37,7 +37,7 @@ public class AdminGUI extends javax.swing.JFrame {
         biayaPeminjamanTambahTextField.setEnabled(false);
         dendaPeminjamanTextField.setEnabled(false);
         dendaPeminjamanTambahTextField.setEnabled(false);
-        logoutButton.setEnabled(false);
+        logoutButton.setEnabled(true);
         saveButton.setEnabled(false);
         cancelButton.setEnabled(false);
         jenisBukuComboBox.setEnabled(false);
@@ -47,38 +47,22 @@ public class AdminGUI extends javax.swing.JFrame {
         judulBukuHapusComboBox.setEnabled(false);
         saveHapusButton.setEnabled(false);
         cancelHapusButton.setEnabled(false);
+        
         jenisBukuTambahComboBox.addItemListener(e -> {
         Object selectedItem = jenisBukuTambahComboBox.getSelectedItem();
         boolean editable = selectedItem instanceof String
             && ((String) selectedItem).equals("Other");
         jenisBukuTambahComboBox.setEditable(editable);
     });
- 
-    }
-    
-    private static void buka_koneksi(){
-        if (koneksi == null) {
-            try {
-                String url = "jdbc:mysql://localhost/perpustakaan";
-//                String url = "jdbc:mysql://192.168.80.103:3306/perpustakaan";
-                String user = "root";
-                String password = "";
-//                String password = "pass";
-                DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-                koneksi = DriverManager.getConnection(url, user, password);
-            } catch (SQLException t) {
-                System.out.println("Error membuat koneksi");
-            }
-        }
     }
     
     private void isiComboBoxKategori(){
-        buka_koneksi();
+        Connector.buka_koneksi();
         ResultSet rs = null;
         String sql = "SELECT kategori from buku";
         try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sql);
-            Statement state = koneksi.createStatement();
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
             rs =  state.executeQuery("select distinct kategori from buku");
             while (rs.next()) {                
                 jenisBukuTambahComboBox.addItem(rs.getString("kategori"));
@@ -91,12 +75,12 @@ public class AdminGUI extends javax.swing.JFrame {
     }
     
     private void isiComboBoxUbah(){
-        buka_koneksi();
+        Connector.buka_koneksi();
         ResultSet rs = null;
         String sql = "SELECT kategori from buku";
         try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sql);
-            Statement state = koneksi.createStatement();
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
             rs =  state.executeQuery("select distinct kategori from buku");
             while (rs.next()) {                
                 jenisBukuComboBox.addItem(rs.getString("kategori"));
@@ -108,12 +92,12 @@ public class AdminGUI extends javax.swing.JFrame {
     }
     
     private void isiComboBoxHapus(){
-        buka_koneksi();
+        Connector.buka_koneksi();
         ResultSet rs = null;
         String sql = "SELECT kategori from buku";
         try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sql);
-            Statement state = koneksi.createStatement();
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
             rs =  state.executeQuery("select distinct kategori from buku");
             while (rs.next()) {                
                 jenisBukuHapusComboBox.addItem(rs.getString("kategori"));
@@ -333,7 +317,7 @@ public class AdminGUI extends javax.swing.JFrame {
             }
         });
 
-        saveHapusButton.setText("Save");
+        saveHapusButton.setText("Delete");
         saveHapusButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveHapusButtonActionPerformed(evt);
@@ -599,14 +583,14 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void saveTambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTambahButtonActionPerformed
         // TODO add your handling code here:
-        buka_koneksi();
+        Connector.buka_koneksi();
             try {
                 String sql = "insert into buku (kategori, judul, jml_buku, harga_sat, dendaKeterlambatan) values "
                         + "('"+jenisBukuTambahComboBox.getSelectedItem()+"','"+judulTambahTextField.getText()+"',"
                         + "'"+jumlahBukuTambahTextField.getText()+"','"+biayaPeminjamanTambahTextField.getText()+"',"
                         + "'" +dendaPeminjamanTambahTextField.getText()+"')";
     //            java.sql.Connection conn = (java.sql.Connection)gui.koneksi.koneksiDB();
-                PreparedStatement pst = koneksi.prepareStatement(sql);
+                PreparedStatement pst = Connector.koneksi.prepareStatement(sql);
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "berhasil disimpan");
                 pst.close();
@@ -617,7 +601,7 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-        buka_koneksi();
+        Connector.buka_koneksi();
             try {
                 String sql = "update buku SET kategori='"+jenisBukuComboBox.getSelectedItem()+
                         "',judul='"+judulBukuComboBox.getSelectedItem()+"',jml_buku='"+jumlahBukuTextField.getText()+
@@ -625,7 +609,7 @@ public class AdminGUI extends javax.swing.JFrame {
                         "',dendaKeterlambatan='" + dendaPeminjamanTextField.getText()+
                         "' where judul = '" + judulBukuComboBox.getSelectedItem() + "'";
 
-                PreparedStatement pst = koneksi.prepareStatement(sql);
+                PreparedStatement pst = Connector.koneksi.prepareStatement(sql);
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "berhasil disimpan");
                 pst.close();
@@ -637,13 +621,13 @@ public class AdminGUI extends javax.swing.JFrame {
     private void jenisBukuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jenisBukuComboBoxItemStateChanged
         // TODO add your handling code here:
         judulBukuComboBox.removeAllItems();
-        buka_koneksi();
+        Connector.buka_koneksi();
         ResultSet rs = null;
         String ktgr = String.valueOf(jenisBukuComboBox.getSelectedItem());
         String sql = "SELECT judul from buku";
         try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sql);
-            Statement state = koneksi.createStatement();
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
             rs =  state.executeQuery("select judul from buku where kategori = '" +ktgr+ "'");
             while (rs.next()) {                
                 judulBukuComboBox.addItem(rs.getString("judul"));
@@ -675,10 +659,10 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void saveHapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveHapusButtonActionPerformed
         // TODO add your handling code here:
-        buka_koneksi();
+        Connector.buka_koneksi();
             try {
                 String sql = "delete from buku where judul='"+judulBukuHapusComboBox.getSelectedItem()+"'";
-                PreparedStatement pst = koneksi.prepareStatement(sql);
+                PreparedStatement pst = Connector.koneksi.prepareStatement(sql);
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "berhasil dihapus");
                 pst.close();
@@ -739,13 +723,13 @@ public class AdminGUI extends javax.swing.JFrame {
     private void jenisBukuHapusComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jenisBukuHapusComboBoxItemStateChanged
         // TODO add your handling code here:
         judulBukuHapusComboBox.removeAllItems();
-        buka_koneksi();
+        Connector.buka_koneksi();
         ResultSet rs = null;
         String ktgr = String.valueOf(jenisBukuHapusComboBox.getSelectedItem());
         String sql = "SELECT judul from buku";
         try {
-            PreparedStatement mStatement = koneksi.prepareStatement(sql);
-            Statement state = koneksi.createStatement();
+            PreparedStatement mStatement = Connector.koneksi.prepareStatement(sql);
+            Statement state = Connector.koneksi.createStatement();
             rs =  state.executeQuery("select judul from buku where kategori = '" +ktgr+ "'");
             while (rs.next()) {                
                 judulBukuHapusComboBox.addItem(rs.getString("judul"));
