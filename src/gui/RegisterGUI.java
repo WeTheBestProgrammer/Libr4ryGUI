@@ -1,7 +1,6 @@
 package gui;
 
 import database.Connector;
-import database.ConnectionPerpus;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JFrame;

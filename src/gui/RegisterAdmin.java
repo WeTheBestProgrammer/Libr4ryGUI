@@ -1,6 +1,6 @@
 package gui;
 
-import database.ConnectionPerpus;
+import database.DatabaseConnector;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JFrame;
@@ -213,32 +213,12 @@ public class RegisterAdmin extends javax.swing.JFrame {
 
         if (username.equals("")){
             JOptionPane.showMessageDialog(null, "Harap masukkan username!!!");
-        }
-        else if (password.equals("")){
+        } else if (password.equals("")){
             JOptionPane.showMessageDialog(null, "Harap masukkan password!!!");
-        }
-         else if (!password.equals(rePassword)){
-            JOptionPane.showMessageDialog(null, "Ulangi masukkan password!!!");
-         }
-        else{
-
-        ConnectionPerpus.buka_koneksi();
-            PreparedStatement ps;
-            String query = "INSERT INTO `admin`(`fname`, `lname`, `username`, `password`,`alamat`) VALUES (?,?,?,?,?);";
-            try {
-                ps = ConnectionPerpus.koneksi2.prepareStatement(query);
-                ps.setString(1, fname);
-                ps.setString(2, lname);
-                ps.setString(3, username);
-                ps.setString(4, password);
-                ps.setString(5, alamat);
-
-                if(ps.executeUpdate()>0){
-                    JOptionPane.showMessageDialog(null, "Data telah ditambah");
-                }
-            } catch (SQLException ex) {
-                System.err.println(ex);
-            }
+        } else if (!password.equals(rePassword)){
+            JOptionPane.showMessageDialog(null, "Password tidak sama!!!");
+        } else {
+            DatabaseConnector.register(fname, lname, username, password, alamat);
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
 

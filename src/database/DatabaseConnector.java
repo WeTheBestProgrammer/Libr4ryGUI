@@ -35,7 +35,24 @@ public class DatabaseConnector {
         }
     }
     
-    
+    public static void register(String fName, String lName, String username, String password, String alamat){
+        Connector.buka_koneksi();
+        PreparedStatement ps;
+        String query = "INSERT INTO `admin`(`fname`, `lname`, `username`, `password`,`alamat`) VALUES (?,?,?,?,?);";
+        try {
+            ps = Connector.koneksi.prepareStatement(query);
+            ps.setString(1, fName);
+            ps.setString(2, lName);
+            ps.setString(3, username);
+            ps.setString(4, password);
+            ps.setString(5, alamat);
+            if(ps.executeUpdate()>0){
+                JOptionPane.showMessageDialog(null, "Data telah ditambah");
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    }
     public static void setHarga(String kategori, String judul){
         buka_koneksi();
         ResultSet rs = null;
