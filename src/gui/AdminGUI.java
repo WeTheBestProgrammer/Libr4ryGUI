@@ -6,6 +6,7 @@
 package gui;
 
 import database.Connector;
+import database.DatabaseConnector;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
@@ -28,6 +29,7 @@ public class AdminGUI extends javax.swing.JFrame {
         setTitle("Edit Data");
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        
         ButtonGroup group = new ButtonGroup();
         group.add(ubahDataBukuRadioButton);
         group.add(tambahDataBukuRadioButton);
@@ -602,20 +604,13 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void saveTambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTambahButtonActionPerformed
         // TODO add your handling code here:
-        Connector.buka_koneksi();
-            try {
-                String sql = "insert into buku (kategori, judul, jml_buku, harga_sat, dendaKeterlambatan) values "
-                        + "('"+jenisBukuTambahComboBox.getSelectedItem()+"','"+judulTambahTextField.getText()+"',"
-                        + "'"+jumlahBukuTambahTextField.getText()+"','"+biayaPeminjamanTambahTextField.getText()+"',"
-                        + "'" +dendaPeminjamanTambahTextField.getText()+"')";
-    //            java.sql.Connection conn = (java.sql.Connection)gui.koneksi.koneksiDB();
-                PreparedStatement pst = Connector.koneksi.prepareStatement(sql);
-                pst.execute();
-                JOptionPane.showMessageDialog(null, "berhasil disimpan");
-                pst.close();
-            } catch (SQLException | HeadlessException e) {
-                JOptionPane.showMessageDialog(null, e);
-            }   
+        String kategori = String.valueOf(jenisBukuTambahComboBox.getSelectedItem());
+        String judul = judulTambahTextField.getText();
+        String jumlahBuku = jumlahBukuTambahTextField.getText();
+        String hargaSat = biayaPeminjamanTambahTextField.getText();
+        String denda = dendaPeminjamanTambahTextField.getText();
+        
+        DatabaseConnector.addBuku(kategori, judul, jumlahBuku, hargaSat, denda);
     }//GEN-LAST:event_saveTambahButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed

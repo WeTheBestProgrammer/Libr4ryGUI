@@ -5,6 +5,7 @@
  */
 package database;
 
+import java.awt.HeadlessException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
@@ -273,5 +274,39 @@ public class DatabaseConnector {
             System.err.println(l);
         }
         return 0;
+    }
+    
+    public static void addBuku(String kategori, String judul, String jumlahBuku, String hargaSat, String denda){
+        Connector.buka_koneksi();
+        try {
+            String sql = "insert into buku (kategori, judul, jml_buku, harga_sat, dendaKeterlambatan) values "
+                        + "('"+ kategori +"','"+ judul +"',"
+                        + "'"+ jumlahBuku +"','"+ hargaSat +"',"
+                        + "'" + denda +"')";
+            PreparedStatement pst = Connector.koneksi.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "berhasil disimpan");
+            pst.close();
+        } catch (SQLException | HeadlessException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }   
+    }
+    
+    public static void updateBuku(String kategori, String judul, String jumlahBuku, String hargaSat, String denda){
+        Connector.buka_koneksi();
+        try {
+            String sql = "update buku SET kategori='"+ kategori +
+                        "',judul='"+ judul +"',jml_buku='"+ jumlahBuku +
+                        "',harga_sat='"+ hargaSat +
+                        "',dendaKeterlambatan='" + denda +
+                        "' where judul = '" + judul + "'";
+
+            PreparedStatement pst = Connector.koneksi.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "berhasil disimpan");
+            pst.close();
+        } catch (SQLException | HeadlessException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 }
