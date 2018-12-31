@@ -1,8 +1,6 @@
 package gui;
 
 import database.DatabaseConnector;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 /**

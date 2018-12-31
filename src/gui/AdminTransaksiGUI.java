@@ -27,7 +27,8 @@ import javax.swing.table.DefaultTableModel;
  * @author KINTUL
  */
 public class AdminTransaksiGUI extends javax.swing.JFrame {
-    int code, harga = 0, total = 0;
+    int code, total = 0;
+    public static int harga = 0;
     String dendastrng = null;
     DateFormat dateFormat;
     SimpleDateFormat simpleDateFormat;
@@ -104,7 +105,6 @@ public class AdminTransaksiGUI extends javax.swing.JFrame {
                 } catch (NumberFormatException e) {
                     biayaTextField.setText(harga + "");
                 }
-                
             }
         });
                 
@@ -667,6 +667,7 @@ public class AdminTransaksiGUI extends javax.swing.JFrame {
         pinjamButton.setEnabled(false);
         jButtonCancel.setEnabled(false);
         jButtonCancel.setEnabled(true);
+        tabelTransaksi.setModel(tabel);
     }//GEN-LAST:event_jRadioButtonPengembalianActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed

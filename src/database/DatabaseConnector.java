@@ -5,6 +5,7 @@
  */
 package database;
 
+import gui.AdminTransaksiGUI;
 import java.awt.HeadlessException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -67,6 +68,7 @@ public class DatabaseConnector {
             rs =  state.executeQuery("select harga_sat from buku where kategori = '" +kategori+ "' and judul ='" + judul + "'");
             while (rs.next()) {                
                 harga = rs.getInt("harga_sat");
+                AdminTransaksiGUI.harga = harga;
                 total = harga*lamaPinjam;
                 return harga + " X " + lamaPinjam + " = " + total;
             }
