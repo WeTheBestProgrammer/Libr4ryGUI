@@ -134,7 +134,7 @@ public class DatabaseConnector {
         return String.valueOf(tempCode);
     }
     
-    public static int getHarga(String kategori, String judul){
+    public static String getHarga(String kategori, String judul){
         Connector.buka_koneksi();
         ResultSet rs = null;
         String sql = "SELECT harga_sat from buku";
@@ -143,13 +143,13 @@ public class DatabaseConnector {
             Statement state = Connector.koneksi.createStatement();
             rs =  state.executeQuery("select harga_sat from buku where kategori = '" + kategori + "' and judul ='" + judul + "'");
             while (rs.next()) {                
-                return harga = rs.getInt("harga_sat");
+                return rs.getString("harga_sat");
             }
             mStatement.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE); 
         }
-        return 0;
+        return null;
     }
     
     public static void getUpdateBuku(String kategori, String judul){
