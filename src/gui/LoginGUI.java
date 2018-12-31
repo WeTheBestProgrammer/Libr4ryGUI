@@ -24,8 +24,6 @@ public class LoginGUI extends javax.swing.JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
