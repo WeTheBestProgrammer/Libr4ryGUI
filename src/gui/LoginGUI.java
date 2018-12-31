@@ -232,7 +232,7 @@ public class LoginGUI extends javax.swing.JFrame {
             while (rs.next()) {
                 if (password.equals(rs.getString("password")) && username.equals(rs.getString("username"))) {
                     this.setVisible(false);
-                    new AdminGUI().setVisible(true);
+                    new OptionAdminGUI().setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Username / password salah!");
                 }
